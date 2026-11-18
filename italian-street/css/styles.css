@@ -427,7 +427,7 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 .footer { background: var(--green); color: #c9bfa9; padding: 56px 0 120px; text-align: center; font-size: 15px; border-top: 2px solid var(--gold); }
 .footer a { color: var(--cream); }
 .footer p { margin: 6px 0; }
-.footer__logo { width: 120px; height: 120px; margin: 0 auto 18px; border-radius: 50%; box-shadow: 0 0 40px rgba(232,180,90,.3); }
+.footer__logo { width: 150px; height: 150px; margin: 0 auto 18px; border-radius: 50%; box-shadow: 0 0 40px rgba(232,180,90,.3); }
 .brand__name--footer { color: var(--cream); font-size: 30px; }
 .footer .footer__by { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
 .footer .footer__small { font-size: 13px; opacity: .7; margin-top: 18px; }

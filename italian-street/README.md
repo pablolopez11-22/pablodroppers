@@ -15,4 +15,4 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - [ ] Fotos de platos (opcional: se pueden añadir a la carta y a la portada)
 - [ ] Confirmar con cocina qué platos son vegetarianos (marcados según ingredientes)
 - [ ] 3 reseñas reales de Google
-- [ ] Logo en alta resolución (ahora se usa el de la página final de la carta)
+- [x] Logo en alta resolución
