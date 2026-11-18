@@ -145,17 +145,23 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 
 /* ---------- Portada ---------- */
 .hero {
-  position: relative; min-height: 100svh; display: flex; align-items: flex-end;
-  color: #fff; padding: calc(var(--header-h) + 40px) 0 64px; isolation: isolate; background: var(--green);
+  position: relative; min-height: 100svh; display: flex; align-items: center;
+  color: #fff; padding: calc(var(--header-h) + 40px) 0 64px; isolation: isolate; overflow: hidden;
+  background: radial-gradient(ellipse 60% 70% at 72% 50%, #3b2814 0%, #1c140c 55%, #120d08 100%);
 }
-.hero__media, .hero__media img { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; }
-.hero__media img { object-fit: cover; object-position: 50% 60%; animation: heroZoom 18s ease-out both; }
+/* Rótulo iluminado a la derecha, fundido con el fondo */
+.hero__media {
+  position: absolute; z-index: -2; top: 50%; right: max(0px, calc(50% - 700px));
+  width: min(54vw, 96vh); aspect-ratio: 1; transform: translateY(-46%);
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 70%, transparent 100%);
+          mask-image: radial-gradient(circle closest-side, #000 70%, transparent 100%);
+}
+.hero__media img { width: 100%; height: 100%; object-fit: cover; animation: heroGlow 2.4s ease-out both; }
 .hero__shade {
-  position: absolute; inset: 0; z-index: -1;
-  background:
-    linear-gradient(90deg, rgba(16,22,18,.88) 0%, rgba(16,22,18,.55) 45%, rgba(16,22,18,.1) 75%),
-    linear-gradient(180deg, rgba(16,22,18,.55) 0%, transparent 25%, transparent 60%, rgba(16,22,18,.85) 100%);
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: linear-gradient(90deg, rgba(18,13,8,.95) 0%, rgba(18,13,8,.8) 36%, rgba(18,13,8,0) 58%);
 }
+@keyframes heroGlow { from { opacity: 0; transform: scale(1.04); filter: brightness(.4); } to { opacity: 1; transform: none; filter: none; } }
 .hero__content { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
 .hero__title { font-size: clamp(44px, 7.4vw, 96px); font-weight: 700; letter-spacing: -.01em; line-height: 1.02; max-width: 12ch; }
 .hero__title em { color: var(--gold); font-weight: 400; }
@@ -486,8 +492,11 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 
 @media (max-width: 700px) {
   .hero { padding-bottom: 110px; }
-  .hero__media img { object-position: 50% 70%; }
-  .hero__shade { background: linear-gradient(180deg, rgba(16,22,18,.6) 0%, rgba(16,22,18,.15) 30%, rgba(16,22,18,.7) 55%, rgba(16,22,18,.95) 100%); }
+  /* En el móvil: rótulo arriba y el texto debajo */
+  .hero { flex-direction: column; align-items: stretch; min-height: auto; padding-top: var(--header-h); }
+  .hero__media { position: relative; top: auto; right: auto; transform: none; width: min(84vw, 44vh); margin: 0 auto -18px; z-index: 0; }
+  .hero__shade { display: none; }
+  .hero__content { position: relative; }
   .menu-filters { justify-content: stretch; }
   .search { flex-basis: 100%; max-width: none; }
   .toggle, .allergen-filter { flex: 1; }
@@ -507,4 +516,49 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
   .gallery { grid-auto-rows: 64px; gap: 8px; }
   .allergen-filter__panel { position: fixed; left: 16px; right: 16px; top: auto; bottom: 90px; width: auto; }
   .hours td span { display: block; margin-left: 0; }
+}
+
+/* ---------- Reservar: WhatsApp o teléfono ---------- */
+html.reserve-open { overflow: hidden; }
+.reserve {
+  border: 0; padding: 0; background: transparent; color: var(--ink);
+  width: min(440px, calc(100vw - 32px)); max-width: none; max-height: none; overflow: visible;
+}
+.reserve::backdrop { background: rgba(16, 22, 18, .7); backdrop-filter: blur(4px); }
+.reserve[open] { animation: reserveIn .3s cubic-bezier(.2, .8, .3, 1); }
+.reserve[open]::backdrop { animation: fadeIn .3s ease; }
+@keyframes reserveIn { from { opacity: 0; transform: translateY(20px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } }
+.reserve__box {
+  position: relative; background: var(--paper); border-radius: 24px; padding: 32px 24px 22px; text-align: center;
+  border: 1px solid rgba(201,162,90,.5); box-shadow: 0 40px 80px -30px rgba(0,0,0,.6);
+}
+.reserve__close {
+  position: absolute; top: 10px; right: 10px; width: 40px; height: 40px; border-radius: 50%;
+  border: 0; background: transparent; font-size: 28px; line-height: 1; color: var(--ink-soft); cursor: pointer;
+}
+.reserve__close:hover { background: var(--cream-2); }
+.reserve__logo { width: 64px; height: 64px; margin: 0 auto 10px; border-radius: 50%; }
+.reserve__title { font-size: 30px; }
+.reserve__title em { color: var(--red); font-weight: 500; }
+.reserve__text { margin: 8px 0 20px; color: var(--ink-soft); font-size: 15px; }
+.reserve__options { display: grid; gap: 10px; }
+.reserve__opt {
+  display: flex; align-items: center; gap: 14px; text-align: left; text-decoration: none;
+  padding: 16px 18px; border-radius: 16px; transition: transform .15s ease, filter .2s ease;
+}
+.reserve__opt:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.reserve__opt strong { display: block; font-size: 17px; }
+.reserve__opt small { display: block; font-size: 13px; opacity: .85; }
+.reserve__opt--wa { background: #1f8f4e; color: #fff; }
+.reserve__opt--tel { background: var(--green); color: var(--cream); }
+.reserve__opt--tel svg { color: var(--gold); }
+.reserve__note { margin: 16px 0 0; font-size: 12px; color: var(--ink-soft); }
+
+@media (max-width: 560px) {
+  /* En el móvil sale desde abajo */
+  .reserve { margin: auto 0 0; width: 100vw; }
+  .reserve__box { border-radius: 24px 24px 0 0; padding-bottom: calc(22px + env(safe-area-inset-bottom)); border-bottom: 0; }
+  .reserve[open] { animation: sheetIn .32s cubic-bezier(.2, .8, .3, 1); }
+  @keyframes sheetIn { from { transform: translateY(100%); } to { transform: none; } }
 }

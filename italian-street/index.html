@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Italian Street by Nacho García · Pizza napoletana y pasta en Málaga</title>
   <meta name="description" content="Italian Street by Nacho García: pizza napoletana de fermentación lenta, pasta a tu gusto, pasta rellena, lasañas y postres italianos en Málaga (Av. Jane Bowles, 17). Reserva al 624 25 33 16.">
-  <meta name="theme-color" content="#1c2820">
+  <meta name="theme-color" content="#120d08">
 
   <meta property="og:title" content="Italian Street by Nacho García · Málaga">
   <meta property="og:description" content="Dalla strada italiana alla tua tavola. Pizza napoletana y pasta en Av. Jane Bowles, 17 · Málaga.">
@@ -114,7 +114,7 @@
         <a href="#visitanos">Horario y reservas</a>
       </nav>
 
-      <a class="btn btn--small btn--gold header__cta" href="tel:+34624253316">Reservar</a>
+      <a class="btn btn--small btn--gold header__cta" href="tel:+34624253316" data-reserve>Reservar</a>
 
       <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
         <span></span><span></span>
@@ -127,8 +127,8 @@
     <!-- ============ PORTADA ============ -->
     <section class="hero">
       <picture class="hero__media">
-        <source media="(max-width: 700px)" srcset="img/hero-movil.jpg">
-        <img src="img/hero.jpg" alt="Vespa con el logo de Italian Street en una calle empedrada italiana al atardecer" width="1800" height="1389" fetchpriority="high">
+        <source media="(max-width: 700px)" srcset="img/portada-movil.jpg">
+        <img src="img/portada.jpg" alt="Rótulo iluminado de Italian Street by Nacho García" width="1200" height="1200" fetchpriority="high">
       </picture>
       <div class="hero__shade" aria-hidden="true"></div>
 
@@ -144,7 +144,7 @@
         </p>
 
         <div class="hero__actions">
-          <a class="btn btn--gold" href="tel:+34624253316">Reservar mesa</a>
+          <a class="btn btn--gold" href="tel:+34624253316" data-reserve>Reservar mesa</a>
           <a class="btn btn--ghost" href="#carta">Ver la carta</a>
         </div>
 
@@ -250,7 +250,7 @@
             <p class="plate__al" id="plateAl"></p>
             <div class="plate__actions">
               <button class="btn btn--light btn--small" id="randomBtn" type="button">Sorpréndeme</button>
-              <a class="btn btn--gold btn--small" href="tel:+34624253316">Reservar y pedirla</a>
+              <a class="btn btn--gold btn--small" href="tel:+34624253316" data-reserve="pasta">Reservar y pedirla</a>
             </div>
           </div>
         </div>
@@ -322,7 +322,7 @@
         <div class="visit__info reveal">
           <p class="kicker">Horario y reservas</p>
           <h2 class="section__title">Te guardamos <em>mesa</em></h2>
-          <p>Te recomendamos reservar con antelación, sobre todo los fines de semana.</p>
+          <p>Reservas solo por WhatsApp o por teléfono. Te recomendamos reservar con antelación, sobre todo los fines de semana.</p>
 
           <dl class="contact">
             <div><dt>Dirección</dt><dd>Av. Jane Bowles, 17<br>Palma-Palmilla, 29011 Málaga</dd></div>
@@ -333,7 +333,7 @@
           <table class="hours" id="hours"></table>
 
           <div class="visit__actions">
-            <a class="btn btn--red" href="tel:+34624253316">Llamar y reservar</a>
+            <a class="btn btn--red" href="tel:+34624253316" data-reserve>Reservar mesa</a>
             <a class="btn btn--outline" href="https://www.google.com/maps/dir/?api=1&destination=Italian+Street+Av.+Jane+Bowles+17+29011+M%C3%A1laga" target="_blank" rel="noopener">Cómo llegar</a>
           </div>
         </div>
@@ -362,12 +362,36 @@
 
   <!-- Barra fija en móvil -->
   <nav class="dock" aria-label="Acciones rápidas">
-    <a href="tel:+34624253316"><span aria-hidden="true">☎</span> Reservar</a>
+    <a href="tel:+34624253316" data-reserve><span aria-hidden="true">☎</span> Reservar</a>
     <a href="#carta"><span aria-hidden="true">☰</span> Carta</a>
     <a href="https://www.google.com/maps/dir/?api=1&destination=Italian+Street+Av.+Jane+Bowles+17+29011+M%C3%A1laga" target="_blank" rel="noopener"><span aria-hidden="true">➤</span> Llegar</a>
   </nav>
 
+  <!-- ============ RESERVAR: WhatsApp o teléfono ============ -->
+  <dialog class="reserve" id="reserve" aria-labelledby="reserveTitle">
+    <div class="reserve__box">
+      <button class="reserve__close" type="button" data-close aria-label="Cerrar">×</button>
+      <img class="reserve__logo" src="img/logo-sm.png" alt="" width="64" height="64">
+      <h2 class="reserve__title" id="reserveTitle">Reserva tu <em>mesa</em></h2>
+      <p class="reserve__text" id="reserveText">¿Cómo prefieres reservar?</p>
+
+      <div class="reserve__options">
+        <a class="reserve__opt reserve__opt--wa" id="reserveWa" href="https://wa.me/34624253316" target="_blank" rel="noopener">
+          <svg viewBox="0 0 32 32" width="28" height="28" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.3 3.6 5.7 5 2.1.9 3 1 4 .8.7-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.7-.4z"/></svg>
+          <span><strong>WhatsApp</strong><small>Te respondemos por mensaje</small></span>
+        </a>
+        <a class="reserve__opt reserve__opt--tel" href="tel:+34624253316">
+          <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2z"/></svg>
+          <span><strong>Llamar</strong><small>624 25 33 16</small></span>
+        </a>
+      </div>
+
+      <p class="reserve__note">Martes cerrado por descanso · Lunes y miércoles solo mediodía</p>
+    </div>
+  </dialog>
+
   <script src="js/menu.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/reservas.js"></script>
 </body>
 </html>
