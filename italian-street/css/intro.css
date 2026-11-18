@@ -1,0 +1,113 @@
+/* =========================================================
+   Italian Street · animación de entrada
+   La fachada del local de noche: se encienden las luces, se
+   abre la puerta verde y la cámara entra hasta la web.
+   ========================================================= */
+
+html.intro-lock, html.intro-lock body { overflow: hidden; }
+html.no-intro .intro { display: none; }
+
+.intro {
+  position: fixed; inset: 0; z-index: 1000;
+  background: #3e4630; overflow: hidden;
+  /* Red de seguridad: si algo falla, la intro desaparece sola */
+  animation: introFailsafe .6s ease 9s forwards;
+}
+.intro.is-done { opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility 0s .6s; }
+@keyframes introFailsafe { to { opacity: 0; visibility: hidden; } }
+
+/* Cámara: hace zoom hacia la puerta */
+.intro__cam { position: absolute; inset: 0; will-change: transform; }
+.intro.is-zoom .intro__cam { transform: scale(9); transition: transform 1.25s cubic-bezier(.55, 0, .75, .2); }
+
+/* Escenario de 3000 × 1000 escalado para cubrir la pantalla */
+.intro__stage {
+  position: absolute; left: 0; top: 0;
+  width: 3000px; height: 1000px; transform-origin: 0 0;
+  transform: translate(var(--x, 0px), var(--y, 0px)) scale(var(--s, 1));
+}
+.intro__svg { position: absolute; inset: 0; width: 3000px; height: 1000px; display: block; }
+
+/* ---------- Luces ---------- */
+.intro .glow, .intro .pool { opacity: 0; transition: opacity .9s ease; }
+.intro .lamp-glass { fill: #2a2622; transition: fill .3s ease; }
+.intro.is-on .lamp-glass { fill: #ffd37e; }
+.intro.is-on .glow, .intro.is-on .pool { opacity: 1; }
+.intro.is-on .lamp-r .glow, .intro.is-on .lamp-r .lamp-glass { transition-delay: .25s; }
+.intro .sign-halo { opacity: 0; transition: opacity 1s ease .55s; }
+.intro.is-on .sign-halo { opacity: 1; animation: signPulse 2.4s ease-in-out 1.6s infinite; }
+.intro .sign-body { filter: brightness(.4); transition: filter 1s ease .55s; }
+.intro.is-on .sign-body { filter: brightness(1); }
+@keyframes signPulse { 50% { opacity: .75; } }
+
+/* Noche: oscurece la escena hasta que se encienden las luces */
+.intro__night {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 60%, rgba(8,10,8,.35), rgba(8,10,8,.85));
+  transition: opacity 1.2s ease;
+}
+.intro.is-on .intro__night { opacity: .35; }
+
+/* ---------- Puerta ---------- */
+.door {
+  position: absolute; left: 1410px; top: 410px; width: 180px; height: 490px;
+  perspective: 900px;
+}
+.door__inside {
+  position: absolute; inset: 0; overflow: hidden;
+  background: #f3c77d url("../img/hero.jpg") center 70% / cover;
+}
+.door__inside::after {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, rgba(255,214,140,.55), rgba(120,70,20,.35) 70%, rgba(40,25,10,.6));
+}
+.door__leaf {
+  position: absolute; top: 0; width: 90px; height: 490px;
+  transition: transform 1.15s cubic-bezier(.6, .05, .25, 1);
+  backface-visibility: hidden;
+}
+.door__leaf svg { display: block; width: 90px; height: 490px; }
+.door__leaf--l { left: 0; transform-origin: left center; }
+.door__leaf--r { right: 0; transform-origin: right center; }
+.intro.is-open .door__leaf--l { transform: rotateY(-108deg); }
+.intro.is-open .door__leaf--r { transform: rotateY(108deg); }
+.intro .pane { fill: #3a3a2e; transition: fill .6s ease .4s; }
+.intro.is-on .pane { fill: url(#paneLight); }
+/* Luz que sale por la puerta al abrirse */
+.door__spill {
+  position: absolute; left: -120px; right: -120px; top: 480px; height: 140px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,205,120,.55), transparent 70%);
+  opacity: 0; transition: opacity 1s ease .3s; pointer-events: none;
+}
+.intro.is-open .door__spill { opacity: 1; }
+
+/* ---------- Textos ---------- */
+.intro__text {
+  position: absolute; left: 0; right: 0; bottom: 0; text-align: center;
+  color: #f4ecdd; pointer-events: none; padding: 90px 20px max(6vh, 36px);
+  background: linear-gradient(180deg, transparent, rgba(10,12,10,.6));
+  opacity: 0; transform: translateY(12px);
+  transition: opacity .9s ease .8s, transform .9s ease .8s;
+}
+.intro.is-on .intro__text { opacity: 1; transform: none; }
+.intro.is-zoom .intro__text { opacity: 0; transition: opacity .3s ease; }
+.intro__kicker { margin: 0 0 6px; font: 700 12px/1 "DM Sans", system-ui, sans-serif; letter-spacing: .32em; text-transform: uppercase; color: #e3c88c; }
+.intro__title { margin: 0; font: italic 500 clamp(26px, 4vw, 40px)/1.15 "Playfair Display", Georgia, serif; text-shadow: 0 2px 20px rgba(0,0,0,.6); }
+
+.intro__skip {
+  position: absolute; right: 16px; top: 16px; z-index: 2;
+  background: rgba(20,24,18,.55); color: #f4ecdd; border: 1px solid rgba(227,200,140,.5);
+  font: 600 13px/1 "DM Sans", system-ui, sans-serif; letter-spacing: .04em;
+  padding: 10px 16px; border-radius: 999px; cursor: pointer; backdrop-filter: blur(6px);
+}
+.intro__skip:hover { background: rgba(20,24,18,.8); }
+.intro.is-zoom .intro__skip { opacity: 0; }
+
+/* En pantallas verticales el rótulo se coloca sobre la puerta para que se vea */
+@media (max-aspect-ratio: 4/5) {
+  .intro .sign { transform: translate(320px, -262px) scale(.6); transform-box: fill-box; transform-origin: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { display: none; }
+}

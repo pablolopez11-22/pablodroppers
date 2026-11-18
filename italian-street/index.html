@@ -19,6 +19,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/intro.css">
+  <noscript><style>.intro { display: none !important; }</style></noscript>
+  <script>
+    /* La intro se ve una vez por visita (añade ?intro a la URL para verla de nuevo) */
+    (function () {
+      var d = document.documentElement, show = true;
+      try {
+        var force = /[?&]intro\b/.test(location.search);
+        if (!force && (sessionStorage.getItem('is-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches)) show = false;
+      } catch (e) {}
+      d.classList.add(show ? 'intro-lock' : 'no-intro');
+    })();
+  </script>
 
   <script type="application/ld+json">
   {
@@ -48,6 +61,142 @@
   </script>
 </head>
 <body>
+  <!-- ============ INTRO: fachada del local ============ -->
+  <div class="intro" id="intro">
+    <div class="intro__cam" id="introCam">
+      <div class="intro__stage" id="introStage" aria-hidden="true">
+        <svg class="intro__svg" viewBox="0 0 3000 1000" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#4a5636"/><stop offset="1" stop-color="#5f6d45"/>
+            </linearGradient>
+            <pattern id="stones" width="180" height="84" patternUnits="userSpaceOnUse">
+              <rect width="180" height="84" fill="#b3a37f"/>
+              <rect x="2" y="2" width="64" height="38" rx="3" fill="#dfd2b5"/>
+              <rect x="70" y="2" width="48" height="38" rx="3" fill="#d2c3a1"/>
+              <rect x="122" y="2" width="56" height="38" rx="3" fill="#e7dcc3"/>
+              <rect x="2" y="44" width="38" height="38" rx="3" fill="#d7c8a7"/>
+              <rect x="44" y="44" width="70" height="38" rx="3" fill="#e5d9bf"/>
+              <rect x="118" y="44" width="60" height="38" rx="3" fill="#cdbd9a"/>
+            </pattern>
+            <radialGradient id="lampGlow"><stop offset="0" stop-color="#ffd58a" stop-opacity=".9"/><stop offset=".35" stop-color="#ffb84d" stop-opacity=".35"/><stop offset="1" stop-color="#ffb84d" stop-opacity="0"/></radialGradient>
+            <radialGradient id="wallPool" cx=".5" cy=".25"><stop offset="0" stop-color="#ffcf7a" stop-opacity=".45"/><stop offset="1" stop-color="#ffcf7a" stop-opacity="0"/></radialGradient>
+            <radialGradient id="signHalo"><stop offset=".55" stop-color="#ffe29a" stop-opacity=".7"/><stop offset=".75" stop-color="#ffc35e" stop-opacity=".22"/><stop offset="1" stop-color="#ffb84d" stop-opacity="0"/></radialGradient>
+            <radialGradient id="signFace" cx=".45" cy=".4"><stop offset="0" stop-color="#fff4c9"/><stop offset="1" stop-color="#ead592"/></radialGradient>
+            <linearGradient id="paneLight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe2a6"/><stop offset="1" stop-color="#cf8f3e"/></linearGradient>
+            <clipPath id="signClip"><circle cx="1180" cy="440" r="98"/></clipPath>
+          </defs>
+
+          <!-- Pared verde oliva -->
+          <rect width="3000" height="1000" fill="url(#wall)"/>
+          <!-- Banda superior verde oscuro -->
+          <rect width="3000" height="130" fill="#1f3024"/>
+          <rect y="130" width="3000" height="10" fill="#2d4231"/>
+          <rect y="140" width="3000" height="3" fill="#c9a25a" opacity=".55"/>
+          <!-- Zócalo de piedra -->
+          <rect x="0" y="560" width="3000" height="340" fill="url(#stones)"/>
+          <rect x="0" y="552" width="3000" height="10" fill="#d3c6a8"/>
+
+          <!-- Luz de los farolillos sobre la pared -->
+          <ellipse class="pool" cx="1318" cy="420" rx="160" ry="250" fill="url(#wallPool)"/>
+          <ellipse class="pool" cx="1682" cy="420" rx="160" ry="250" fill="url(#wallPool)"/>
+
+          <!-- Marco de piedra de la puerta -->
+          <g fill="#e9dfc9" stroke="#bcab88" stroke-width="3">
+            <rect x="1350" y="280" width="300" height="60"/>
+            <rect x="1465" y="280" width="70" height="60" fill="#f1e9d6"/>
+            <rect x="1355" y="340" width="55" height="80"/><rect x="1355" y="420" width="55" height="105"/>
+            <rect x="1355" y="525" width="55" height="80"/><rect x="1355" y="605" width="55" height="105"/>
+            <rect x="1355" y="710" width="55" height="80"/><rect x="1355" y="790" width="55" height="110"/>
+            <rect x="1590" y="340" width="55" height="105"/><rect x="1590" y="445" width="55" height="80"/>
+            <rect x="1590" y="525" width="55" height="105"/><rect x="1590" y="630" width="55" height="80"/>
+            <rect x="1590" y="710" width="55" height="105"/><rect x="1590" y="815" width="55" height="85"/>
+          </g>
+          <!-- Cajón de la persiana -->
+          <rect x="1410" y="340" width="180" height="70" fill="#5a412b"/>
+          <g stroke="#3f2d1d" stroke-width="2.5">
+            <line x1="1410" y1="354" x2="1590" y2="354"/><line x1="1410" y1="368" x2="1590" y2="368"/>
+            <line x1="1410" y1="382" x2="1590" y2="382"/><line x1="1410" y1="396" x2="1590" y2="396"/>
+          </g>
+
+          <!-- Rótulo redondo con el logo -->
+          <g class="sign">
+            <circle class="sign-halo" cx="1180" cy="440" r="235" fill="url(#signHalo)"/>
+            <g class="sign-body">
+              <circle cx="1180" cy="440" r="138" fill="#141412"/>
+              <circle cx="1180" cy="440" r="130" fill="url(#signFace)"/>
+              <circle cx="1180" cy="440" r="104" fill="none" stroke="#1d1a14" stroke-width="5"/>
+              <image href="img/logo.png" x="1082" y="342" width="196" height="196" clip-path="url(#signClip)"/>
+            </g>
+          </g>
+
+          <!-- Farolillos junto al dintel -->
+          <g class="lamp lamp-l">
+            <circle class="glow" cx="1318" cy="330" r="115" fill="url(#lampGlow)"/>
+            <path d="M1350 286 h-22 v10 h22z" fill="#1b1a18"/>
+            <path d="M1303 292 h30 l6 14 h-42z" fill="#1b1a18"/>
+            <rect class="lamp-glass" x="1303" y="306" width="30" height="48" rx="2"/>
+            <path d="M1303 306 h30 v48 h-30z M1318 306 v48" fill="none" stroke="#1b1a18" stroke-width="4"/>
+            <path d="M1299 354 h38 l-6 10 h-26z" fill="#1b1a18"/>
+          </g>
+          <g class="lamp lamp-r">
+            <circle class="glow" cx="1682" cy="330" r="115" fill="url(#lampGlow)"/>
+            <path d="M1650 286 h22 v10 h-22z" fill="#1b1a18"/>
+            <path d="M1667 292 h30 l6 14 h-42z" fill="#1b1a18"/>
+            <rect class="lamp-glass" x="1667" y="306" width="30" height="48" rx="2"/>
+            <path d="M1667 306 h30 v48 h-30z M1682 306 v48" fill="none" stroke="#1b1a18" stroke-width="4"/>
+            <path d="M1663 354 h38 l-6 10 h-26z" fill="#1b1a18"/>
+          </g>
+
+          <!-- Olivos en maceteros negros -->
+          <g>
+            <rect x="1297" y="730" width="6" height="80" fill="#4a3826"/>
+            <circle cx="1300" cy="690" r="46" fill="#3b5a2b"/><circle cx="1270" cy="712" r="30" fill="#4a6b34"/><circle cx="1330" cy="708" r="32" fill="#43632f"/><circle cx="1298" cy="655" r="30" fill="#557a3c"/><circle cx="1318" cy="680" r="18" fill="#62884a"/>
+            <path d="M1266 800 h68 l-5 100 h-58z" fill="#141414"/><rect x="1264" y="796" width="72" height="10" fill="#202020"/>
+            <rect x="1697" y="730" width="6" height="80" fill="#4a3826"/>
+            <circle cx="1700" cy="690" r="46" fill="#3b5a2b"/><circle cx="1670" cy="708" r="32" fill="#43632f"/><circle cx="1730" cy="712" r="30" fill="#4a6b34"/><circle cx="1702" cy="655" r="30" fill="#557a3c"/><circle cx="1682" cy="680" r="18" fill="#62884a"/>
+            <path d="M1666 800 h68 l-5 100 h-58z" fill="#141414"/><rect x="1664" y="796" width="72" height="10" fill="#202020"/>
+          </g>
+
+          <!-- Acera -->
+          <rect x="0" y="900" width="3000" height="100" fill="#4f4c47"/>
+          <g stroke="#403d39" stroke-width="3">
+            <line x1="0" y1="935" x2="3000" y2="935"/><line x1="0" y1="968" x2="3000" y2="968"/>
+          </g>
+          <rect x="0" y="900" width="3000" height="6" fill="#726e66"/>
+        </svg>
+
+        <!-- Puerta verde de dos hojas -->
+        <div class="door" id="introDoor">
+          <div class="door__inside"></div>
+          <div class="door__leaf door__leaf--l">
+            <svg viewBox="0 0 90 490"><rect width="90" height="490" fill="#56704b"/><rect x="2" y="2" width="86" height="486" fill="none" stroke="#42583a" stroke-width="4"/>
+              <rect class="pane" x="14" y="16" width="62" height="226"/>
+              <rect x="14" y="16" width="62" height="226" fill="none" stroke="#42583a" stroke-width="6"/>
+              <rect x="16" y="262" width="58" height="96" fill="none" stroke="#4a6142" stroke-width="5"/><rect x="16" y="374" width="58" height="100" fill="none" stroke="#4a6142" stroke-width="5"/>
+              <rect x="80" y="252" width="5" height="24" rx="2" fill="#c9a25a"/></svg>
+          </div>
+          <div class="door__leaf door__leaf--r">
+            <svg viewBox="0 0 90 490"><rect width="90" height="490" fill="#56704b"/><rect x="2" y="2" width="86" height="486" fill="none" stroke="#42583a" stroke-width="4"/>
+              <rect class="pane" x="14" y="16" width="62" height="226"/>
+              <rect x="14" y="16" width="62" height="226" fill="none" stroke="#42583a" stroke-width="6"/>
+              <rect x="16" y="262" width="58" height="96" fill="none" stroke="#4a6142" stroke-width="5"/><rect x="16" y="374" width="58" height="100" fill="none" stroke="#4a6142" stroke-width="5"/>
+              <rect x="5" y="252" width="5" height="24" rx="2" fill="#c9a25a"/></svg>
+          </div>
+          <div class="door__spill"></div>
+        </div>
+      </div>
+      <div class="intro__night"></div>
+    </div>
+
+    <div class="intro__text">
+      <p class="intro__kicker">Benvenuti</p>
+      <p class="intro__title">Dalla strada italiana alla tua tavola</p>
+    </div>
+    <button class="intro__skip" id="introSkip" type="button">Entrar ›</button>
+  </div>
+  <script src="js/intro.js"></script>
+
   <a class="skip" href="#main">Saltar al contenido</a>
 
   <!-- ============ CABECERA ============ -->
