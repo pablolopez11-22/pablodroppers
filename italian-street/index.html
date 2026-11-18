@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Italian Street · Pizzería y pasta en Málaga</title>
+  <meta name="description" content="Italian Street: pizzas artesanales, pasta a tu gusto, lasañas y postres caseros en Málaga (Av. Jane Bowles, 17). Ambiente informal, opciones vegetarianas. Reserva al 624 25 33 16.">
+  <meta name="theme-color" content="#1f1a17">
+
+  <!-- Open Graph (para cuando se comparta el enlace en WhatsApp / redes) -->
+  <meta property="og:title" content="Italian Street · Pizzería y pasta en Málaga">
+  <meta property="og:description" content="Pizzas artesanales y pasta a tu gusto en Av. Jane Bowles, 17 · Málaga.">
+  <meta property="og:type" content="restaurant">
+  <!-- PENDIENTE: <meta property="og:image" content="img/portada.jpg"> -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400;1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Datos estructurados para Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Italian Street",
+    "servesCuisine": ["Italiana", "Pizza", "Pasta"],
+    "priceRange": "10-20 €",
+    "telephone": "+34624253316",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Av. Jane Bowles, 17",
+      "addressLocality": "Málaga",
+      "postalCode": "29011",
+      "addressRegion": "Málaga",
+      "addressCountry": "ES"
+    },
+    "sameAs": ["https://www.instagram.com/italianstreet_/"],
+    "acceptsReservations": true
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Saltar al contenido</a>
+
+  <!-- ============ CABECERA ============ -->
+  <header class="header" id="top">
+    <div class="header__inner">
+      <a href="#top" class="brand" aria-label="Italian Street, inicio">
+        <!-- PENDIENTE: sustituir por el logo real (img/logo.svg o .png) -->
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">Italian <em>Street</em></span>
+      </a>
+
+      <nav class="nav" id="nav" aria-label="Principal">
+        <a href="#carta">Carta</a>
+        <a href="#crea">Crea tu pasta</a>
+        <a href="#local">El local</a>
+        <a href="#visitanos">Visítanos</a>
+      </nav>
+
+      <a class="btn btn--small btn--tomato header__cta" href="tel:+34624253316">Reservar</a>
+
+      <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ PORTADA ============ -->
+    <section class="hero">
+      <div class="hero__media ph ph--dark" data-label="FOTO PORTADA · la pizza más espectacular de Instagram"></div>
+      <div class="hero__shade" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="kicker kicker--light">Pizzería · Pasta · Málaga</p>
+        <h1 class="hero__title">
+          Italia,<br>
+          <em>a pie de calle.</em>
+        </h1>
+        <p class="hero__lead">
+          Pizzas artesanales, pasta a tu gusto y recetas al horno de toda la vida,
+          en un sitio donde se viene a comer bien y sin prisas.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--tomato" href="tel:+34624253316">Reservar mesa</a>
+          <a class="btn btn--ghost" href="#carta">Ver la carta</a>
+        </div>
+
+        <ul class="hero__facts" aria-label="Datos rápidos">
+          <li><strong>4,6 <span class="star" aria-hidden="true">★</span></strong> 40 reseñas en Google</li>
+          <li><strong>10–20 €</strong> por persona</li>
+          <li class="today-status" id="todayStatus"><strong>Hoy</strong> <span>consultando horario…</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CINTA ============ -->
+    <div class="ribbon-wrap" aria-hidden="true"><div class="ribbon">
+      <div class="ribbon__track">
+        <span>Pizza artesanal</span><span>✦</span><span>Pasta a tu gusto</span><span>✦</span><span>Lasaña</span><span>✦</span><span>Canelones</span><span>✦</span><span>Postres caseros</span><span>✦</span>
+        <span>Pizza artesanal</span><span>✦</span><span>Pasta a tu gusto</span><span>✦</span><span>Lasaña</span><span>✦</span><span>Canelones</span><span>✦</span><span>Postres caseros</span><span>✦</span>
+      </div>
+    </div></div>
+
+    <!-- ============ CARTA ============ -->
+    <section class="section carta" id="carta">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker">La carta</p>
+          <h2 class="section__title">Lo que sale del <em>horno</em></h2>
+          <p class="note">
+            <strong>Borrador:</strong> platos y precios de ejemplo. Se sustituyen por la carta real.
+          </p>
+        </header>
+
+        <div class="tabs reveal" role="tablist" aria-label="Categorías de la carta">
+          <button class="tab is-active" role="tab" aria-selected="true" aria-controls="tab-pizzas" id="t-pizzas">Pizzas</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-pastas" id="t-pastas" tabindex="-1">Pastas</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-horno" id="t-horno" tabindex="-1">Al horno</button>
+          <button class="tab" role="tab" aria-selected="false" aria-controls="tab-postres" id="t-postres" tabindex="-1">Postres</button>
+        </div>
+
+        <div class="legend">
+          <span class="veg" aria-hidden="true">V</span> Vegetariano
+        </div>
+
+        <!-- PIZZAS -->
+        <div class="panel is-active" role="tabpanel" id="tab-pizzas" aria-labelledby="t-pizzas">
+          <div class="panel__grid">
+            <div class="panel__photo ph" data-label="FOTO · pizza"></div>
+            <ul class="dishes">
+              <li class="dish">
+                <div class="dish__row"><h3>Margherita <span class="veg" title="Vegetariano">V</span></h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Tomate, mozzarella fior di latte y albahaca fresca.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Prosciutto e funghi</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Tomate, mozzarella, jamón cocido y champiñones.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Diavola</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Tomate, mozzarella y salami picante.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Quattro formaggi <span class="veg" title="Vegetariano">V</span></h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Mozzarella, gorgonzola, parmesano y provolone.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Pizza de la casa</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Descripción pendiente.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- PASTAS -->
+        <div class="panel" role="tabpanel" id="tab-pastas" aria-labelledby="t-pastas" hidden>
+          <div class="panel__grid">
+            <div class="panel__photo ph" data-label="FOTO · pasta"></div>
+            <div>
+              <p class="panel__intro">
+                Aquí la pasta se pide a tu manera: <strong>elige la pasta y elige la salsa</strong>.
+                <a href="#crea" class="link">Pruébalo en «Crea tu pasta» →</a>
+              </p>
+              <ul class="dishes">
+                <li class="dish">
+                  <div class="dish__row"><h3>Pasta + salsa a elegir</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                  <p>Cualquier combinación de nuestras pastas y salsas.</p>
+                </li>
+                <li class="dish">
+                  <div class="dish__row"><h3>Recomendación del chef</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                  <p>Descripción pendiente.</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- AL HORNO -->
+        <div class="panel" role="tabpanel" id="tab-horno" aria-labelledby="t-horno" hidden>
+          <div class="panel__grid">
+            <div class="panel__photo ph" data-label="FOTO · lasaña"></div>
+            <ul class="dishes">
+              <li class="dish">
+                <div class="dish__row"><h3>Lasaña boloñesa</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Capas de pasta, ragú de carne, bechamel y queso gratinado.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Lasaña vegetal <span class="veg" title="Vegetariano">V</span></h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Descripción pendiente.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Canelones</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Descripción pendiente.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- POSTRES -->
+        <div class="panel" role="tabpanel" id="tab-postres" aria-labelledby="t-postres" hidden>
+          <div class="panel__grid">
+            <div class="panel__photo ph" data-label="FOTO · postre"></div>
+            <ul class="dishes">
+              <li class="dish">
+                <div class="dish__row"><h3>Tiramisú <span class="veg" title="Vegetariano">V</span></h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Descripción pendiente.</p>
+              </li>
+              <li class="dish">
+                <div class="dish__row"><h3>Postre de la casa</h3><span class="dish__dots"></span><span class="dish__price">0,00 €</span></div>
+                <p>Descripción pendiente.</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="allergens reveal">¿Alergias o intolerancias? Pregúntanos: te informamos de los alérgenos de cada plato.</p>
+      </div>
+    </section>
+
+    <!-- ============ CREA TU PASTA ============ -->
+    <section class="section crea" id="crea">
+      <div class="container">
+        <header class="section__head reveal">
+          <p class="kicker kicker--light">Lo que nos hace distintos</p>
+          <h2 class="section__title section__title--light">Crea tu <em>pasta</em></h2>
+          <p class="section__sub">Tú eliges la pasta, tú eliges la salsa. Juega con las combinaciones y pídela tal cual en el restaurante.</p>
+          <p class="note note--dark"><strong>Borrador:</strong> tipos de pasta y salsas de ejemplo.</p>
+        </header>
+
+        <div class="builder reveal">
+          <div class="builder__steps">
+            <fieldset class="step">
+              <legend><span class="step__n">1</span> Elige la pasta</legend>
+              <div class="chips" data-group="pasta">
+                <!-- Se generan desde js/main.js (PASTAS) -->
+              </div>
+            </fieldset>
+
+            <fieldset class="step">
+              <legend><span class="step__n">2</span> Elige la salsa</legend>
+              <div class="chips" data-group="salsa">
+                <!-- Se generan desde js/main.js (SALSAS) -->
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="plate" aria-live="polite">
+            <div class="plate__visual">
+              <svg viewBox="0 0 200 200" class="plate__svg" aria-hidden="true">
+                <circle cx="100" cy="100" r="96" class="plate__rim"/>
+                <circle cx="100" cy="100" r="74" class="plate__base"/>
+                <g id="pastaShape"></g>
+                <g id="sauceTop"></g>
+              </svg>
+            </div>
+            <p class="plate__label">Tu plato</p>
+            <p class="plate__name" id="plateName">Elige pasta y salsa</p>
+            <p class="plate__desc" id="plateDesc">Combina cualquiera de nuestras pastas con cualquiera de nuestras salsas.</p>
+            <div class="plate__actions">
+              <button class="btn btn--light btn--small" id="randomBtn" type="button">Sorpréndeme</button>
+              <a class="btn btn--tomato btn--small" href="tel:+34624253316">Reservar y pedirla</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EL LOCAL ============ -->
+    <section class="section local" id="local">
+      <div class="container local__grid">
+        <div class="local__text reveal">
+          <p class="kicker">El local</p>
+          <h2 class="section__title">Como en una calle de <em>Italia</em>, pero en Málaga</h2>
+          <p>
+            <!-- PENDIENTE: la historia real (quién está detrás, desde cuándo, de dónde vienen las recetas) -->
+            Un sitio sin postureo para comer pizza y pasta de verdad. Ven con amigos, en pareja o con
+            los peques: aquí hay sitio para todos.
+          </p>
+          <ul class="perks">
+            <li><span class="perks__icon" aria-hidden="true">🍕</span> Masa y recetas artesanales</li>
+            <li><span class="perks__icon" aria-hidden="true">🌿</span> Opciones vegetarianas</li>
+            <li><span class="perks__icon" aria-hidden="true">👶</span> Tronas para los más pequeños</li>
+            <li><span class="perks__icon" aria-hidden="true">💶</span> Entre 10 y 20 € por persona</li>
+          </ul>
+        </div>
+
+        <div class="gallery reveal">
+          <div class="ph g1" data-label="FOTO · interior"></div>
+          <div class="ph g2" data-label="FOTO · plato"></div>
+          <div class="ph g3" data-label="FOTO · fachada / terraza"></div>
+          <div class="ph g4" data-label="FOTO · plato"></div>
+          <div class="ph g5" data-label="FOTO · postre"></div>
+        </div>
+      </div>
+
+      <div class="container">
+        <a class="insta reveal" href="https://www.instagram.com/italianstreet_/" target="_blank" rel="noopener">
+          <span class="insta__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
+          </span>
+          <span>Síguenos en Instagram <strong>@italianstreet_</strong></span>
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ============ RESEÑAS ============ -->
+    <section class="section reviews" id="opiniones">
+      <div class="container reviews__inner reveal">
+        <div class="score">
+          <span class="score__num">4,6</span>
+          <span class="score__stars" aria-hidden="true">★★★★★</span>
+          <span class="score__meta">40 reseñas en Google</span>
+        </div>
+        <div class="reviews__text">
+          <h2 class="section__title">Lo que dicen <em>quienes repiten</em></h2>
+          <!-- PENDIENTE: 3 citas de reseñas reales de Google (con permiso / nombre de pila) -->
+          <p>Aquí irán tres reseñas reales de Google que elijamos juntos.</p>
+          <a class="link" href="https://www.google.com/maps/search/?api=1&query=Italian+Street+Av.+Jane+Bowles+17+M%C3%A1laga" target="_blank" rel="noopener">Leer todas las reseñas en Google →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ VISÍTANOS ============ -->
+    <section class="section visit" id="visitanos">
+      <div class="container visit__grid">
+        <div class="visit__info reveal">
+          <p class="kicker">Visítanos</p>
+          <h2 class="section__title">Te guardamos <em>mesa</em></h2>
+          <p>Te recomendamos reservar con antelación, sobre todo los fines de semana.</p>
+
+          <dl class="contact">
+            <div><dt>Dirección</dt><dd>Av. Jane Bowles, 17<br>Palma-Palmilla, 29011 Málaga</dd></div>
+            <div><dt>Teléfono</dt><dd><a href="tel:+34624253316">624 25 33 16</a></dd></div>
+          </dl>
+
+          <h3 class="hours__title">Horario</h3>
+          <table class="hours" id="hours">
+            <!-- Se genera desde js/main.js (HORARIO) -->
+          </table>
+          <p class="note"><strong>Borrador:</strong> horario incompleto, pendiente de confirmar.</p>
+
+          <div class="visit__actions">
+            <a class="btn btn--tomato" href="tel:+34624253316">Llamar y reservar</a>
+            <a class="btn btn--outline" href="https://www.google.com/maps/dir/?api=1&destination=Italian+Street+Av.+Jane+Bowles+17+29011+M%C3%A1laga" target="_blank" rel="noopener">Cómo llegar</a>
+          </div>
+        </div>
+
+        <div class="map reveal">
+          <iframe
+            title="Mapa: Italian Street, Av. Jane Bowles 17, Málaga"
+            src="https://www.google.com/maps?q=Av.+Jane+Bowles+17,+29011+M%C3%A1laga&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PIE ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="brand__name brand__name--footer">Italian <em>Street</em></p>
+      <p>Av. Jane Bowles, 17 · 29011 Málaga · <a href="tel:+34624253316">624 25 33 16</a></p>
+      <p><a href="https://www.instagram.com/italianstreet_/" target="_blank" rel="noopener">Instagram @italianstreet_</a></p>
+      <p class="footer__small">© <span id="year"></span> Italian Street</p>
+    </div>
+  </footer>
+
+  <!-- Barra fija en móvil -->
+  <nav class="dock" aria-label="Acciones rápidas">
+    <a href="tel:+34624253316"><span aria-hidden="true">☎</span> Llamar</a>
+    <a href="#carta"><span aria-hidden="true">☰</span> Carta</a>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Italian+Street+Av.+Jane+Bowles+17+29011+M%C3%A1laga" target="_blank" rel="noopener"><span aria-hidden="true">➤</span> Llegar</a>
+  </nav>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
