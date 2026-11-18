@@ -21,6 +21,7 @@
 
   function open(trigger) {
     lastTrigger = trigger;
+    if (isDesktop) telSmall.textContent = '624 25 33 16 · pulsa para copiar el número';
     var extra = '';
     if (trigger.dataset.reserve === 'pasta') {
       var plate = document.getElementById('plateName');
@@ -34,6 +35,28 @@
 
   function close() { dialog.close(); }
 
+  // ¿Ordenador (ratón) o móvil (táctil)?
+  var isDesktop = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  var tel = dialog.querySelector('.reserve__opt--tel');
+  var telSmall = tel.querySelector('small');
+
+  // En el móvil WhatsApp se abre en la misma pestaña: así pasa directo a la app
+  // y ningún navegador lo bloquea como ventana emergente.
+  if (!isDesktop) { wa.removeAttribute('target'); wa.removeAttribute('rel'); }
+
+  // En el ordenador no se puede llamar: al pulsar «Llamar» se copia el número
+  // (y si hay una app de llamadas instalada, se abre igualmente).
+  if (isDesktop) {
+    telSmall.textContent = '624 25 33 16 · pulsa para copiar el número';
+    tel.addEventListener('click', function () {
+      var done = function () { telSmall.textContent = '✓ Número copiado · 624 25 33 16'; };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText('624 25 33 16').then(done, done);
+        else done();
+      } catch (e) { done(); }
+    });
+  }
+
   document.addEventListener('click', function (e) {
     var t = e.target.closest('[data-reserve]');
     if (!t) return;
@@ -44,7 +67,7 @@
   dialog.addEventListener('click', function (e) {
     // Cerrar al pulsar la X, una opción o fuera de la caja
     if (e.target === dialog || e.target.closest('[data-close]')) close();
-    else if (e.target.closest('.reserve__opt')) setTimeout(close, 300);
+    else if (e.target.closest('.reserve__opt--wa')) setTimeout(close, 300);
   });
 
   dialog.addEventListener('close', function () {
