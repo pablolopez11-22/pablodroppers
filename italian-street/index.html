@@ -258,42 +258,77 @@
     </section>
 
     <!-- ============ EL LOCAL ============ -->
-    <section class="section local" id="local">
-      <div class="container local__grid">
-        <div class="local__text reveal">
-          <p class="kicker">El local</p>
-          <h2 class="section__title">Un rincón de <em>Italia</em> en Málaga</h2>
-          <p>
-            Paredes verde oliva, piedra, madera y luz cálida. Botellas de vino en las baldas, plantas
-            por todas partes y una puerta verde que se abre a la calle. Italian Street es un sitio
-            para comer pizza y pasta de verdad, sin prisas y en buena compañía.
-          </p>
-          <ul class="perks">
-            <li><span class="perks__icon" aria-hidden="true">🍕</span> Pizza napoletana de fermentación lenta</li>
-            <li><span class="perks__icon" aria-hidden="true">🌿</span> Muchas opciones vegetarianas</li>
-            <li><span class="perks__icon" aria-hidden="true">👶</span> Tronas para los más pequeños</li>
-            <li><span class="perks__icon" aria-hidden="true">🍷</span> Vino italiano para acompañar</li>
-          </ul>
-        </div>
+    <section class="tour" id="local" aria-labelledby="tourTitle">
+      <div class="tour__sticky">
+        <div class="tour__track" id="tourTrack">
 
-        <!-- PENDIENTE: sustituir por las fotos reales del local (img/local-*.jpg) -->
-        <div class="gallery reveal">
-          <div class="ph g1" data-label="FOTO · fachada y puerta verde"></div>
-          <div class="ph g2" data-label="FOTO · rótulo con el logo"></div>
-          <div class="ph g3" data-label="FOTO · baldas con vino"></div>
-          <div class="ph g4" data-label="FOTO · mesa"></div>
-          <div class="ph g5" data-label="FOTO · lámpara y piedra"></div>
-        </div>
-      </div>
+          <header class="tour__intro">
+            <p class="kicker">El local</p>
+            <h2 class="section__title" id="tourTitle">Pasa, siéntate,<br><em>sei a casa.</em></h2>
+            <p class="tour__lead">Paredes verde oliva, piedra, madera y luz cálida. Acompáñanos en un paseo por Italian Street.</p>
+            <p class="tour__hint" aria-hidden="true"><span class="tour__hint-line"></span> <span class="tour__hint-pin">Sigue bajando</span><span class="tour__hint-swipe">Desliza</span></p>
+          </header>
 
-      <div class="container">
-        <a class="insta reveal" href="https://www.instagram.com/italianstreet_/" target="_blank" rel="noopener">
-          <span class="insta__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="22" height="22"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/></svg>
-          </span>
-          <span>Haz una foto a tu plato y etiquétanos <strong>@italianstreet_</strong></span>
-          <span aria-hidden="true">→</span>
-        </a>
+          <article class="stop">
+            <figure class="stop__frame"><img src="img/fachada.jpg" alt="Fachada de Italian Street: puerta verde con marco de piedra, farolillos y olivos en maceteros negros" loading="lazy" width="1008" height="976" style="object-position: 62% 60%"></figure>
+            <div class="stop__text">
+              <span class="stop__n" aria-hidden="true">01</span>
+              <h3 class="stop__title">La puerta <em>verde</em></h3>
+              <p>Piedra, farolillos y dos olivos a la entrada. Aquí empieza Italia.</p>
+            </div>
+          </article>
+
+          <article class="stop stop--down">
+            <figure class="stop__frame"><img src="img/portada-movil.jpg" alt="Rótulo iluminado con el logo de Italian Street by Nacho García" loading="lazy" width="800" height="800"></figure>
+            <div class="stop__text">
+              <span class="stop__n" aria-hidden="true">02</span>
+              <h3 class="stop__title">El <em>rótulo</em></h3>
+              <p>Nuestro chef calavera, con la pala y el cortapizzas, se enciende cada noche.</p>
+            </div>
+          </article>
+
+          <!-- PENDIENTE: foto real de las baldas con vino (img/local-baldas.jpg) -->
+          <article class="stop">
+            <figure class="stop__frame stop__frame--ph" data-label="Foto pendiente · baldas con vino"></figure>
+            <div class="stop__text">
+              <span class="stop__n" aria-hidden="true">03</span>
+              <h3 class="stop__title">Las <em>baldas</em></h3>
+              <p>Madera, vino italiano, aceite y plantas: la despensa a la vista.</p>
+            </div>
+          </article>
+
+          <!-- PENDIENTE: foto real de la lámpara sobre la piedra (img/local-luz.jpg) -->
+          <article class="stop stop--down">
+            <figure class="stop__frame stop__frame--ph" data-label="Foto pendiente · lámpara y piedra"></figure>
+            <div class="stop__text">
+              <span class="stop__n" aria-hidden="true">04</span>
+              <h3 class="stop__title">La <em>luz</em></h3>
+              <p>Lámparas de latón sobre la piedra. Luz cálida para cenar sin prisas.</p>
+            </div>
+          </article>
+
+          <!-- PENDIENTE: foto real de una mesa (img/local-mesa.jpg) -->
+          <article class="stop">
+            <figure class="stop__frame stop__frame--ph" data-label="Foto pendiente · la mesa"></figure>
+            <div class="stop__text">
+              <span class="stop__n" aria-hidden="true">05</span>
+              <h3 class="stop__title">Tu <em>mesa</em></h3>
+              <p>Con amigos, en pareja o en familia: hay tronas para los más pequeños.</p>
+            </div>
+          </article>
+
+          <aside class="tour__end">
+            <dl class="words">
+              <div><dt>Napoletana</dt><dd>Pizza de masa artesanal y fermentación lenta</dd></div>
+              <div><dt>Verde</dt><dd>Muchas opciones vegetarianas en la carta</dd></div>
+              <div><dt>Famiglia</dt><dd>Tronas y sitio para los más pequeños</dd></div>
+              <div><dt>Vino</dt><dd>Italiano, para acompañar cada plato</dd></div>
+            </dl>
+            <a class="btn btn--red" href="tel:+34624253316" data-reserve>Reservar mesa</a>
+            <a class="tour__insta" href="https://www.instagram.com/italianstreet_/" target="_blank" rel="noopener">Más fotos en Instagram <strong>@italianstreet_</strong> →</a>
+          </aside>
+        </div>
+        <div class="tour__progress" aria-hidden="true"><span id="tourBar"></span></div>
       </div>
     </section>
 
@@ -393,5 +428,6 @@
   <script src="js/menu.js"></script>
   <script src="js/main.js"></script>
   <script src="js/reservas.js"></script>
+  <script src="js/local.js"></script>
 </body>
 </html>
