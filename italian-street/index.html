@@ -22,12 +22,17 @@
   <link rel="stylesheet" href="css/intro.css">
   <noscript><style>.intro { display: none !important; }</style></noscript>
   <script>
-    /* La intro se ve una vez por visita (añade ?intro a la URL para verla de nuevo) */
+    /* Animación de entrada con la fachada.
+       DESACTIVADA hasta tener la foto de la fachada en buena calidad:
+       para activarla, cambia INTRO_ACTIVA a true.
+       Se ve una vez por visita (añade ?intro a la URL para verla de nuevo). */
+    var INTRO_ACTIVA = false;
     (function () {
-      var d = document.documentElement, show = true;
+      var d = document.documentElement, show = INTRO_ACTIVA;
       try {
         var force = /[?&]intro\b/.test(location.search);
-        if (!force && (sessionStorage.getItem('is-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches)) show = false;
+        if (force) show = true;
+        else if (sessionStorage.getItem('is-intro') || matchMedia('(prefers-reduced-motion: reduce)').matches) show = false;
       } catch (e) {}
       d.classList.add(show ? 'intro-lock' : 'no-intro');
     })();
