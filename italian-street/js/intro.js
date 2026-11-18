@@ -19,15 +19,15 @@
   var finished = false;
   var zooming = false;
 
-  // Encaja la fachada (escenario de 3000 × 1000) en la pantalla:
-  // acerca la cámara a la puerta sin dejar huecos en los bordes.
+  // Encaja la foto de la fachada (1008 × 976) en la pantalla:
+  // ocupa todo el alto y, si sobra ancho, se ve el fondo desenfocado a los lados.
+  // En móvil se recorta por los lados manteniendo la puerta en el centro.
+  var W = 1008, H = 976, DOOR_X = 628;
   function fit() {
     var w = window.innerWidth, h = window.innerHeight;
-    var s = Math.min(w / 1150, h / 820);              // la fachada ocupa la pantalla
-    s = Math.max(s, h / 1000, w / 3000);             // sin bordes vacíos
-    var x = w / 2 - 1500 * s;                        // puerta centrada
-    var y = h / 2 - 560 * s;                         // centrada en altura…
-    y = Math.min(0, Math.max(h - 1000 * s, y));       // …sin salirse por arriba ni por abajo
+    var s = Math.max(h / H, w / (W * 1.9));
+    var x = W * s > w ? Math.min(0, Math.max(w - W * s, w / 2 - DOOR_X * s)) : (w - W * s) / 2;
+    var y = (h - H * s) / 2;
     stage.style.setProperty('--s', s);
     stage.style.setProperty('--x', x + 'px');
     stage.style.setProperty('--y', y + 'px');
@@ -42,7 +42,7 @@
     zooming = true;
     // El zoom se centra en el hueco de la puerta
     var r = door.getBoundingClientRect();
-    cam.style.transformOrigin = (r.left + r.width / 2) + 'px ' + (r.top + r.height * 0.45) + 'px';
+    cam.style.transformOrigin = (r.left + r.width / 2) + 'px ' + (r.top + r.height * 0.4) + 'px';
     intro.classList.add('is-zoom');
     at(1050, finish);
   }
