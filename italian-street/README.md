@@ -12,8 +12,9 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 ## Pendiente
 - [ ] Carta real con precios (pizzas, pastas, al horno, postres)
 - [ ] Tipos de pasta y salsas reales para «Crea tu pasta»
-- [ ] Horario completo
-- [ ] Fotos (portada, platos, local) y logo
+- [x] Horario completo
+- [x] Logo (versión en baja resolución: pedir el original en alta)
+- [ ] Fotos (portada, platos, local)
 - [ ] Historia del local
 - [ ] 3 reseñas reales de Google
 - [ ] Imagen para compartir (og:image)

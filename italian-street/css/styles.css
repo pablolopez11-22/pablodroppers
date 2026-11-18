@@ -10,8 +10,9 @@
   --ink-soft: #5a4f47;
   --tomato: #c63d2a;
   --tomato-dark: #a52f1f;
-  --basil: #2f5d3a;
-  --gold: #e0a43a;
+  --basil: #23432f;
+  --basil-deep: #172e20;
+  --gold: #d2a65a;
   --line: rgba(31, 26, 23, .14);
 
   --font-display: "Fraunces", Georgia, serif;
@@ -119,11 +120,9 @@ h1 em, h2 em { color: var(--tomato); font-weight: 400; }
   display: flex; align-items: center; gap: 28px;
 }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; margin-right: auto; }
-.brand__mark {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: conic-gradient(var(--basil) 0 33%, #fff 0 66%, var(--tomato) 0);
-  box-shadow: inset 0 0 0 2px currentColor;
-}
+.brand__logo { width: 44px; height: 44px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,.3); }
+.brand__text { display: flex; flex-direction: column; gap: 3px; }
+.brand__by { font: 600 10px/1 var(--font-body); letter-spacing: .2em; text-transform: uppercase; opacity: .7; }
 .brand__name { font: 800 22px/1 var(--font-display); letter-spacing: -.01em; }
 .brand__name em { font-weight: 400; color: var(--tomato); }
 .header:not(.is-solid) .brand__name em { color: var(--gold); }
@@ -165,7 +164,7 @@ h1 em, h2 em { color: var(--tomato); font-weight: 400; }
 
 /* ---------- Cinta ---------- */
 .ribbon-wrap { overflow: hidden; margin-top: -26px; padding: 16px 0; position: relative; z-index: 2; }
-.ribbon { background: var(--tomato); color: #fff; overflow: hidden; padding: 14px 0; transform: rotate(-1.2deg) scaleX(1.04); }
+.ribbon { background: var(--basil-deep); color: var(--gold); border-block: 3px solid var(--gold); overflow: hidden; padding: 14px 0; transform: rotate(-1.2deg) scaleX(1.04); }
 .ribbon__track { display: flex; gap: 26px; width: max-content; animation: marquee 30s linear infinite; font: italic 600 22px/1 var(--font-display); white-space: nowrap; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
@@ -297,6 +296,7 @@ h1 em, h2 em { color: var(--tomato); font-weight: 400; }
 .hours { width: 100%; border-collapse: collapse; font-size: 15px; }
 .hours th, .hours td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--line); font-weight: 400; }
 .hours td { text-align: right; color: var(--ink-soft); }
+.hours td small { display: block; font-size: 12px; opacity: .8; }
 .hours tr.is-today { background: var(--paper); }
 .hours tr.is-today th { font-weight: 700; }
 .hours tr.is-today th::after { content: "Hoy"; margin-left: 8px; font-size: 11px; font-weight: 700; color: #fff; background: var(--tomato); padding: 2px 8px; border-radius: 999px; vertical-align: middle; }
@@ -309,7 +309,9 @@ h1 em, h2 em { color: var(--tomato); font-weight: 400; }
 .footer { background: var(--ink); color: #cbbda8; padding: 56px 0 120px; text-align: center; font-size: 15px; }
 .footer a { color: var(--cream); }
 .footer p { margin: 6px 0; }
-.brand__name--footer { color: var(--cream); font-size: 30px; margin-bottom: 14px !important; }
+.footer__logo { width: 120px; height: 120px; margin: 0 auto 18px; border-radius: 50%; }
+.brand__name--footer { color: var(--cream); font-size: 30px; }
+.footer__by { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px !important; }
 .footer__small { font-size: 13px; opacity: .7; margin-top: 18px !important; }
 
 /* ---------- Barra fija móvil ---------- */

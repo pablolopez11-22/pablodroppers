@@ -23,16 +23,15 @@ const SALSAS = [
   { id: 'arrabbiata', name: 'Arrabbiata',   color: '#b02a17', veg: true,  herb: false, desc: 'Tomate con un buen toque de guindilla.' },
 ];
 
-// Horario (0 = domingo … 6 = sábado). null = por confirmar.
-// PENDIENTE: completar con el horario real
+// Horario (0 = domingo … 6 = sábado). slots vacío = cerrado.
 const HORARIO = [
-  { day: 1, label: 'Lunes',     slots: [['13:00', '16:00']] },
-  { day: 2, label: 'Martes',    slots: null },
-  { day: 3, label: 'Miércoles', slots: [['13:00', '16:00']] },
-  { day: 4, label: 'Jueves',    slots: [['13:00', null]] },
-  { day: 5, label: 'Viernes',   slots: [['13:00', null]] },
-  { day: 6, label: 'Sábado',    slots: [['13:00', null]] },
-  { day: 0, label: 'Domingo',   slots: [['13:00', null]] },
+  { day: 1, label: 'Lunes',     slots: [['13:00', '16:00']], note: 'cerrado por la noche' },
+  { day: 2, label: 'Martes',    slots: [], note: 'cerrado por descanso' },
+  { day: 3, label: 'Miércoles', slots: [['13:00', '16:00']], note: 'cerrado por la noche' },
+  { day: 4, label: 'Jueves',    slots: [['13:00', '16:00'], ['20:00', '00:00']] },
+  { day: 5, label: 'Viernes',   slots: [['13:00', '16:00'], ['20:00', '00:00']] },
+  { day: 6, label: 'Sábado',    slots: [['13:00', '16:00'], ['20:00', '00:00']] },
+  { day: 0, label: 'Domingo',   slots: [['13:00', '16:00'], ['20:00', '00:00']] },
 ];
 
 /* ---------- Cabecera y menú móvil ---------- */
@@ -217,8 +216,9 @@ function madridNow() {
   const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(get('weekday'));
   return { day, minutes: (+get('hour') % 24) * 60 + +get('minute') };
 }
-const toMin = (hhmm) => { const [h, m] = hhmm.split(':').map(Number); return h * 60 + m; };
-const fmtSlot = ([a, b]) => `${a} – ${b ?? '¿?'}`;
+// '00:00' como hora de cierre significa medianoche (fin del día)
+const toMin = (hhmm, isClose = false) => { const [h, m] = hhmm.split(':').map(Number); const t = h * 60 + m; return isClose && t === 0 ? 24 * 60 : t; };
+const fmtSlot = ([a, b]) => `${a} – ${b}`;
 
 const now = madridNow();
 const hoursTable = document.getElementById('hours');
@@ -226,20 +226,32 @@ HORARIO.forEach((d) => {
   const tr = document.createElement('tr');
   if (d.day === now.day) tr.className = 'is-today';
   const th = document.createElement('th'); th.scope = 'row'; th.textContent = d.label;
-  const td = document.createElement('td'); td.textContent = d.slots ? d.slots.map(fmtSlot).join(' · ') : 'Por confirmar';
+  const td = document.createElement('td'); td.textContent = d.slots.length ? d.slots.map(fmtSlot).join(' · ') : 'Cerrado';
+  if (d.note) { const small = document.createElement('small'); small.textContent = d.note; td.append(small); }
   tr.append(th, td);
   hoursTable.append(tr);
 });
+
+// Próximo día con servicio, p. ej. «mañana a las 13:00» o «el jueves a las 13:00»
+function nextOpening() {
+  for (let i = 1; i <= 7; i++) {
+    const d = HORARIO.find((h) => h.day === (now.day + i) % 7);
+    if (d.slots.length) return `${i === 1 ? 'mañana' : 'el ' + d.label.toLowerCase()} a las ${d.slots[0][0]}`;
+  }
+  return '';
+}
 
 (function todayStatus() {
   const box = document.getElementById('todayStatus');
   const span = box.querySelector('span');
   const today = HORARIO.find((d) => d.day === now.day);
-  if (!today || !today.slots) { span.textContent = 'horario por confirmar'; return; }
-  const open = today.slots.find(([a, b]) => b && now.minutes >= toMin(a) && now.minutes < toMin(b));
-  if (open) { box.classList.add('is-open'); box.querySelector('strong').textContent = 'Abierto'; span.textContent = `hasta las ${open[1]}`; return; }
+  if (!today.slots.length) { box.classList.add('is-closed'); box.querySelector('strong').textContent = 'Hoy cerrado'; span.textContent = `por descanso · abrimos ${nextOpening()}`; return; }
+  const open = today.slots.find(([a, b]) => now.minutes >= toMin(a) && now.minutes < toMin(b, true));
+  if (open) { box.classList.add('is-open'); box.querySelector('strong').textContent = 'Abierto'; span.textContent = open[1] === '00:00' ? 'hasta medianoche' : `hasta las ${open[1]}`; return; }
   const next = today.slots.find(([a]) => now.minutes < toMin(a));
-  span.textContent = next ? `abrimos a las ${next[0]}` : `${today.slots.map(fmtSlot).join(' · ')}`;
+  if (next) { span.textContent = `abrimos a las ${next[0]}`; return; }
+  box.classList.add('is-closed'); box.querySelector('strong').textContent = 'Cerrado';
+  span.textContent = `abrimos ${nextOpening()}`;
 })();
 
 /* ---------- Aparición al hacer scroll ---------- */
