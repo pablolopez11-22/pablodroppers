@@ -19,13 +19,13 @@
   var finished = false;
   var zooming = false;
 
-  // Encaja la foto vertical de la fachada (1125 × 2000) en la pantalla.
-  // Móvil: se ve casi entera. Ordenador: se recorta arriba y abajo para que la
-  // fachada llene la pantalla y, si sobra ancho, se ve el fondo desenfocado.
-  var W = 1125, H = 2000, FOCUS_X = 545, FOCUS_Y = 990;
+  // La foto vertical de la fachada (1125 × 2000) llena toda la pantalla sin
+  // deformarse: en el móvil se recorta por los lados y en el ordenador por
+  // arriba y por abajo, siempre con la puerta en el centro.
+  var W = 1125, H = 2000, FOCUS_X = 545, FOCUS_Y = 960;
   function fit() {
     var w = window.innerWidth, h = window.innerHeight;
-    var s = Math.max(h / H, Math.min(w / W, h / 820));
+    var s = Math.max(h / H, w / W);                  // siempre llena toda la pantalla
     var x = W * s > w ? Math.min(0, Math.max(w - W * s, w / 2 - FOCUS_X * s)) : (w - W * s) / 2;
     var y = H * s > h ? Math.min(0, Math.max(h - H * s, h / 2 - FOCUS_Y * s)) : (h - H * s) / 2;
     stage.style.setProperty('--s', s);
