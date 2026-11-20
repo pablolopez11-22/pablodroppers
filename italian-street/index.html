@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Italian Street by Nacho García · Pizza napoletana y pasta en Málaga</title>
-  <meta name="description" content="Italian Street by Nacho García: pizza napoletana de fermentación lenta, pasta a tu gusto, pasta rellena, lasañas y postres italianos en Málaga (Av. Jane Bowles, 17). Reserva al 624 25 33 16.">
+  <title>Italian Street by Nacho García · Pizza romana y pasta en Málaga</title>
+  <meta name="description" content="Italian Street by Nacho García: pizza romana de fermentación lenta, pasta a tu gusto, pasta rellena, lasañas y postres italianos en Málaga (Av. Jane Bowles, 17). Reserva al 624 25 33 16.">
   <meta name="theme-color" content="#120d08">
 
   <meta property="og:title" content="Italian Street by Nacho García · Málaga">
-  <meta property="og:description" content="Dalla strada italiana alla tua tavola. Pizza napoletana y pasta en Av. Jane Bowles, 17 · Málaga.">
+  <meta property="og:description" content="Dalla strada italiana alla tua tavola. Pizza romana y pasta en Av. Jane Bowles, 17 · Málaga.">
   <meta property="og:type" content="restaurant">
   <meta property="og:image" content="img/og.jpg">
   <meta property="og:locale" content="es_ES">
@@ -62,7 +62,7 @@
     "name": "Italian Street by Nacho García",
     "image": "img/og.jpg",
     "logo": "img/logo.png",
-    "servesCuisine": ["Italiana", "Pizza napoletana", "Pasta"],
+    "servesCuisine": ["Italiana", "Pizza romana", "Pasta"],
     "priceRange": "10-20 €",
     "telephone": "+34624253316",
     "address": {
@@ -155,13 +155,13 @@
       <canvas class="embers" id="embers" aria-hidden="true"></canvas>
       <div class="hero__inner">
         <div class="hero__content">
-          <p class="kicker kicker--light">Cucina italiana · Pizza napoletana</p>
+          <p class="kicker kicker--light">Cucina italiana · Pizza romana</p>
           <h1 class="hero__title">
             Dalla strada italiana<br>
             <em>alla tua tavola.</em>
           </h1>
           <p class="hero__lead">
-            Pizza napoletana de fermentación lenta, pasta a tu gusto y recetas al horno de toda la vida.
+            Pizza romana de fermentación lenta, pasta a tu gusto y recetas al horno de toda la vida.
             De la calle italiana a tu mesa, en Málaga.
           </p>
           <div class="hero__actions">
@@ -192,8 +192,8 @@
     <!-- ============ CINTA ============ -->
     <div class="ribbon-wrap" aria-hidden="true"><div class="ribbon">
       <div class="ribbon__track">
-        <span>Pizza napoletana</span><span>✦</span><span>Pasta al dente</span><span>✦</span><span>Pasta ripiena</span><span>✦</span><span>Al forno</span><span>✦</span><span>Risotto</span><span>✦</span><span>Dolci</span><span>✦</span>
-        <span>Pizza napoletana</span><span>✦</span><span>Pasta al dente</span><span>✦</span><span>Pasta ripiena</span><span>✦</span><span>Al forno</span><span>✦</span><span>Risotto</span><span>✦</span><span>Dolci</span><span>✦</span>
+        <span>Pizza romana</span><span>✦</span><span>Pasta al dente</span><span>✦</span><span>Pasta ripiena</span><span>✦</span><span>Al forno</span><span>✦</span><span>Risotto</span><span>✦</span><span>Dolci</span><span>✦</span>
+        <span>Pizza romana</span><span>✦</span><span>Pasta al dente</span><span>✦</span><span>Pasta ripiena</span><span>✦</span><span>Al forno</span><span>✦</span><span>Risotto</span><span>✦</span><span>Dolci</span><span>✦</span>
       </div>
     </div></div>
 
@@ -248,53 +248,51 @@
         <header class="section__head reveal">
           <p class="kicker kicker--light">Lo que nos hace distintos</p>
           <h2 class="section__title section__title--light">Crea tu <em>pasta</em></h2>
-          <p class="section__sub">Aquí la pasta se pide a tu manera. Elige la pasta, elige la salsa y te decimos si es la combinación que recomienda la casa.</p>
+          <p class="section__sub">Aquí la pasta se pide a tu manera: 5 pastas, 11 salsas y 55 combinaciones. Tira de la palanca y deja que la suerte elija… o gira los rodillos a tu gusto.</p>
         </header>
 
-        <div class="builder reveal">
-          <div class="builder__steps">
-            <fieldset class="step">
-              <legend><span class="step__n">1</span> Elige tu pasta</legend>
-              <div class="pasta-picks" id="pastaPicks"></div>
-            </fieldset>
+        <div class="ruota reveal">
+          <!-- La ruota della pasta: tragaperras italiana -->
+          <div class="machine" id="machine">
+            <div class="machine__lights" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div class="machine__marquee" aria-hidden="true"><img src="img/logo-sm.png" alt="" width="34" height="34"><span>La ruota <em>della pasta</em></span></div>
 
-            <fieldset class="step">
-              <legend><span class="step__n">2</span> Elige tu salsa</legend>
-              <div class="chips" id="salsaPicks"></div>
-            </fieldset>
+            <div class="machine__reels">
+              <div class="reel" id="reelPasta" data-kind="pasta" aria-roledescription="rodillo" aria-label="Pasta">
+                <button class="reel__arrow reel__arrow--up" type="button" data-step="-1" aria-label="Pasta anterior">‹</button>
+                <div class="reel__window"><div class="reel__strip"></div></div>
+                <button class="reel__arrow reel__arrow--down" type="button" data-step="1" aria-label="Pasta siguiente">›</button>
+                <p class="reel__label">Pasta</p>
+              </div>
+              <div class="reel" id="reelSalsa" data-kind="salsa" aria-roledescription="rodillo" aria-label="Salsa">
+                <button class="reel__arrow reel__arrow--up" type="button" data-step="-1" aria-label="Salsa anterior">‹</button>
+                <div class="reel__window"><div class="reel__strip"></div></div>
+                <button class="reel__arrow reel__arrow--down" type="button" data-step="1" aria-label="Salsa siguiente">›</button>
+                <p class="reel__label">Salsa</p>
+              </div>
+            </div>
+
+            <button class="lever" id="lever" type="button" aria-label="Tirar de la palanca: combinación al azar">
+              <span class="lever__rod"><span class="lever__knob"></span></span>
+              <span class="lever__base"></span>
+            </button>
+            <canvas class="machine__fx" id="machineFx" aria-hidden="true"></canvas>
           </div>
 
-          <div class="plate">
-            <div class="printer" aria-hidden="true"><span class="printer__led"></span></div>
-            <div class="ticket-wrap">
-              <article class="ticket" id="ticket" aria-live="polite" aria-label="Tu comanda">
-                <header class="ticket__head">
-                  <img src="img/logo-sm.png" alt="" width="40" height="40">
-                  <div>
-                    <p class="ticket__brand">Italian Street</p>
-                    <p class="ticket__meta">Comanda Nº <span id="ticketNo">0427</span> · <span id="ticketDate"></span></p>
-                  </div>
-                </header>
-                <div class="ticket__rule"></div>
-                <div class="ticket__dish">
-                  <img class="ticket__pasta" id="ticketImg" src="img/pasta/spaghetti.png" alt="" width="180" height="180">
-                  <div>
-                    <p class="ticket__label">1 × Tu plato</p>
-                    <h3 class="ticket__name" id="plateName"></h3>
-                  </div>
-                </div>
-                <ul class="ticket__ing" id="ticketIng"></ul>
-                <div class="ticket__rule"></div>
-                <div class="ticket__total"><span>Total</span><span id="platePrice"></span></div>
-                <p class="ticket__match" id="plateMatch"></p>
-                <p class="ticket__al" id="plateAl"></p>
-                <p class="ticket__thanks">Grazie mille!</p>
-                <div class="stamp" id="ticketStamp" aria-hidden="true"><span>Consigliata</span><b>dalla casa</b><span>★ ★ ★</span></div>
-              </article>
-            </div>
-            <div class="plate__actions">
-              <button class="btn btn--light btn--small" id="randomBtn" type="button">Sorpréndeme</button>
-              <a class="btn btn--gold btn--small" href="tel:+34624253316" data-reserve="pasta">Reservar y pedirla</a>
+          <p class="ruota__hint" id="ruotaHint">Tira de la palanca · o desliza los rodillos para elegir tú</p>
+
+          <!-- Resultado -->
+          <div class="result" aria-live="polite">
+            <p class="result__jackpot" id="jackpot">★ Consigliata dalla casa ★</p>
+            <h3 class="result__name" id="plateName"></h3>
+            <p class="result__price" id="platePrice"></p>
+            <p class="result__desc" id="plateDesc"></p>
+            <p class="result__match" id="plateMatch"></p>
+            <p class="result__al" id="plateAl"></p>
+            <div class="result__actions">
+              <a class="btn btn--gold" href="tel:+34624253316" data-reserve="pasta">Reservar y pedirla</a>
             </div>
           </div>
         </div>
@@ -360,7 +358,7 @@
 
           <aside class="tour__end">
             <dl class="words">
-              <div><dt>Napoletana</dt><dd>Pizza de masa artesanal y fermentación lenta</dd></div>
+              <div><dt>Romana</dt><dd>Pizza de masa artesanal y fermentación lenta</dd></div>
               <div><dt>Verde</dt><dd>Muchas opciones vegetarianas en la carta</dd></div>
               <div><dt>Famiglia</dt><dd>Tronas y sitio para los más pequeños</dd></div>
               <div><dt>Vino</dt><dd>Italiano, para acompañar cada plato</dd></div>
@@ -468,6 +466,7 @@
 
   <script src="js/menu.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/ruota.js"></script>
   <script src="js/reservas.js"></script>
   <script src="js/local.js"></script>
   <script src="js/hero3d.js"></script>

@@ -30,7 +30,7 @@ const MENU = [
   {
     id: 'pizzas',
     tab: 'Pizzas',
-    title: 'Pizze Napoletane',
+    title: 'Pizze Romane',
     sub: 'Masa artesanal · Fermentación lenta · Horno eléctrico de alta temperatura',
     featured: {
       label: 'La especialidad de la casa',
