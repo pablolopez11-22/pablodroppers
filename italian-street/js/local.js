@@ -19,9 +19,12 @@
     tour.classList.toggle('is-pinned', pin);
     track.style.transform = '';
     if (!pin) { tour.style.height = ''; return; }
-    distance = Math.max(0, track.scrollWidth - window.innerWidth);
+    // Con el escalado de pantallas grandes, las medidas de la ventana van en
+    // píxeles reales y las de la página en píxeles escalados (Z)
+    var Z = window.__Z || 1;
+    distance = Math.max(0, track.scrollWidth - window.innerWidth / Z);
     // Altura de la sección = lo que hay que bajar para recorrer todo el ancho
-    tour.style.height = (window.innerHeight + distance) + 'px';
+    tour.style.height = (window.innerHeight / Z + distance) + 'px';
     update();
   }
 
@@ -29,7 +32,7 @@
     ticking = false;
     if (!tour.classList.contains('is-pinned')) return;
     var top = tour.getBoundingClientRect().top;
-    var p = Math.min(1, Math.max(0, -top / (distance || 1)));
+    var p = Math.min(1, Math.max(0, -top / ((distance * (window.__Z || 1)) || 1)));
     track.style.transform = 'translate3d(' + (-p * distance) + 'px, 0, 0)';
     if (bar) bar.style.transform = 'scaleX(' + p + ')';
     // Las fotos se acercan suavemente al pasar por el centro

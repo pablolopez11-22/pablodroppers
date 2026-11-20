@@ -8,6 +8,7 @@ html.intro-lock, html.intro-lock body { overflow: hidden; }
 html.no-intro .intro { display: none; }
 
 .intro {
+  zoom: calc(1 / var(--z, 1));   /* la intro no se escala: ya ocupa toda la pantalla */
   position: fixed; inset: 0; z-index: 1000;
   background: #1a1d16; overflow: hidden;
   /* Red de seguridad: si algo falla, la intro desaparece sola */

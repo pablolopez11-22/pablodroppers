@@ -18,6 +18,24 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <script>
+    /* Pantallas grandes (4K, monitores anchos): la web se escala para verse
+       igual que en un portátil, en lugar de quedarse pequeña en el centro. */
+    (function () {
+      var d = document.documentElement;
+      function scale() {
+        var w = window.innerWidth, h = window.innerHeight;
+        var z = Math.max(1, Math.min(w / 1440, h / 860));
+        if (z < 1.08) z = 1;
+        d.style.zoom = z === 1 ? '' : z;
+        d.style.setProperty('--z', z);
+        d.style.setProperty('--vh', (h / z / 100) + 'px');   // 1vh real dentro de la web escalada
+        window.__Z = z;
+      }
+      scale();
+      window.addEventListener('resize', scale);
+    })();
+  </script>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/intro.css">
   <noscript><style>.intro { display: none !important; }</style></noscript>
@@ -133,24 +151,40 @@
   <main id="main">
 
     <!-- ============ PORTADA ============ -->
-    <section class="hero" aria-labelledby="heroTitle">
-      <h1 class="sr-only" id="heroTitle">Italian Street by Nacho García · Pizza napoletana y pasta italiana en Málaga</h1>
+    <section class="hero">
       <canvas class="embers" id="embers" aria-hidden="true"></canvas>
-
-      <!-- Rótulo en 3D: medallón con grosor que flota y gira -->
-      <div class="sign3d" id="sign3d" aria-hidden="true">
-        <div class="sign3d__glow"></div>
-        <div class="sign3d__disc" id="disc">
-          <div class="sign3d__back"></div>
-          <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="900" height="900" fetchpriority="high">
-          <div class="sign3d__shine"></div>
+      <div class="hero__inner">
+        <div class="hero__content">
+          <p class="kicker kicker--light">Cucina italiana · Pizza napoletana</p>
+          <h1 class="hero__title">
+            Dalla strada italiana<br>
+            <em>alla tua tavola.</em>
+          </h1>
+          <p class="hero__lead">
+            Pizza napoletana de fermentación lenta, pasta a tu gusto y recetas al horno de toda la vida.
+            De la calle italiana a tu mesa, en Málaga.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--gold" href="tel:+34624253316" data-reserve>Reservar mesa</a>
+            <a class="btn btn--ghost" href="#carta">Ver la carta</a>
+          </div>
+          <ul class="hero__facts" aria-label="Datos rápidos">
+            <li><strong>4,6 <span class="star" aria-hidden="true">★</span></strong> 40 reseñas en Google</li>
+            <li><strong>10–20 €</strong> por persona</li>
+            <li class="today-status" id="todayStatus"><strong>Hoy</strong> <span>…</span></li>
+          </ul>
         </div>
-        <div class="sign3d__shadow"></div>
-      </div>
 
-      <div class="hero__actions">
-        <a class="btn btn--gold" href="tel:+34624253316" data-reserve>Reservar mesa</a>
-        <a class="btn btn--ghost" href="#carta">Ver la carta</a>
+        <!-- Rótulo en 3D: medallón con grosor que flota y gira -->
+        <div class="sign3d" id="sign3d" aria-hidden="true">
+          <div class="sign3d__glow"></div>
+          <div class="sign3d__disc" id="disc">
+            <div class="sign3d__back"></div>
+            <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="900" height="900" fetchpriority="high">
+            <div class="sign3d__shine"></div>
+          </div>
+          <div class="sign3d__shadow"></div>
+        </div>
       </div>
       <a class="hero__scroll" href="#carta" aria-label="Bajar a la carta"><span></span></a>
     </section>
