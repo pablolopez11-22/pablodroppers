@@ -23,10 +23,9 @@
   <noscript><style>.intro { display: none !important; }</style></noscript>
   <script>
     /* Animación de entrada con la fachada.
-       DESACTIVADA hasta tener la foto de la fachada en buena calidad:
-       para activarla, cambia INTRO_ACTIVA a true.
+       Para desactivarla, cambia INTRO_ACTIVA a false.
        Se ve una vez por visita (añade ?intro a la URL para verla de nuevo). */
-    var INTRO_ACTIVA = false;
+    var INTRO_ACTIVA = true;
     (function () {
       var d = document.documentElement, show = INTRO_ACTIVA;
       try {
@@ -72,7 +71,7 @@
     <div class="intro__cam" id="introCam">
       <div class="intro__stage" id="introStage" aria-hidden="true">
         <div class="intro__scene">
-          <img class="intro__photo" src="img/fachada.jpg" alt="" width="1008" height="976">
+          <img class="intro__photo" src="img/fachada.jpg" alt="" width="1125" height="2000">
           <!-- Las dos hojas de la puerta, recortadas de la propia foto -->
           <div class="door" id="introDoor">
             <div class="door__inside"></div>
@@ -82,10 +81,14 @@
         </div>
         <!-- Luces que se encienden sobre la foto -->
         <div class="intro__lights">
-          <span class="light light--lamp" style="--x: 416px; --y: 282px"></span>
-          <span class="light light--lamp light--late" style="--x: 848px; --y: 282px"></span>
-          <span class="light light--sign" style="--x: 196px; --y: 362px"></span>
-          <span class="light light--glass"></span>
+          <span class="light light--lamp" style="--x: 20px; --y: 735px"></span>
+          <span class="light light--lamp" style="--x: 492px; --y: 735px"></span>
+          <span class="light light--lamp light--late" style="--x: 948px; --y: 745px"></span>
+          <span class="light light--sign" style="--x: 245px; --y: 862px"></span>
+          <span class="light light--plant" style="--x: 505px; --y: 1165px"></span>
+          <span class="light light--plant light--late" style="--x: 965px; --y: 1180px"></span>
+          <span class="light light--glass" style="--x: 557px; --w: 124px"></span>
+          <span class="light light--glass light--late" style="--x: 712px; --w: 126px"></span>
           <span class="light light--spill"></span>
         </div>
       </div>

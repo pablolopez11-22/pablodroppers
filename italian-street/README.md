@@ -11,7 +11,8 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - `img/`: portada (sacada de la portada de la carta), logo, pastas
 
 ## Pendiente
-- [ ] Fotos del local en buena calidad para el recorrido: baldas con vino, lámpara sobre la piedra, mesa (y la fachada en alta)
+- [x] Fachada en buena calidad (animación de entrada)
+- [ ] Fotos del local en buena calidad para el recorrido: baldas con vino, lámpara sobre la piedra, mesa
 - [ ] Fotos de platos (opcional: se pueden añadir a la carta y a la portada)
 - [ ] Confirmar con cocina qué platos son vegetarianos (marcados según ingredientes)
 - [ ] 3 reseñas reales de Google

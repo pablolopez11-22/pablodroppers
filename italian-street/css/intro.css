@@ -31,21 +31,21 @@ html.no-intro .intro { display: none; }
 
 /* Escenario: la foto a su tamaño (1008 × 976) escalada a la pantalla */
 .intro__stage {
-  position: absolute; left: 0; top: 0; width: 1008px; height: 976px; transform-origin: 0 0;
+  position: absolute; left: 0; top: 0; width: 1125px; height: 2000px; transform-origin: 0 0;
   transform: translate(var(--x, 0px), var(--y, 0px)) scale(var(--s, 1));
 }
 .intro__scene {
   position: absolute; inset: 0;
-  filter: brightness(.42) saturate(.7) contrast(1.05);
+  filter: brightness(.22) saturate(.5) contrast(1.05);
   transition: filter 1.4s ease;
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
           mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 }
 .intro.is-on .intro__scene { filter: brightness(1) saturate(1.05) contrast(1.02); }
-.intro__photo { position: absolute; inset: 0; width: 1008px; height: 976px; max-width: none; display: block; }
+.intro__photo { position: absolute; inset: 0; width: 1125px; height: 2000px; max-width: none; display: block; }
 
 /* ---------- Puerta ---------- */
-.door { position: absolute; left: 472px; top: 390px; width: 310px; height: 444px; perspective: 900px; overflow: hidden; }
+.door { position: absolute; left: 552px; top: 740px; width: 310px; height: 552px; perspective: 1000px; overflow: hidden; }
 .door__inside {
   position: absolute; inset: 0; overflow: hidden;
   background: #2a1d10 url("../img/portada-movil.jpg") center / 160% auto no-repeat;
@@ -55,9 +55,9 @@ html.no-intro .intro { display: none; }
   background: radial-gradient(ellipse at 50% 40%, rgba(255,214,140,.5), rgba(120,70,20,.35) 70%, rgba(40,25,10,.6));
 }
 .door__leaf {
-  position: absolute; top: 0; height: 444px;
+  position: absolute; top: 0; height: 552px;
   background-image: url("../img/fachada.jpg");
-  background-size: 1008px 976px;
+  background-size: 1125px 2000px;
   transition: transform 1.2s cubic-bezier(.6, .05, .25, 1);
   transform-style: preserve-3d;
 }
@@ -69,8 +69,8 @@ html.no-intro .intro { display: none; }
 .door__leaf::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.45), rgba(0,0,0,0)); opacity: 0; transition: opacity 1.2s ease; }
 .door__leaf--r::before { background: linear-gradient(270deg, rgba(0,0,0,.45), rgba(0,0,0,0)); }
 .intro.is-open .door__leaf::before { opacity: 1; }
-.door__leaf--l { left: 0; width: 156px; background-position: -472px -390px; transform-origin: left center; }
-.door__leaf--r { right: 0; width: 154px; background-position: -628px -390px; transform-origin: right center; }
+.door__leaf--l { left: 0; width: 154px; background-position: -552px -740px; transform-origin: left center; }
+.door__leaf--r { right: 0; width: 156px; background-position: -706px -740px; transform-origin: right center; }
 /* La puerta se abre hacia dentro del local */
 .intro.is-open .door__leaf--l { transform: rotateY(78deg); }
 .intro.is-open .door__leaf--r { transform: rotateY(-78deg); }
@@ -79,25 +79,30 @@ html.no-intro .intro { display: none; }
 .intro__lights { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; }
 .light { position: absolute; opacity: 0; transition: opacity 1s ease; }
 .light--lamp {
-  left: calc(var(--x) - 150px); top: calc(var(--y) - 150px); width: 300px; height: 300px;
+  left: calc(var(--x) - 170px); top: calc(var(--y) - 170px); width: 340px; height: 340px;
   background: radial-gradient(circle, rgba(255,226,150,.95) 0, rgba(255,190,90,.45) 12%, rgba(255,170,70,.12) 40%, transparent 70%);
 }
 .light--late { transition-delay: .25s; }
 .light--sign {
-  left: calc(var(--x) - 230px); top: calc(var(--y) - 230px); width: 460px; height: 460px;
-  background: radial-gradient(circle, rgba(255,236,170,.32) 0, rgba(255,226,140,.25) 32%, rgba(255,200,100,.4) 35%, rgba(255,190,90,.12) 50%, transparent 68%);
+  left: calc(var(--x) - 260px); top: calc(var(--y) - 260px); width: 520px; height: 520px;
+  background: radial-gradient(circle, rgba(255,240,90,.18) 0, rgba(255,235,80,.12) 30%, rgba(255,230,60,.35) 34%, rgba(230,220,40,.12) 46%, transparent 66%);
   transition-delay: .55s;
 }
 .light--glass {
-  left: 486px; top: 398px; width: 284px; height: 196px;
-  background: linear-gradient(180deg, rgba(255,205,120,.45), rgba(255,170,80,.25));
-  filter: blur(6px); transition-delay: .4s;
+  left: var(--x); top: 762px; width: var(--w); height: 288px;
+  background: linear-gradient(180deg, rgba(255,205,120,.55), rgba(255,160,70,.3));
+  filter: blur(8px); transition-delay: .7s;
+}
+.light--plant {
+  left: calc(var(--x) - 110px); top: calc(var(--y) - 150px); width: 220px; height: 260px;
+  background: radial-gradient(ellipse at 50% 70%, rgba(80,255,190,.35), rgba(60,220,160,.1) 45%, transparent 70%);
+  transition-delay: .4s;
 }
 .light--spill {
-  left: 380px; top: 800px; width: 500px; height: 150px;
-  background: radial-gradient(ellipse at 50% 10%, rgba(255,205,120,.6), transparent 70%);
+  left: 430px; top: 1230px; width: 560px; height: 260px;
+  background: radial-gradient(ellipse closest-side, rgba(255,205,120,.5), rgba(255,190,100,.15) 60%, transparent);
 }
-.intro.is-on .light--lamp, .intro.is-on .light--sign, .intro.is-on .light--glass { opacity: 1; }
+.intro.is-on .light--lamp, .intro.is-on .light--sign, .intro.is-on .light--glass, .intro.is-on .light--plant { opacity: 1; }
 .intro.is-on .light--sign { animation: signPulse 2.4s ease-in-out 1.6s infinite; }
 .intro.is-open .light--glass { opacity: 0; transition-delay: 0s; transition-duration: .4s; }
 .intro.is-open .light--spill { opacity: 1; transition-delay: .3s; }
