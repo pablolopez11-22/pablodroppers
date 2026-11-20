@@ -498,6 +498,7 @@ function nextOpening() {
 
 (function todayStatus() {
   const box = $('#todayStatus');
+  if (!box) return;
   const strong = box.querySelector('strong');
   const span = box.querySelector('span');
   const today = HORARIO.find((d) => d.day === now.day);
