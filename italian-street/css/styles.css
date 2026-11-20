@@ -392,25 +392,62 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 .chip__dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.25); flex: none; }
 .chip__price { font-size: 13px; opacity: .7; margin-left: 2px; }
 
-.plate {
-  position: sticky; top: calc(var(--header-h) + 24px);
-  background: var(--green-2); border: 1px solid rgba(201,162,90,.35); border-radius: 28px;
-  padding: 28px; text-align: center;
+/* Comanda: el ticket de pedido sale de la impresora con cada elección */
+.plate { position: sticky; top: calc(var(--header-h) + 24px); }
+.printer {
+  position: relative; z-index: 2; height: 22px; margin: 0 6px; border-radius: 12px 12px 6px 6px;
+  background: linear-gradient(180deg, #2c3a2f, #121a14); border: 1px solid rgba(201,162,90,.35);
+  box-shadow: 0 10px 20px -8px rgba(0,0,0,.7), inset 0 -6px 0 #0a0f0b;
 }
-.plate__visual { width: min(250px, 70%); margin: 0 auto 16px; }
-.plate__svg { width: 100%; height: auto; display: block; overflow: visible; }
-.plate__shadow { fill: rgba(0,0,0,.35); }
-.plate__rim { fill: #f6efe2; }
-.plate__line { fill: none; stroke: #c9a25a; stroke-width: 1.2; opacity: .7; }
-.plate__base { fill: #ebe1cf; }
-.plate.is-changing #pastaShape, .plate.is-changing #sauceTop { animation: pop .45s ease; transform-origin: 100px 100px; }
-.plate__label { font: 700 11px/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin: 0 0 8px; }
-.plate__name { font: italic 500 30px/1.15 var(--font-display); margin: 0; }
-.plate__price { font: 700 22px/1 var(--font-display); color: var(--gold-light); margin: 8px 0 0; }
-.plate__match { font-size: 13px; margin: 12px auto 0; color: #c8bfae; max-width: 340px; }
-.plate__match.is-rec { color: var(--green); background: var(--gold); display: inline-block; padding: 6px 12px; border-radius: 999px; font-weight: 700; }
-.plate__desc { color: #d6cdbc; font-size: 15px; margin: 12px auto 0; max-width: 360px; }
-.plate__al { color: #9f9785; font-size: 12px; margin: 8px 0 18px; }
+.printer__led { position: absolute; right: 16px; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: #8fe0a0; box-shadow: 0 0 8px #8fe0a0; }
+.ticket-wrap { position: relative; margin: -6px 22px 0; padding-bottom: 14px; overflow: hidden; }
+.ticket {
+  position: relative; color: #2a241d; padding: 26px 24px 30px;
+  background:
+    repeating-linear-gradient(0deg, rgba(0,0,0,.018) 0 1px, transparent 1px 3px),
+    linear-gradient(180deg, #efe6d4 0, #fbf6ec 18px, #fbf6ec 100%);
+  box-shadow: 0 24px 40px -24px rgba(0,0,0,.8);
+  -webkit-mask: linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 10px repeat-x;
+          mask: linear-gradient(#000 0 0) top / 100% calc(100% - 10px) no-repeat, conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) bottom / 14px 10px repeat-x;
+}
+.plate.is-printing .ticket { animation: printOut .9s cubic-bezier(.3, .7, .3, 1); }
+@keyframes printOut { from { transform: translateY(-100%); } to { transform: none; } }
+
+.ticket__head { display: flex; align-items: center; gap: 12px; }
+.ticket__head img { width: 40px; height: 40px; border-radius: 50%; filter: sepia(.4) contrast(1.1); }
+.ticket__brand { margin: 0; font: italic 600 20px/1 var(--font-display); }
+.ticket__meta { margin: 4px 0 0; font: 500 11px/1.3 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .06em; color: #7a6f60; text-transform: uppercase; }
+.ticket__rule { border-top: 1.5px dashed rgba(42,36,29,.35); margin: 16px 0; }
+.ticket__dish { display: flex; align-items: center; gap: 14px; }
+.ticket__pasta { width: 84px; height: 84px; object-fit: contain; flex: none; filter: drop-shadow(0 6px 8px rgba(90,60,20,.25)); }
+.ticket__label { margin: 0 0 4px; font: 600 11px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; color: #7a6f60; }
+.ticket__name { margin: 0; font: 700 28px/1.05 var(--font-display); color: #1f1b16; }
+.ticket__name em { display: block; font-weight: 500; color: var(--red); }
+.ticket__ing { list-style: none; margin: 14px 0 0; padding: 0; columns: 2; column-gap: 18px; font: 400 13px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #4b4339; }
+.ticket__ing li { break-inside: avoid; padding-left: 14px; position: relative; }
+.ticket__ing li::before { content: "–"; position: absolute; left: 0; color: #a3967f; }
+.ticket__total { display: flex; justify-content: space-between; align-items: baseline; font: 700 13px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .12em; text-transform: uppercase; }
+.ticket__total span:last-child { font: 700 26px/1 var(--font-display); letter-spacing: 0; color: var(--red); }
+.ticket__match { margin: 14px 0 0; font-size: 13px; color: #6b6153; line-height: 1.45; }
+.ticket__match.is-rec { color: var(--olive); font-weight: 700; }
+.ticket__al { margin: 6px 0 0; font: 400 11px/1.4 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #8a7f70; }
+.ticket__thanks { margin: 18px 0 0; text-align: center; font: italic 500 18px/1 var(--font-display); color: #7a6f60; }
+
+/* Sello de tinta cuando la combinación es la recomendada */
+.stamp {
+  position: absolute; right: 16px; top: 92px; width: 108px; height: 108px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  color: var(--red); border: 3px double currentColor; text-transform: uppercase; text-align: center;
+  font: 700 10px/1.1 var(--font-body); letter-spacing: .14em;
+  transform: rotate(-14deg) scale(1.6); opacity: 0; pointer-events: none; mix-blend-mode: multiply;
+  -webkit-mask: radial-gradient(circle at 30% 40%, #000 55%, rgba(0,0,0,.75) 70%, #000 85%);
+          mask: radial-gradient(circle at 30% 40%, #000 55%, rgba(0,0,0,.75) 70%, #000 85%);
+  transition: opacity .2s ease, transform .25s cubic-bezier(.3, 1.6, .5, 1);
+}
+.stamp b { font: italic 600 17px/1 var(--font-display); letter-spacing: 0; text-transform: none; }
+.stamp span:last-child { font-size: 8px; letter-spacing: .2em; }
+.stamp.is-on { opacity: .85; transform: rotate(-14deg) scale(1); transition-delay: .55s; }
+.plate__actions { margin-top: 18px; }
 .plate__actions { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
 
 /* ---------- El local: recorrido ---------- */
@@ -596,6 +633,11 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 }
 
 @media (max-width: 560px) {
+  .ticket-wrap { margin-inline: 14px; }
+  .ticket { padding: 22px 18px 28px; }
+  .ticket__name { font-size: 24px; }
+  .stamp { width: 92px; height: 92px; top: 84px; right: 10px; }
+  .stamp b { font-size: 15px; }
   .stop--down { margin-top: 0; }
   body { font-size: 16px; }
   .contact div { grid-template-columns: 1fr; gap: 2px; }

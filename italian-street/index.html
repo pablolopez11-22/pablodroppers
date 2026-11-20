@@ -264,23 +264,34 @@
             </fieldset>
           </div>
 
-          <div class="plate" aria-live="polite">
-            <div class="plate__visual">
-              <svg viewBox="0 0 200 200" class="plate__svg" aria-hidden="true">
-                <circle cx="100" cy="104" r="96" class="plate__shadow"/>
-                <circle cx="100" cy="100" r="96" class="plate__rim"/>
-                <circle cx="100" cy="100" r="90" class="plate__line"/>
-                <circle cx="100" cy="100" r="72" class="plate__base"/>
-                <g id="pastaShape"></g>
-                <g id="sauceTop"></g>
-              </svg>
+          <div class="plate">
+            <div class="printer" aria-hidden="true"><span class="printer__led"></span></div>
+            <div class="ticket-wrap">
+              <article class="ticket" id="ticket" aria-live="polite" aria-label="Tu comanda">
+                <header class="ticket__head">
+                  <img src="img/logo-sm.png" alt="" width="40" height="40">
+                  <div>
+                    <p class="ticket__brand">Italian Street</p>
+                    <p class="ticket__meta">Comanda Nº <span id="ticketNo">0427</span> · <span id="ticketDate"></span></p>
+                  </div>
+                </header>
+                <div class="ticket__rule"></div>
+                <div class="ticket__dish">
+                  <img class="ticket__pasta" id="ticketImg" src="img/pasta/spaghetti.png" alt="" width="180" height="180">
+                  <div>
+                    <p class="ticket__label">1 × Tu plato</p>
+                    <h3 class="ticket__name" id="plateName"></h3>
+                  </div>
+                </div>
+                <ul class="ticket__ing" id="ticketIng"></ul>
+                <div class="ticket__rule"></div>
+                <div class="ticket__total"><span>Total</span><span id="platePrice"></span></div>
+                <p class="ticket__match" id="plateMatch"></p>
+                <p class="ticket__al" id="plateAl"></p>
+                <p class="ticket__thanks">Grazie mille!</p>
+                <div class="stamp" id="ticketStamp" aria-hidden="true"><span>Consigliata</span><b>dalla casa</b><span>★ ★ ★</span></div>
+              </article>
             </div>
-            <p class="plate__label">Tu plato</p>
-            <p class="plate__name" id="plateName"></p>
-            <p class="plate__price" id="platePrice"></p>
-            <p class="plate__match" id="plateMatch"></p>
-            <p class="plate__desc" id="plateDesc"></p>
-            <p class="plate__al" id="plateAl"></p>
             <div class="plate__actions">
               <button class="btn btn--light btn--small" id="randomBtn" type="button">Sorpréndeme</button>
               <a class="btn btn--gold btn--small" href="tel:+34624253316" data-reserve="pasta">Reservar y pedirla</a>
@@ -339,18 +350,9 @@
           </article>
 
           <article class="stop">
-            <figure class="stop__frame"><img src="img/local-luz.jpg" alt="Lámpara colgante de cristal y aplique de latón sobre la pared verde oliva" loading="lazy" width="750" height="1000"></figure>
-            <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">05</span>
-              <h3 class="stop__title">La <em>luz</em></h3>
-              <p>Cristal y latón sobre el verde oliva. Luz cálida para cenar sin prisas.</p>
-            </div>
-          </article>
-
-          <article class="stop stop--down">
             <figure class="stop__frame"><img src="img/local-mesa.jpg" alt="Mesa de madera puesta con platos, copas y manteles verdes junto a la pared de piedra" loading="lazy" width="750" height="1000"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">06</span>
+              <span class="stop__n" aria-hidden="true">05</span>
               <h3 class="stop__title">Tu <em>mesa</em></h3>
               <p>Con amigos, en pareja o en familia: hay tronas para los más pequeños.</p>
             </div>

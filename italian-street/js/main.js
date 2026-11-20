@@ -251,144 +251,7 @@ renderMenu();
    ========================================================= */
 const SALSAS = MENU.find((c) => c.id === 'pasta').items.map((it) => ({ ...it, ...SALSA_STYLE[it.name] }));
 const pastaState = { pasta: 'spaghetti', salsa: 'Carbonara' };
-const SVGNS = 'http://www.w3.org/2000/svg';
-const PASTA_COLOR = '#f2cd6e';
-const PASTA_EDGE = '#d6a440';
-
 const isMatch = (pasta, salsa) => pasta.goes.some((g) => salsa.kind.includes(g));
-
-function el(tag, attrs, parent) {
-  const n = document.createElementNS(SVGNS, tag);
-  for (const k in attrs) n.setAttribute(k, attrs[k]);
-  if (parent) parent.append(n);
-  return n;
-}
-// Pseudoaleatorio estable: cada combinación se dibuja siempre igual
-function rng(seed) {
-  let s = 7; for (const c of seed) s = (s * 31 + c.charCodeAt(0)) >>> 0;
-  return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296);
-}
-const polar = (rand, maxR, cx = 100, cy = 100) => {
-  const a = rand() * Math.PI * 2, d = Math.sqrt(rand()) * maxR;
-  return [cx + Math.cos(a) * d, cy + Math.sin(a) * d];
-};
-const f1 = (n) => n.toFixed(1);
-const rot = (rand, max = 180) => Math.floor(rand() * max);
-
-function drawPasta(g, shape, rand) {
-  g.replaceChildren();
-  if (shape === 'long' || shape === 'ribbon') {
-    const w = shape === 'long' ? 2.6 : 7;
-    const count = shape === 'long' ? 18 : 10;
-    for (let i = 0; i < count; i++) {
-      const r = 12 + rand() * 46, a = rand() * Math.PI * 2, span = 2.4 + rand() * 2;
-      const cx = 100 + (rand() - .5) * 16, cy = 100 + (rand() - .5) * 16;
-      const pts = [];
-      for (let t = 0; t <= 1.0001; t += .08) {
-        const ang = a + t * span, rr = r + Math.sin(t * 7) * 3.5;
-        pts.push(`${f1(cx + Math.cos(ang) * rr)},${f1(cy + Math.sin(ang) * rr)}`);
-      }
-      const p = pts.join(' ');
-      el('polyline', { points: p, fill: 'none', stroke: PASTA_EDGE, 'stroke-width': w + 1.6, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
-      el('polyline', { points: p, fill: 'none', stroke: PASTA_COLOR, 'stroke-width': w, 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, g);
-    }
-    return;
-  }
-  if (shape === 'gnocchi') {
-    for (let i = 0; i < 24; i++) {
-      const [x, y] = polar(rand, 54);
-      const grp = el('g', { transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand)})` }, g);
-      el('ellipse', { rx: 9, ry: 6.5, fill: PASTA_COLOR, stroke: PASTA_EDGE, 'stroke-width': 1.2 }, grp);
-      for (let k = -1; k <= 1; k++) el('path', { d: `M${k * 3.4 - 1},-5 q2,5 0,10`, fill: 'none', stroke: PASTA_EDGE, 'stroke-width': .9, opacity: .8 }, grp);
-    }
-    return;
-  }
-  const big = shape === 'bigtube';
-  const count = big ? 18 : 26;
-  for (let i = 0; i < count; i++) {
-    const [x, y] = polar(rand, 54);
-    const len = big ? 22 : 24, thick = big ? 11 : 8, skew = big ? 0 : 4;
-    const grp = el('g', { transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand)})` }, g);
-    el('path', { d: `M${-len / 2 + skew},${-thick / 2} L${len / 2 + skew},${-thick / 2} L${len / 2 - skew},${thick / 2} L${-len / 2 - skew},${thick / 2} Z`, fill: PASTA_COLOR, stroke: PASTA_EDGE, 'stroke-width': 1.3, 'stroke-linejoin': 'round' }, grp);
-    for (let k = -2; k <= 2; k++) {
-      const xx = k * (len / 6);
-      el('line', { x1: xx + skew * .6, y1: -thick / 2 + 1, x2: xx - skew * .6, y2: thick / 2 - 1, stroke: PASTA_EDGE, 'stroke-width': .8, opacity: .7 }, grp);
-    }
-  }
-}
-
-const TOPPINGS = {
-  herb(g, rand) {
-    for (let i = 0; i < 9; i++) { const [x, y] = polar(rand, 44); el('path', { d: 'M0,-3.2 C2.6,-2 2.6,2 0,3.2 C-2.6,2 -2.6,-2 0,-3.2Z', fill: '#4e8a36', transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand)})` }, g); }
-  },
-  chive(g, rand) {
-    for (let i = 0; i < 14; i++) { const [x, y] = polar(rand, 46); el('rect', { x: f1(x), y: f1(y), width: 5, height: 1.3, rx: .6, fill: '#5d9b3c', transform: `rotate(${rot(rand)} ${f1(x)} ${f1(y)})` }, g); }
-  },
-  pepper(g, rand) {
-    for (let i = 0; i < 30; i++) { const [x, y] = polar(rand, 50); el('circle', { cx: f1(x), cy: f1(y), r: .7, fill: '#2a2420' }, g); }
-  },
-  chili(g, rand) {
-    for (let i = 0; i < 10; i++) { const [x, y] = polar(rand, 44); el('rect', { x: f1(x), y: f1(y), width: 3.5, height: 1.6, rx: .8, fill: '#e0381d', transform: `rotate(${rot(rand)} ${f1(x)} ${f1(y)})` }, g); }
-  },
-  guanciale(g, rand) {
-    for (let i = 0; i < 9; i++) {
-      const [x, y] = polar(rand, 40);
-      const grp = el('g', { transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand)})` }, g);
-      el('rect', { x: -4.5, y: -2.6, width: 9, height: 5.2, rx: 1, fill: '#9c4a2c' }, grp);
-      el('rect', { x: -4.5, y: -.6, width: 9, height: 1.6, fill: '#f1d6c0', opacity: .9 }, grp);
-    }
-  },
-  mushroom(g, rand) {
-    for (let i = 0; i < 7; i++) {
-      const [x, y] = polar(rand, 40);
-      el('path', { d: 'M-6,0 A6,5 0 0 1 6,0 L2,0 L2,5 L-2,5 L-2,0 Z', fill: '#8b6a4a', stroke: '#5e4630', 'stroke-width': .8, transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand, 360)})` }, g);
-    }
-  },
-  olive(g, rand) {
-    for (let i = 0; i < 8; i++) { const [x, y] = polar(rand, 44); el('circle', { cx: f1(x), cy: f1(y), r: 3.4, fill: 'none', stroke: '#2b2622', 'stroke-width': 2.2 }, g); }
-  },
-  clam(g, rand) {
-    for (let i = 0; i < 6; i++) {
-      const [x, y] = polar(rand, 42);
-      const grp = el('g', { transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand, 360)})` }, g);
-      el('path', { d: 'M-7,2 A7,7 0 0 1 7,2 Z', fill: '#d9cfc0', stroke: '#8f8273', 'stroke-width': .9 }, grp);
-      for (let k = -2; k <= 2; k++) el('line', { x1: 0, y1: 2, x2: k * 2.8, y2: -4, stroke: '#8f8273', 'stroke-width': .5 }, grp);
-    }
-  },
-  shrimp(g, rand) {
-    for (let i = 0; i < 6; i++) {
-      const [x, y] = polar(rand, 40);
-      el('path', { d: 'M-5,-3 A6,6 0 1 0 5,-3', fill: 'none', stroke: '#f08e63', 'stroke-width': 4, 'stroke-linecap': 'round', transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand, 360)})` }, g);
-    }
-  },
-  salmon(g, rand) {
-    for (let i = 0; i < 7; i++) {
-      const [x, y] = polar(rand, 40);
-      const grp = el('g', { transform: `translate(${f1(x)} ${f1(y)}) rotate(${rot(rand)})` }, g);
-      el('rect', { x: -4.5, y: -3.5, width: 9, height: 7, rx: 2, fill: '#f29a73' }, grp);
-      el('path', { d: 'M-3,-3 q2,3 0,6 M1,-3 q2,3 0,6', fill: 'none', stroke: '#fde1d2', 'stroke-width': .9 }, grp);
-    }
-  },
-  burrata(g) {
-    el('circle', { cx: 100, cy: 98, r: 15, fill: '#fbf8f0', stroke: '#e3dccb', 'stroke-width': 1.2 }, g);
-    el('path', { d: 'M92,94 q8,-6 15,0', fill: 'none', stroke: '#ffffff', 'stroke-width': 2.4, 'stroke-linecap': 'round' }, g);
-  },
-};
-
-function drawSauce(g, salsa, rand) {
-  g.replaceChildren();
-  for (let i = 0; i < 8; i++) {
-    const [cx, cy] = polar(rand, 32);
-    const r = 10 + rand() * 15;
-    el('ellipse', { cx: f1(cx), cy: f1(cy), rx: f1(r), ry: f1(r * (.6 + rand() * .4)), fill: salsa.color, opacity: .84, transform: `rotate(${rot(rand)} ${f1(cx)} ${f1(cy)})` }, g);
-  }
-  // pecorino rallado
-  for (let i = 0; i < 22; i++) {
-    const [x, y] = polar(rand, 48);
-    el('rect', { x: f1(x), y: f1(y), width: 2.2, height: 1.3, fill: '#fff8e4', opacity: .9 }, g);
-  }
-  (salsa.top || []).forEach((t) => TOPPINGS[t] && TOPPINGS[t](g, rand));
-}
 
 const plate = $('.plate');
 const pastaPicks = $('#pastaPicks');
@@ -417,6 +280,18 @@ SALSAS.forEach((s) => {
   salsaPicks.append(b);
 });
 
+// Convierte la descripción de la salsa en una lista de ingredientes
+function ingredients(desc) {
+  const parts = desc.replace(/\.$/, '').split(/,\s*/);
+  const last = parts.pop().split(/\s+y\s+/);
+  return parts.concat(last).map((x) => x.trim()).filter(Boolean).map((x) => x[0].toUpperCase() + x.slice(1));
+}
+let ticketNo = 426, printed = false;
+(function ticketDate() {
+  const d = new Intl.DateTimeFormat('es-ES', { timeZone: 'Europe/Madrid', day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }).format(new Date());
+  $('#ticketDate').textContent = d.replace(',', '');
+})();
+
 const joinOr = (arr) => (arr.length > 1 ? arr.slice(0, -1).join(', ') + ' o ' + arr[arr.length - 1] : arr[0] || '');
 
 function renderPlate() {
@@ -432,25 +307,28 @@ function renderPlate() {
   });
   salsaPicks.querySelectorAll('.chip').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.id === salsa.name)));
 
-  const rand = rng(pasta.id + salsa.name);
-  drawPasta($('#pastaShape'), pasta.shape, rand);
-  drawSauce($('#sauceTop'), salsa, rand);
-
-  $('#plateName').textContent = `${pasta.name} ${salsa.name}`;
+  $('#ticketImg').src = pasta.img;
+  $('#plateName').innerHTML = `${esc(pasta.name)} <em>${esc(salsa.name)}</em>`;
   $('#platePrice').textContent = euro(salsa.price);
+  $('#ticketIng').innerHTML = ingredients(salsa.desc).map((x) => `<li>${esc(x)}</li>`).join('');
   const match = $('#plateMatch');
-  if (isMatch(pasta, salsa)) {
-    match.className = 'plate__match is-rec';
-    match.textContent = '★ Combinación recomendada por la casa';
+  const rec = isMatch(pasta, salsa);
+  $('#ticketStamp').classList.toggle('is-on', rec);
+  if (rec) {
+    match.className = 'ticket__match is-rec';
+    match.textContent = 'Combinación recomendada por la casa';
   } else {
     const recs = PASTAS.filter((p) => isMatch(p, salsa)).map((p) => p.name);
-    match.className = 'plate__match';
+    match.className = 'ticket__match';
     match.textContent = recs.length ? `Combinación libre · la casa la recomienda con ${joinOr(recs)}` : 'Combinación libre';
   }
-  $('#plateDesc').textContent = salsa.desc;
   $('#plateAl').textContent = 'Alérgenos: ' + alText(salsa.al);
+  ticketNo += 1;
+  $('#ticketNo').textContent = String(ticketNo).padStart(4, '0');
 
-  if (!reduceMotion) { plate.classList.remove('is-changing'); void plate.offsetWidth; plate.classList.add('is-changing'); }
+  // La comanda «sale de la impresora» con cada cambio
+  if (!reduceMotion && printed) { plate.classList.remove('is-printing'); void plate.offsetWidth; plate.classList.add('is-printing'); }
+  printed = true;
 }
 renderPlate();
 
