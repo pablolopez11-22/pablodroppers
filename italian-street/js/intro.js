@@ -44,7 +44,7 @@
     var r = door.getBoundingClientRect();
     cam.style.transformOrigin = (r.left + r.width / 2) + 'px ' + (r.top + r.height * 0.35) + 'px';
     intro.classList.add('is-zoom');
-    at(1050, finish);
+    at(1250, finish);
   }
 
   function finish() {

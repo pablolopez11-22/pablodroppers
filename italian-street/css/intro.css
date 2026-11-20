@@ -14,6 +14,11 @@ html.no-intro .intro { display: none; }
   animation: introFailsafe .6s ease 9s forwards;
 }
 .intro.is-done { opacity: 0; visibility: hidden; transition: opacity .6s ease, visibility 0s .6s; }
+.intro::after {
+  content: ""; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: #120d08; opacity: 0;
+}
+.intro.is-zoom::after { opacity: 1; transition: opacity .45s ease .75s; }
 @keyframes introFailsafe { to { opacity: 0; visibility: hidden; } }
 
 /* Fondo desenfocado (se ve a los lados en pantallas anchas) */
@@ -44,13 +49,10 @@ html.no-intro .intro { display: none; }
 
 /* ---------- Puerta ---------- */
 .door { position: absolute; left: 552px; top: 740px; width: 310px; height: 552px; perspective: 1000px; overflow: hidden; }
+/* Por dentro: solo luz cálida (la cámara entra en ella y aparece la portada) */
 .door__inside {
   position: absolute; inset: 0; overflow: hidden;
-  background: #2a1d10 url("../img/portada-movil.jpg") center / 160% auto no-repeat;
-}
-.door__inside::after {
-  content: ""; position: absolute; inset: 0;
-  background: radial-gradient(ellipse at 50% 40%, rgba(255,214,140,.5), rgba(120,70,20,.35) 70%, rgba(40,25,10,.6));
+  background: radial-gradient(ellipse 70% 55% at 50% 38%, #ffe6ad 0%, #f2b863 30%, #a8662a 62%, #3a2412 100%);
 }
 .door__leaf {
   position: absolute; top: 0; height: 552px;

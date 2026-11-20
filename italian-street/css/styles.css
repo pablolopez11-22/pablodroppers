@@ -151,8 +151,8 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 }
 /* Rótulo iluminado a la derecha, fundido con el fondo */
 .hero__media {
-  position: absolute; z-index: -2; top: 50%; right: max(0px, calc(50% - 700px));
-  width: min(54vw, 96vh); aspect-ratio: 1; transform: translateY(-46%);
+  position: absolute; z-index: -2; top: 50%; right: max(0px, calc(50% - 660px));
+  width: min(54vw, 96vh, 820px); aspect-ratio: 1; transform: translateY(-46%);
   -webkit-mask-image: radial-gradient(circle closest-side, #000 70%, transparent 100%);
           mask-image: radial-gradient(circle closest-side, #000 70%, transparent 100%);
 }
