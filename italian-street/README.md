@@ -31,4 +31,5 @@ Se cambian sin tocar el diseño, de dos formas (instrucciones en `js/sugerencias
 - [ ] Dar de alta la web en Google Search Console y enviar el sitemap.
 - [ ] **Activar el contador de visitas sin cookies** (Cloudflare Web Analytics o GoatCounter): pegar su código en el hueco marcado en `index.html` y medir también los clics en «Reservar».
 - [ ] Poner el enlace de la web en la ficha de Google Maps y en la biografía de Instagram.
+- [ ] Revisar que la oferta de pizzas a 10 € siga vigente (`OFERTA_ACTIVA` en `js/oferta.js`).
 - [ ] (Opcional) Conectar la hoja de Google de sugerencias (`HOJA_CSV` en `js/sugerencias.js`).
