@@ -12,9 +12,8 @@
   var text = document.getElementById('reserveText');
   var lastTrigger = null;
 
-  function waLink(extra) {
+  function waLink() {
     var msg = '¡Hola! Me gustaría reservar una mesa en Italian Street.' +
-      (extra ? ' ' + extra : '') +
       '\n\nDía: \nHora: \nPersonas: ';
     return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
   }
@@ -22,13 +21,8 @@
   function open(trigger) {
     lastTrigger = trigger;
     if (isDesktop) telSmall.textContent = '624 25 33 16 · pulsa para copiar el número';
-    var extra = '';
-    if (trigger.dataset.reserve === 'pasta') {
-      var plate = document.getElementById('plateName');
-      if (plate && plate.textContent) extra = 'Me gustaría pedir unos ' + plate.textContent + '.';
-    }
-    wa.href = waLink(extra);
-    text.textContent = extra ? 'Reserva y pide tu ' + document.getElementById('plateName').textContent + '. ¿Cómo prefieres reservar?' : '¿Cómo prefieres reservar?';
+    wa.href = waLink();
+    text.textContent = '¿Cómo prefieres reservar?';
     dialog.showModal();
     document.documentElement.classList.add('reserve-open');
   }
