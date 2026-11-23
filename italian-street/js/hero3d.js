@@ -7,6 +7,9 @@
 (function () {
   var hero = document.querySelector('.hero');
   var sign = document.getElementById('sign3d');
+  var scene = document.getElementById('scene') || sign;
+  var moto = document.getElementById('moto');
+  var layers = [].slice.call(document.querySelectorAll('.scene__layer'));
   var disc = document.getElementById('disc');
   if (!hero || !sign || !disc) return;
   var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -25,7 +28,7 @@
   // Inclinación del usuario (ratón o dedo), suavizada
   var target = { x: 0, y: 0 }, user = { x: 0, y: 0 }, dragging = false;
   function aim(clientX, clientY) {
-    var r = sign.getBoundingClientRect();
+    var r = scene.getBoundingClientRect();
     target.x = Math.max(-1, Math.min(1, (clientX - (r.left + r.width / 2)) / (r.width / 2)));
     target.y = Math.max(-1, Math.min(1, (clientY - (r.top + r.height / 2)) / (r.height / 2)));
   }
@@ -33,7 +36,7 @@
     hero.addEventListener('mousemove', function (e) { aim(e.clientX, e.clientY); });
     hero.addEventListener('mouseleave', function () { target.x = target.y = 0; });
   }
-  sign.addEventListener('pointerdown', function (e) { dragging = true; aim(e.clientX, e.clientY); });
+  scene.addEventListener('pointerdown', function (e) { dragging = true; aim(e.clientX, e.clientY); });
   window.addEventListener('pointermove', function (e) { if (dragging) aim(e.clientX, e.clientY); });
   window.addEventListener('pointerup', function () { dragging = false; target.x = target.y = 0; });
   window.addEventListener('pointercancel', function () { dragging = false; target.x = target.y = 0; });
@@ -97,7 +100,14 @@
       disc.style.setProperty('--rx', rx.toFixed(2) + 'deg');
       disc.style.setProperty('--fy', fy.toFixed(1) + 'px');
       disc.style.setProperty('--shine', (50 - ry * 2.6).toFixed(1) + '%');
-      sign.style.setProperty('--sh', (1 - Math.abs(ry) / 120 - fy / 200).toFixed(3));
+      // Profundidad: cada capa se desplaza según su distancia (parallax)
+      var w = scene.clientWidth || 400;
+      var autoX = calm ? 0 : Math.sin(t / 3100) * 0.25, autoY = calm ? 0 : Math.cos(t / 3900) * 0.2;
+      layers.forEach(function (l) {
+        var dpt = +l.dataset.depth || 0;
+        l.style.setProperty('--px', ((user.x + autoX) * dpt * w * 0.03).toFixed(1) + 'px');
+        l.style.setProperty('--py', ((user.y + autoY) * dpt * w * 0.015).toFixed(1) + 'px');
+      });
       if (ctx && !calm) drawSparks(t);
     }
     requestAnimationFrame(frame);
@@ -106,6 +116,21 @@
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (en) { visible = en[0].isIntersecting; }).observe(hero);
   }
+  // ---------- Entrada de la Vespa (después de la animación de la fachada) ----------
+  function arrive() {
+    if (!moto) return;
+    if (calm) { moto.classList.add('is-on'); return; }
+    moto.classList.add('is-arriving');
+    setTimeout(function () { moto.classList.add('is-on'); }, 1500);
+  }
+  var root = document.documentElement;
+  if (root.classList.contains('intro-lock')) {
+    var mo = new MutationObserver(function () {
+      if (!root.classList.contains('intro-lock')) { mo.disconnect(); setTimeout(arrive, 350); }
+    });
+    mo.observe(root, { attributes: true, attributeFilter: ['class'] });
+  } else arrive();
+
   window.addEventListener('resize', resize);
   resize();
   requestAnimationFrame(frame);

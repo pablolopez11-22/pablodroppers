@@ -955,15 +955,27 @@
           </ul>
         </div>
 
-        <!-- Rótulo en 3D: medallón con grosor que flota y gira -->
-        <div class="sign3d" id="sign3d" aria-hidden="true">
-          <div class="sign3d__glow"></div>
-          <div class="sign3d__disc" id="disc">
-            <div class="sign3d__back"></div>
-            <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="900" height="900" fetchpriority="high">
-            <div class="sign3d__shine"></div>
+        <!-- Escena 3D: el rótulo dorado gira detrás y la Vespa de la casa aparca delante -->
+        <div class="scene" id="scene" aria-hidden="true">
+          <div class="scene__layer scene__back" data-depth="-0.6">
+            <div class="sign3d" id="sign3d">
+              <div class="sign3d__glow"></div>
+              <div class="sign3d__disc" id="disc">
+                <div class="sign3d__back"></div>
+                <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="900" height="900" fetchpriority="high">
+                <div class="sign3d__shine"></div>
+              </div>
+            </div>
           </div>
-          <div class="sign3d__shadow"></div>
+          <div class="scene__floor"></div>
+          <div class="scene__layer scene__front" data-depth="1">
+            <div class="moto" id="moto">
+              <div class="moto__shadow"></div>
+              <div class="moto__beam"></div>
+              <img class="moto__img" src="img/vespa.webp" srcset="img/vespa-movil.webp 800w, img/vespa.webp 1200w" sizes="(max-width: 700px) 92vw, 640px" alt="" width="1200" height="1050">
+              <div class="moto__lamp"></div>
+            </div>
+          </div>
         </div>
       </div>
       <a class="hero__scroll" href="#carta" aria-label="Bajar a la carta"><span></span></a>
