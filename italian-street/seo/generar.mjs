@@ -31,7 +31,7 @@ ld.hasMenu = menuLD;
 html = html.slice(0, a + 35) + '\n  ' + JSON.stringify(ld, null, 2).replace(/\n/g, '\n  ') + '\n  ' + html.slice(b);
 // Carta estática
 const fallback = MENU.map(c => `<section class="menu-cat"><header class="menu-cat__head"><h3 class="menu-cat__title">${esc(c.title)}</h3>${c.sub ? `<p class="menu-cat__sub">${esc(c.sub)}</p>` : ''}</header><ul class="dishes">` +
-  items(c).map(i => `<li class="dish"><div class="dish__row"><h4 class="dish__name">${esc(i.name)}</h4><span class="dish__dots"></span><span class="dish__price">${i.price != null ? euro(i.price) : i.prices.map(p => p[0] + ' ' + euro(p[1])).join(' · ')}</span></div><p class="dish__desc">${esc(i.desc)}</p></li>`).join('') +
+  items(c).map(i => `<li class="dish"><div class="dish__row"><h4 class="dish__name">${esc(i.name)}</h4><span class="dish__dots"></span>${i.price != null ? `<span class="dish__price">${euro(i.price)}</span>` : `<span class="dish__price dish__price--multi">${i.prices.map(p => `<span><small>${esc(p[0])}</small> ${euro(p[1])}</span>`).join('')}</span>`}</div><p class="dish__desc">${esc(i.desc)}</p></li>`).join('') +
   `</ul></section>`).join('\n');
 html = html.replace(/<div id="menuPanels">[\s\S]*?<\/div><!-- \/menuPanels -->|<div id="menuPanels"><\/div>/, `<div id="menuPanels"><!-- Carta para buscadores (generada con seo/generar.mjs) -->\n${fallback}\n</div><!-- /menuPanels -->`);
 fs.writeFileSync('index.html', html);
