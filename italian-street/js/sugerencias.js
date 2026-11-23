@@ -17,15 +17,14 @@
    B) Editando la lista SUGERENCIAS de aquí abajo y volviendo a
       publicar la web.
 
-   Si no hay ninguna sugerencia visible, la sección no se muestra.
+   Si no hay ninguna sugerencia, se ve la pizarra solo con el título.
    ========================================================= */
 const HOJA_CSV = '';            // enlace .csv de la hoja publicada
 const PERIODO = 'de la semana'; // «del día», «de la semana», «de otoño»…
 
 const SUGERENCIAS = [
-  { nombre: 'Pizza Emiliana', descripcion: 'Mortadela, burrata cremosa, crema de pistacho, ricotta y pistacho molido.', precio: '15,00 €', etiqueta: 'La especialidad' },
-  { nombre: 'Tortellini Ricotta e Tartufo', descripcion: 'Rellenos de ricotta, con crema suave de nata, pecorino romano y un toque de trufa.', precio: '14,50 €' },
-  { nombre: 'Tiramisú al Pistacho', descripcion: 'Bizcocho bañado en café, mascarpone y crema de pistacho.', precio: '6,50 €', etiqueta: 'Postre' },
+  // Ejemplo:
+  // { nombre: 'Pizza Emiliana', descripcion: 'Mortadela, burrata…', precio: '15,00 €', etiqueta: 'La especialidad' },
 ];
 
 (function () {
@@ -36,7 +35,11 @@ const SUGERENCIAS = [
 
   function pintar(items) {
     items = items.filter(function (s) { return s.nombre && !/^\s*no\s*$/i.test(s.visible || ''); });
-    if (!items.length) { section.hidden = true; return; }
+    var note = document.getElementById('suggNote');
+    section.hidden = false;
+    section.classList.toggle('is-empty', !items.length);
+    if (note) note.hidden = !items.length;
+    if (!items.length) { list.innerHTML = ''; return; }
     list.innerHTML = items.map(function (s) {
       var precio = String(s.precio || '').trim();
       if (precio && /^\d+([.,]\d+)?$/.test(precio)) precio = euro(parseFloat(precio.replace(',', '.')));
@@ -46,7 +49,6 @@ const SUGERENCIAS = [
         (s.descripcion ? '<p class="sitem__desc">' + esc(s.descripcion) + '</p>' : '') +
         '</li>';
     }).join('');
-    section.hidden = false;
   }
 
   // Lector de CSV sencillo (admite comillas y comas dentro de los textos)
