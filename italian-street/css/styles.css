@@ -395,54 +395,128 @@ html:not(.js) .header, .header.is-solid { background: rgba(28,40,32,.96); backdr
 .allergens-note { margin: 44px auto 0; max-width: 760px; text-align: center; font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
 .allergens-note .veg { width: 17px; height: 17px; font-size: 10px; vertical-align: -3px; }
 
-/* ---------- Oferta: pizzas a 10 € para llevar ---------- */
+/* ---------- Oferta: cupón «Pizzas a 10 € para llevar» ---------- */
 .promo-pill {
-  display: inline-flex; align-items: center; gap: 10px; margin-bottom: 18px; padding: 6px 14px 6px 6px; border-radius: 999px;
-  border: 1px solid rgba(227,200,140,.55); background: rgba(20,14,8,.55); color: #f4ecdd; text-decoration: none;
-  font: 600 13px/1 var(--font-body); backdrop-filter: blur(4px); transition: background-color .2s ease;
+  position: relative; overflow: hidden; display: inline-flex; align-items: center; gap: 10px; max-width: 100%;
+  margin-bottom: 18px; padding: 5px 8px 5px 5px; border-radius: 999px; text-decoration: none; white-space: nowrap;
+  background: linear-gradient(90deg, rgba(158,52,40,.95), rgba(120,36,28,.95)); color: #fff;
+  box-shadow: 0 8px 20px -8px rgba(158,52,40,.8), inset 0 0 0 1px rgba(255,220,180,.35);
+  font: 500 13px/1 var(--font-body); animation: pillBob 3s ease-in-out infinite;
 }
-.promo-pill:hover { background: rgba(201,162,90,.25); }
-.promo-pill__tag { padding: 5px 10px; border-radius: 999px; background: var(--red); color: #fff; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
-.promo-pill.is-live .promo-pill__tag { animation: livePulse 1.6s ease-in-out infinite; }
-@keyframes livePulse { 50% { box-shadow: 0 0 0 6px rgba(158,52,40,.25); } }
+.promo-pill::after { /* destello que recorre la etiqueta */
+  content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -50%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent); animation: shine 3.2s ease-in-out infinite;
+}
+.promo-pill__tag { padding: 6px 10px; border-radius: 999px; background: var(--gold); color: var(--green); font: 800 10.5px/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; }
+.promo-pill__txt b { font-weight: 800; }
+.promo-pill__go { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(255,255,255,.18); font-size: 12px; }
+@keyframes pillBob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes shine { 0% { left: -50%; } 55%, 100% { left: 130%; } }
 
 .offer { background: var(--cream); padding-bottom: 0; }
-.offer__card {
-  position: relative; display: grid; grid-template-columns: auto 1fr; gap: clamp(22px, 4vw, 48px); align-items: center;
-  max-width: 920px; margin: 0 auto; padding: clamp(24px, 4vw, 40px); border-radius: 26px; color: var(--cream); overflow: hidden;
-  background: radial-gradient(ellipse 70% 90% at 0% 50%, rgba(201,162,90,.18), transparent 60%), var(--green);
-  border: 1px solid rgba(201,162,90,.5); box-shadow: 0 30px 60px -34px rgba(28,40,32,.9);
+.coupon {
+  position: relative; max-width: 980px; margin: 0 auto; border-radius: 26px; overflow: hidden; color: var(--cream);
+  background: radial-gradient(ellipse 60% 80% at 0% 40%, rgba(201,162,90,.16), transparent 60%), var(--green);
+  border: 1px solid rgba(201,162,90,.5); box-shadow: 0 34px 70px -36px rgba(28,40,32,.95);
+  /* muescas de cupón a los lados */
+  -webkit-mask: radial-gradient(circle 16px at 0 62%, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 16px at 100% 62%, #0000 98%, #000) right / 51% 100% no-repeat;
+          mask: radial-gradient(circle 16px at 0 62%, #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 16px at 100% 62%, #0000 98%, #000) right / 51% 100% no-repeat;
 }
-.offer__card::after { content: ""; position: absolute; inset: 8px; border-radius: 20px; border: 1px dashed rgba(227,200,140,.3); pointer-events: none; }
-.offer__price {
-  width: clamp(140px, 22vw, 200px); aspect-ratio: 1; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  background: radial-gradient(circle at 35% 30%, #e7c27b, #c9a25a 55%, #9c7631); color: var(--green); transform: rotate(-8deg);
-  box-shadow: 0 18px 30px -12px rgba(0,0,0,.6), inset 0 0 0 6px rgba(255,255,255,.18), inset 0 0 0 8px rgba(28,40,32,.25);
-  font: 700 12px/1.2 var(--font-body); letter-spacing: .16em; text-transform: uppercase;
+.coupon__ticker { background: var(--red); color: #fff; overflow: hidden; padding: 10px 0; border-bottom: 2px solid var(--gold); }
+.coupon__track { display: flex; gap: 22px; width: max-content; animation: marquee 22s linear infinite; font: 700 13px/1 var(--font-body); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; }
+.coupon__track i { font-style: normal; color: var(--gold-light); }
+
+.coupon__main { display: grid; grid-template-columns: 1.05fr auto 1fr; align-items: center; }
+.coupon__left, .coupon__right { padding: clamp(22px, 3.6vw, 40px); }
+.coupon__title { margin: 0; font: 700 clamp(30px, 4vw, 44px)/1.02 var(--font-display); color: #fff; }
+.coupon__title em { display: block; color: var(--gold); font-weight: 500; }
+.coupon__price {
+  display: inline-block; font: 800 clamp(64px, 9vw, 104px)/.9 var(--font-display); letter-spacing: -.04em; vertical-align: -.12em;
+  background: linear-gradient(100deg, #b98a3c 0%, #f6dc9c 35%, #fff6da 45%, #e3bd6e 55%, #b98a3c 100%); background-size: 250% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent; animation: goldShine 4s ease-in-out infinite;
+  filter: drop-shadow(0 6px 12px rgba(0,0,0,.45));
 }
-.offer__price b { font: 800 clamp(48px, 7vw, 68px)/1 var(--font-display); letter-spacing: -.02em; text-transform: none; margin: 2px 0; }
-.offer__status { margin: 0 0 8px; font: 700 12px/1.2 var(--font-body); letter-spacing: .16em; text-transform: uppercase; color: var(--gold-light); }
-.offer__status.is-live { color: #9bd8a7; }
-.offer__status.is-live::before { content: "● "; animation: blink 1.2s steps(1) infinite; }
+.coupon__price small { font-size: .5em; vertical-align: .55em; margin-left: 2px; }
+@keyframes goldShine { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0 0; } }
+
+.offer__status {
+  display: inline-flex; align-items: center; gap: 8px; margin: 0 0 14px; padding: 7px 12px; border-radius: 999px;
+  font: 700 12px/1.2 var(--font-body); letter-spacing: .06em; background: rgba(244,236,221,.08); color: var(--gold-light);
+}
+.offer__status::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: none; }
+.offer__status.is-live { background: rgba(120,200,140,.16); color: #a6e3b2; }
+.offer__status.is-live::before { animation: blink 1s steps(1) infinite; }
+.offer__status.is-today { background: rgba(201,162,90,.18); color: var(--gold-light); }
+.offer__status.is-off { background: rgba(240,140,120,.14); color: #f2b0a2; }
 @keyframes blink { 50% { opacity: .2; } }
-.offer__title { margin: 0; font: 700 clamp(30px, 4.4vw, 46px)/1.05 var(--font-display); color: #fff; }
-.offer__title em { color: var(--gold); font-weight: 500; }
-.offer__days { list-style: none; padding: 0; margin: 16px 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.offer__days li { padding: 8px 14px; border-radius: 999px; border: 1.5px solid rgba(227,200,140,.45); font-size: 14px; color: #e8dfcc; }
-.offer__days b { color: #fff; }
-.offer__rules { margin: 0 0 22px; padding-left: 18px; color: #d6cdbc; font-size: 14px; line-height: 1.55; }
+.offer__rules { margin: 18px 0 0; padding-left: 18px; color: #d6cdbc; font-size: 14px; line-height: 1.55; }
 .offer__rules strong { color: #fff; }
-.offer__call { gap: 10px; white-space: nowrap; }
-.offer__note { margin: 10px 0 0; font-size: 12px; color: #b8b09f; }
-@media (max-width: 640px) {
-  .offer__card { grid-template-columns: 1fr; text-align: left; }
-  .offer__price { position: absolute; right: 14px; top: 14px; width: 104px; }
-  .offer__price span { font-size: 9px; }
-  .offer__price b { font-size: 40px; }
-  .offer__title, .offer__status { padding-right: 110px; }
-  .offer__days li { padding: 7px 12px; font-size: 13px; }
-  .offer__card .btn { width: 100%; padding-inline: 14px; font-size: 14px; }
+
+/* Línea de corte con tijeras */
+.coupon__cut { position: relative; align-self: stretch; width: 0; border-left: 2px dashed rgba(227,200,140,.45); margin: 22px 0; }
+.coupon__scissors { position: absolute; left: -11px; top: 0; font-size: 20px; color: var(--gold-light); transform: rotate(90deg); animation: cutV 5s ease-in-out infinite; }
+@keyframes cutV { 0% { top: 0; } 50% { top: calc(100% - 22px); } 100% { top: 0; } }
+
+/* Calendario de la semana */
+.coupon__label { margin: 0 0 12px; font: 800 12px/1 var(--font-body); letter-spacing: .24em; text-transform: uppercase; color: #fff; }
+.week { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.wday {
+  position: relative; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 10px 2px 8px; border-radius: 12px;
+  background: rgba(244,236,221,.05); border: 1px solid rgba(244,236,221,.1); color: rgba(244,236,221,.35);
 }
+.wday__l { font: 800 18px/1 var(--font-display); }
+.wday__x { font: 400 18px/18px var(--font-body); }
+.wday__t { font: 600 9px/1 var(--font-body); letter-spacing: .06em; text-transform: uppercase; }
+.wday svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+.wday svg path:only-child { fill: currentColor; stroke: none; }
+.wday.is-on {
+  color: var(--green); border-color: transparent;
+  background: radial-gradient(circle at 35% 25%, #ffe8ad, #c9a25a 70%);
+  box-shadow: 0 0 0 0 rgba(255,214,130,.6); animation: dayGlow 2.4s ease-in-out infinite;
+}
+.wday.is-on:nth-child(3) { animation-delay: .4s; } .wday.is-on:nth-child(7) { animation-delay: .8s; }
+@keyframes dayGlow { 0%, 100% { box-shadow: 0 0 0 0 rgba(255,214,130,.0), 0 6px 14px -6px rgba(0,0,0,.6); transform: translateY(0); }
+  50% { box-shadow: 0 0 18px 2px rgba(255,214,130,.45), 0 6px 14px -6px rgba(0,0,0,.6); transform: translateY(-3px); } }
+.wday.is-today { outline: 2px solid #fff; outline-offset: 2px; }
+.wday.is-today::after {
+  content: "Hoy"; position: absolute; top: -10px; left: 50%; transform: translateX(-50%); padding: 2px 6px; border-radius: 999px;
+  background: #fff; color: var(--green); font: 800 9px/1.2 var(--font-body); letter-spacing: .08em; text-transform: uppercase;
+}
+/* Entrada: los días aparecen uno a uno */
+.js .coupon.reveal .wday { opacity: 0; transform: translateY(10px) rotateX(70deg); transition: opacity .4s ease, transform .5s cubic-bezier(.3,1.5,.5,1); }
+.js .coupon.reveal.is-in .wday { opacity: 1; transform: none; }
+.js .coupon.reveal.is-in .wday:nth-child(2) { transition-delay: .08s; } .js .coupon.reveal.is-in .wday:nth-child(3) { transition-delay: .16s; }
+.js .coupon.reveal.is-in .wday:nth-child(4) { transition-delay: .24s; } .js .coupon.reveal.is-in .wday:nth-child(5) { transition-delay: .32s; }
+.js .coupon.reveal.is-in .wday:nth-child(6) { transition-delay: .4s; } .js .coupon.reveal.is-in .wday:nth-child(7) { transition-delay: .48s; }
+.week__legend { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 12px 0 20px; font-size: 12px; color: #cfc6b3; }
+.week__legend span { display: inline-flex; align-items: center; gap: 6px; }
+.week__legend svg { width: 14px; height: 14px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; }
+.week__legend svg path:only-child { fill: var(--gold); stroke: none; }
+.offer__call { width: 100%; gap: 10px; white-space: nowrap; }
+.offer__note { margin: 10px 0 0; font-size: 12px; color: #b8b09f; text-align: center; }
+
+@media (max-width: 760px) {
+  .coupon { -webkit-mask: none; mask: none; }
+  /* Móvil: precio → días → condiciones → (corte) → llamar */
+  .coupon__main { display: flex; flex-direction: column; padding: 22px 20px 24px; }
+  .coupon__left, .coupon__right { display: contents; }
+  .offer__status { order: 1; align-self: flex-start; }
+  .coupon__title { order: 2; }
+  .coupon__label { order: 3; margin-top: 22px; }
+  .week { order: 4; }
+  .week__legend { order: 5; margin-bottom: 0; }
+  .offer__rules { order: 6; }
+  .coupon__cut { order: 7; position: relative; width: auto; height: 0; border-left: 0; border-top: 2px dashed rgba(227,200,140,.45); margin: 22px 0; }
+  .offer__call { order: 8; }
+  .offer__note { order: 9; }
+  .coupon__scissors { top: -13px; left: 0; transform: none; animation: cutH 5s ease-in-out infinite; }
+  @keyframes cutH { 0% { left: 0; } 50% { left: calc(100% - 20px); } 100% { left: 0; } }
+  .wday { padding: 9px 0 7px; border-radius: 10px; }
+  .wday__l { font-size: 16px; }
+  .wday__t { font-size: 7.5px; letter-spacing: .02em; }
+  .promo-pill { font-size: 12px; gap: 8px; }
+}
+@media (prefers-reduced-motion: reduce) { .promo-pill, .promo-pill::after { animation: none; } }
 
 /* ---------- Sugerencias: pizarra de trattoria ---------- */
 .sugg { background: var(--cream); padding-top: 0; }
