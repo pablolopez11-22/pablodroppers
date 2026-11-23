@@ -174,13 +174,18 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 /* Escena: medallón detrás, Vespa delante, con profundidad (parallax) */
 .scene { position: relative; width: var(--w); height: calc(var(--w) * .92); perspective: 1400px; touch-action: pan-y; }
 .scene__layer { position: absolute; inset: 0; transform: translate3d(var(--px, 0px), var(--py, 0px), 0); will-change: transform; pointer-events: none; }
-.scene__back { --d: calc(var(--w) * .76); display: flex; justify-content: flex-end; align-items: flex-start; padding-right: 0; top: -7%; }
+.scene__back { --d: calc(var(--w) * .72); display: flex; justify-content: flex-end; align-items: flex-start; padding-right: 0; top: -13%; right: -3%; }
+/* Profundidad de campo: el rótulo queda al fondo, más oscuro y algo desenfocado */
+.scene__back .sign3d__disc { filter: brightness(.68) saturate(.85) contrast(1.05) blur(1px); }
+.scene__back .sign3d__glow { opacity: .55; }
 .scene__floor {
   position: absolute; left: -10%; right: -10%; bottom: -4%; height: 26%; pointer-events: none;
   background: radial-gradient(ellipse 50% 45% at 50% 40%, rgba(255,196,110,.16), transparent 70%);
 }
 .moto { position: absolute; left: -2%; bottom: 0; width: 94%; aspect-ratio: 1200 / 1050; transform-origin: 70% 100%; }
-.moto__img { position: relative; width: 100%; height: 100%; display: block; filter: drop-shadow(0 18px 24px rgba(0,0,0,.55)) brightness(.96) contrast(1.05); }
+/* La Vespa en primer plano: halo oscuro que la separa del fondo y borde de luz de estudio */
+.moto__img { position: relative; width: 100%; height: 100%; display: block;
+  filter: drop-shadow(1px -1px 0 rgba(255,228,170,.45)) drop-shadow(0 0 22px rgba(10,7,4,.95)) drop-shadow(0 18px 24px rgba(0,0,0,.55)) brightness(1.02) contrast(1.08); }
 .moto__shadow {
   position: absolute; left: 4%; right: 6%; bottom: -3%; height: 12%; border-radius: 50%;
   background: radial-gradient(ellipse, rgba(0,0,0,.75), transparent 68%); filter: blur(4px);
