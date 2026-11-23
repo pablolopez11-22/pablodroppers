@@ -2,7 +2,6 @@
    Italian Street · La ruota della pasta
    Tragaperras con dos rodillos (pasta y salsa). La palanca los
    hace girar; también se mueven a mano (deslizar o flechas).
-   Si sale una combinación recomendada por la casa: ¡jackpot!
    Usa PASTAS, SALSA_STYLE y MENU (js/menu.js) y las utilidades
    de js/main.js ($, esc, euro, alText, reduceMotion).
    ========================================================= */
@@ -42,7 +41,7 @@
       if (reel.busy) return;
       reel.busy = true;
       reel.pos += d; reel.place(reduceMotion ? 0 : 220);
-      setTimeout(function () { reel.normalize(); reel.busy = false; update(false); }, reduceMotion ? 0 : 230);
+      setTimeout(function () { reel.normalize(); reel.busy = false; update(); }, reduceMotion ? 0 : 230);
     };
     reel.spinTo = function (target, turns, ms, done) {
       var n = items.length;
@@ -94,24 +93,20 @@
   window.addEventListener('resize', function () { reelP.place(0); reelS.place(0); });
 
   var result = document.querySelector('.result');
-  var jackpot = document.getElementById('jackpot');
 
-  function update(celebrate) {
+  function update() {
     var p = reelP.value(), s = reelS.value(), rec = isMatch(p, s);
     $('#plateName').innerHTML = esc(p.name) + ' <em>' + esc(s.name) + '</em>';
     $('#platePrice').textContent = euro(s.price);
     $('#plateDesc').textContent = s.desc;
     $('#plateAl').textContent = 'Alérgenos: ' + alText(s.al);
     var m = $('#plateMatch');
-    if (rec) m.textContent = 'Esta es una de las combinaciones favoritas de la cocina.';
+    if (rec) m.textContent = 'Combinación recomendada por la casa.';
     else {
       var recs = PASTAS.filter(function (x) { return isMatch(x, s); }).map(function (x) { return x.name; });
       m.textContent = 'Combinación libre · la casa la recomienda con ' + joinOr(recs) + '.';
     }
-    jackpot.classList.toggle('is-on', rec);
-    machine.classList.toggle('is-win', rec && celebrate);
     result.classList.remove('is-pending');
-    if (rec && celebrate) { burst(); setTimeout(function () { machine.classList.remove('is-win'); }, 2200); }
   }
 
   // ---------- Palanca ----------
@@ -123,7 +118,6 @@
     setTimeout(function () { lever.classList.remove('is-pulled'); }, 260);
     hint.textContent = '¡Gira, gira…!';
     machine.classList.add('is-spinning');
-    jackpot.classList.remove('is-on');
     result.classList.add('is-pending');
     var tp = Math.floor(Math.random() * PASTAS.length);
     var ts = Math.floor(Math.random() * SALSAS.length);
@@ -132,35 +126,9 @@
     reelS.spinTo(ts, 4, 2300 * slow + 10, function () {
       machine.classList.remove('is-spinning');
       hint.textContent = 'Tira otra vez o desliza los rodillos';
-      update(true);
+      update();
     });
   });
 
-  // ---------- Chispas doradas del jackpot ----------
-  var fx = document.getElementById('machineFx'), ctx = fx.getContext('2d'), parts = [], raf = 0;
-  function burst() {
-    if (reduceMotion) return;
-    var r = fx.getBoundingClientRect(), z = window.__Z || 1, dpr = Math.min(window.devicePixelRatio || 1, 2);
-    fx.width = r.width / z * dpr; fx.height = r.height / z * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var W = fx.width / dpr, H = fx.height / dpr;
-    for (var i = 0; i < 90; i++) {
-      var a = Math.random() * Math.PI * 2, v = 2 + Math.random() * 6;
-      parts.push({ x: W / 2, y: H * 0.45, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 3, life: 1, r: 1.5 + Math.random() * 3, c: Math.random() < .5 ? '255,214,130' : '255,245,210' });
-    }
-    if (!raf) raf = requestAnimationFrame(tick);
-    function tick() {
-      ctx.clearRect(0, 0, W, H);
-      parts = parts.filter(function (p) { return p.life > 0; });
-      parts.forEach(function (p) {
-        p.x += p.vx; p.y += p.vy; p.vy += 0.18; p.vx *= 0.985; p.life -= 0.012;
-        ctx.fillStyle = 'rgba(' + p.c + ',' + Math.max(0, p.life) + ')';
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill();
-      });
-      raf = parts.length ? requestAnimationFrame(tick) : 0;
-      if (!raf) ctx.clearRect(0, 0, W, H);
-    }
-  }
-
-  update(false);
+  update();
 })();
