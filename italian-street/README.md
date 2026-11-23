@@ -15,5 +15,5 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - [x] Fotos del local para el recorrido (baldas, luz, mesa)
 - [ ] Fotos de platos (opcional: se pueden añadir a la carta y a la portada)
 - [ ] Confirmar con cocina qué platos son vegetarianos (marcados según ingredientes)
-- [ ] Reseñas reales: pegarlas en js/resenas.js
+- [x] Reseñas reales (js/resenas.js)
 - [x] Logo en alta resolución

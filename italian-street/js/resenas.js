@@ -9,6 +9,12 @@
        nombre: 'Laura M.', estrellas: 5, fuente: 'Google' },
    ========================================================= */
 const RESENAS = [
+  { texto: '¡Nos encantó! El servicio fue increíblemente atento y el personal, muy amable. La comida, deliciosa, abundante y de calidad, y los precios razonables. ¡Volveremos seguro! Echábamos de menos un italiano en la zona.',
+    nombre: 'Nieves L.', estrellas: 5, fuente: 'Google' },
+  { texto: 'Desde que abrieron teníamos ganas de probar sus platos y la experiencia fue excelente. De entrante, carpaccio de ternera, muy sabroso y abundante; mi mujer pidió musaka, también muy buena, y yo pasta rellena de trufa, que estaba deliciosa. Dani, el dueño, nos trajo la cuenta y nos preguntó qué nos había parecido. Volveremos seguro.',
+    nombre: 'José A. M.', estrellas: 5, fuente: 'Google' },
+  { texto: 'Comimos genial, el servicio fue atento y los platos, deliciosos. La lasaña fue sin duda lo mejor: se nota que es casera y está buenísima. Ahora que abren a mediodía, volveremos seguro. ¡Seguid así!',
+    nombre: 'Paula L.', estrellas: 4, fuente: 'Google' },
 ];
 
 (function () {
