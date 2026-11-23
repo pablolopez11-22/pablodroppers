@@ -17,3 +17,8 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - [ ] Confirmar con cocina qué platos son vegetarianos (marcados según ingredientes)
 - [x] Reseñas reales (js/resenas.js)
 - [x] Logo en alta resolución
+
+## Sugerencias (pizarra «Fuera de carta»)
+Se cambian sin tocar el diseño, de dos formas (instrucciones en `js/sugerencias.js`):
+- **Hoja de Google** (recomendado): importa `sugerencias-plantilla.csv` en una hoja, publícala como CSV y pega el enlace en `HOJA_CSV`. Desde entonces basta con editar la hoja.
+- **A mano**: editar la lista `SUGERENCIAS` y volver a publicar.

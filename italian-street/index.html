@@ -17,7 +17,7 @@
   <link rel="apple-touch-icon" href="img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
   <script>
     /* Pantallas grandes (4K, monitores anchos): la web se escala para verse
        igual que en un portátil, en lugar de quedarse pequeña en el centro. */
@@ -135,6 +135,7 @@
 
       <nav class="nav" id="nav" aria-label="Principal">
         <a href="#carta">Carta</a>
+        <a href="#sugerencias">Sugerencias</a>
         <a href="#crea">Crea tu pasta</a>
         <a href="#local">El local</a>
         <a href="#visitanos">Horario y reservas</a>
@@ -239,6 +240,22 @@
           Algunos productos pueden contener trazas por contaminación cruzada.
           <span class="veg" aria-hidden="true">V</span> vegetariano · <span aria-hidden="true">🌶</span> picante.
         </p>
+      </div>
+    </section>
+
+    <!-- ============ SUGERENCIAS (se editan en js/sugerencias.js o en la hoja de Google) ============ -->
+    <section class="section sugg" id="sugerencias" hidden>
+      <div class="container">
+        <div class="board reveal">
+          <div class="board__inner">
+            <p class="board__kicker">Fuera de carta</p>
+            <h2 class="board__title">Sugerencias <span id="suggPeriod">de la semana</span></h2>
+            <svg class="board__flourish" viewBox="0 0 200 14" aria-hidden="true"><path d="M2 9 C 40 1, 70 13, 100 7 S 160 1, 198 8"/></svg>
+            <ul class="board__list" id="suggList"></ul>
+            <p class="board__note" id="suggNote">Pregunta al camarero: ¡vuelan!</p>
+          </div>
+          <span class="board__chalk" aria-hidden="true"></span>
+        </div>
       </div>
     </section>
 
@@ -462,6 +479,7 @@
   <script src="js/menu.js"></script>
   <script src="js/main.js"></script>
   <script src="js/mapa.js"></script>
+  <script src="js/sugerencias.js"></script>
   <script src="js/resenas.js"></script>
   <script src="js/reservas.js"></script>
   <script src="js/local.js"></script>
