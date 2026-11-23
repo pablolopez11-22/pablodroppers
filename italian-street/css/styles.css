@@ -530,6 +530,23 @@ mark { background: rgba(201, 162, 90, .45); color: inherit; border-radius: 3px; 
 .score__stars { color: var(--gold-light); font-size: 22px; letter-spacing: 4px; margin-top: 10px; }
 .score__meta { font-size: 14px; color: #e8e3cf; margin-top: 6px; }
 
+/* Testimonios */
+.quotes {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(280px, 1fr); gap: 16px;
+  margin-top: clamp(36px, 5vw, 56px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px;
+}
+.quotes::-webkit-scrollbar { display: none; }
+.quote {
+  position: relative; scroll-snap-align: start; margin: 0; padding: 30px 24px 22px; border-radius: 20px;
+  background: rgba(244,236,221,.08); border: 1px solid rgba(227,200,140,.35); color: var(--cream);
+  display: flex; flex-direction: column;
+}
+.quote::before { content: "“"; position: absolute; top: -4px; right: 18px; font: italic 700 84px/1 var(--font-display); color: var(--gold); opacity: .55; }
+.quote__stars { color: var(--gold-light); letter-spacing: 3px; font-size: 15px; }
+.quote blockquote { margin: 10px 0 18px; font: italic 400 18px/1.5 var(--font-display); color: #f4ecdd; flex: 1; }
+.quote figcaption { font-size: 13px; color: #d9d4bf; }
+.quote figcaption strong { color: #fff; font-weight: 700; }
+
 /* ---------- Visítanos ---------- */
 .visit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: stretch; }
 .visit__info > p { color: var(--ink-soft); margin: 18px 0 26px; }
