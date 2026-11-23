@@ -14,7 +14,7 @@
 
   function waLink() {
     var msg = '¡Hola! Me gustaría reservar una mesa en Italian Street.' +
-      '\n\nDía: \nHora: \nPersonas: ';
+      '\n\nA nombre de: \nDía: \nHora: \nPersonas: \nMesa (dentro o terraza): ';
     return 'https://wa.me/' + PHONE + '?text=' + encodeURIComponent(msg);
   }
 
