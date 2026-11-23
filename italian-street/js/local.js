@@ -1,52 +1,41 @@
 /* =========================================================
    Italian Street · recorrido por el local
-   En escritorio la sección se queda fija y, al bajar, el
-   recorrido avanza de lado. En móvil se desliza con el dedo.
+   Carrusel libre: se desliza con el dedo o con las flechas.
+   No obliga a recorrerlo para seguir bajando por la web.
    ========================================================= */
 (function () {
-  var tour = document.getElementById('local');
   var track = document.getElementById('tourTrack');
+  if (!track) return;
   var bar = document.getElementById('tourBar');
-  if (!tour || !track) return;
-
-  var mqWide = window.matchMedia('(min-width: 901px) and (min-height: 560px)');
-  var mqCalm = window.matchMedia('(prefers-reduced-motion: reduce)');
-  var distance = 0, ticking = false;
+  var prev = document.getElementById('tourPrev');
+  var next = document.getElementById('tourNext');
   var frames = [].slice.call(track.querySelectorAll('.stop__frame img'));
-
-  function setup() {
-    var pin = mqWide.matches && !mqCalm.matches;
-    tour.classList.toggle('is-pinned', pin);
-    track.style.transform = '';
-    if (!pin) { tour.style.height = ''; return; }
-    // Con el escalado de pantallas grandes, las medidas de la ventana van en
-    // píxeles reales y las de la página en píxeles escalados (Z)
-    var Z = window.__Z || 1;
-    distance = Math.max(0, track.scrollWidth - window.innerWidth / Z);
-    // Altura de la sección = lo que hay que bajar para recorrer todo el ancho
-    tour.style.height = (window.innerHeight / Z + distance) + 'px';
-    update();
-  }
+  var ticking = false;
 
   function update() {
     ticking = false;
-    if (!tour.classList.contains('is-pinned')) return;
-    var top = tour.getBoundingClientRect().top;
-    var p = Math.min(1, Math.max(0, -top / ((distance * (window.__Z || 1)) || 1)));
-    track.style.transform = 'translate3d(' + (-p * distance) + 'px, 0, 0)';
-    if (bar) bar.style.transform = 'scaleX(' + p + ')';
+    var max = track.scrollWidth - track.clientWidth;
+    var p = max > 0 ? track.scrollLeft / max : 0;
+    if (bar) bar.style.transform = 'scaleX(' + Math.max(.06, p) + ')';
+    if (prev) prev.disabled = track.scrollLeft < 8;
+    if (next) next.disabled = track.scrollLeft > max - 8;
     // Las fotos se acercan suavemente al pasar por el centro
-    var cx = window.innerWidth / 2;
+    var r0 = track.getBoundingClientRect(), cx = r0.left + r0.width / 2;
     frames.forEach(function (img) {
       var r = img.parentNode.getBoundingClientRect();
-      var d = Math.min(1, Math.abs(r.left + r.width / 2 - cx) / cx);
-      img.style.setProperty('--zoom', (1 + d * 0.12).toFixed(3));
+      var d = Math.min(1, Math.abs(r.left + r.width / 2 - cx) / (r0.width / 2 || 1));
+      img.style.setProperty('--zoom', (1 + d * 0.1).toFixed(3));
     });
   }
-
-  window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
-  window.addEventListener('resize', setup);
-  (mqWide.addEventListener ? mqWide.addEventListener('change', setup) : mqWide.addListener(setup));
-  window.addEventListener('load', setup);
-  setup();
+  function go(dir) {
+    var item = track.querySelector('.stop');
+    var step = item ? item.getBoundingClientRect().width / (window.__Z || 1) + 40 : track.clientWidth * .8;
+    track.scrollBy({ left: dir * step, behavior: 'smooth' });
+  }
+  if (prev) prev.addEventListener('click', function () { go(-1); });
+  if (next) next.addEventListener('click', function () { go(1); });
+  track.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+  window.addEventListener('resize', update);
+  window.addEventListener('load', update);
+  update();
 })();

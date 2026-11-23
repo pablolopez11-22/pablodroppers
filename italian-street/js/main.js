@@ -188,8 +188,23 @@ function catHTML(cat, items, showFeatured, compact) {
     ${items.length ? `<ul class="dishes">${items.map(dishHTML).join('')}</ul>` : ''}
     ${!compact && cat.cta ? `<a class="menu-cat__cta" href="${cat.cta.href}">${esc(cat.cta.text)} →</a>` : ''}
     ${!compact && cat.fact ? `<aside class="fact"><p class="fact__title">¿Sabías que…?</p><p>${esc(cat.fact)}</p></aside>` : ''}
+    ${!compact ? nextHTML(cat) : ''}
   </section>`;
 }
+
+// Botón «Siguiente sección» al final de cada sección de la carta
+function nextHTML(cat) {
+  const i = MENU.indexOf(cat);
+  const nxt = MENU[i + 1];
+  return nxt ? `<button type="button" class="menu-cat__next" data-next="${nxt.id}">Siguiente: ${esc(nxt.tab)} <span aria-hidden="true">→</span></button>` : '';
+}
+panelsEl.addEventListener('click', (e) => {
+  const b = e.target.closest('.menu-cat__next');
+  if (!b) return;
+  selectTab(b.dataset.next, false);
+  const top = tabsEl.closest('.container').querySelector('#menuPanels').getBoundingClientRect().top;
+  window.scrollTo({ top: window.scrollY + top / (window.__Z || 1) - 150, behavior: reduceMotion ? 'auto' : 'smooth' });
+});
 
 function renderMenu() {
   const searching = !!menuState.query;

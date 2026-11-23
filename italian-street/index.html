@@ -1105,7 +1105,7 @@
             <p class="kicker">El local</p>
             <h2 class="section__title" id="tourTitle">Pasa, siéntate,<br><em>sei a casa.</em></h2>
             <p class="tour__lead">Paredes verde oliva, piedra, madera y luz cálida. Acompáñanos en un paseo por Italian Street, tu restaurante italiano en Palma-Palmilla, Málaga.</p>
-            <p class="tour__hint" aria-hidden="true"><span class="tour__hint-line"></span> <span class="tour__hint-pin">Sigue bajando</span><span class="tour__hint-swipe">Desliza</span></p>
+            <p class="tour__hint" aria-hidden="true"><span class="tour__hint-line"></span> Desliza para pasear por el local</p>
           </header>
 
           <article class="stop">
@@ -1164,7 +1164,11 @@
             <a class="tour__insta" href="https://www.instagram.com/italianstreet_/" target="_blank" rel="noopener">Más fotos en Instagram <strong>@italianstreet_</strong> →</a>
           </aside>
         </div>
-        <div class="tour__progress" aria-hidden="true"><span id="tourBar"></span></div>
+        <div class="tour__nav">
+          <button class="tour__btn" type="button" id="tourPrev" aria-label="Foto anterior">←</button>
+          <div class="tour__progress" aria-hidden="true"><span id="tourBar"></span></div>
+          <button class="tour__btn" type="button" id="tourNext" aria-label="Foto siguiente">→</button>
+        </div>
       </div>
     </section>
 
