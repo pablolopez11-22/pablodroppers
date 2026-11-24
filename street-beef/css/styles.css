@@ -94,6 +94,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 .header__inner { height: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; gap: 28px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
 .brand__logo { width: 50px; height: 50px; border-radius: 50%; }
+.brand__wordmark { height: 54px; width: auto; }
 .brand__text { display: flex; flex-direction: column; gap: 2px; }
 .brand__name { font: 900 26px/.9 var(--font-display); letter-spacing: .03em; text-transform: uppercase; }
 .brand__name em { font-style: normal; color: var(--bone); }
@@ -350,7 +351,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 }
 .ticket__head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 2px dashed var(--ink); }
 .ticket__head img { width: 52px; height: 52px; }
-.ticket__head strong { display: block; font: 900 26px/.9 var(--font-display); letter-spacing: .04em; text-transform: uppercase; }
+.ticket__wordmark { display: block; height: 48px; width: auto; margin-bottom: 4px; }
 .ticket__head span { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
 .ticket__rows { margin: 14px 0 0; display: grid; gap: 8px; font-size: 13px; }
 .ticket__rows div { display: flex; justify-content: space-between; gap: 12px; }
@@ -476,6 +477,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 .footer a { color: var(--bone); }
 .footer p { margin: 6px 0; }
 .footer__logo { width: 170px; height: 170px; margin: 0 auto 18px; border-radius: 50%; box-shadow: 0 0 60px rgba(255,207,122,.25); }
+.footer__wordmark { width: 240px; height: auto; margin: 0 auto 22px; }
 .brand__name--footer { color: var(--bone); font-size: 44px; }
 .footer .footer__by { font: 400 20px/1 var(--font-hand); color: #e04435; margin: 4px 0 20px; }
 .footer .footer__small { font: 400 12px/1 var(--font-mono); opacity: .7; margin-top: 18px; }
