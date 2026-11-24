@@ -1,26 +1,25 @@
 /* =========================================================
    Street Beef · estilos
-   Identidad propia: papel de carnicería (kraft), tinta negra,
-   carbón y el rojo del logo. Letra de estarcido para los
+   Identidad sacada del logo: negro, rojo neón y crema. Letra de estarcido para los
    títulos, rotulador para los detalles a mano (como el
    «by Nacho García» del logo) y mono de ticket de báscula.
    Esquinas rectas y sombras duras, como un cartel impreso.
    ========================================================= */
 :root {
   --vh: 1vh;   /* lo ajusta el escalado de pantallas grandes */
-  --carbon: #141312;
-  --carbon-2: #1d1b19;
-  --carbon-3: #2a2724;
-  --kraft: #c9a273;
-  --kraft-2: #b48d5d;
-  --kraft-light: #e6cfaa;
-  --bone: #efe9df;
-  --paper: #fbf8f2;
+  --carbon: #0e0d0d;
+  --carbon-2: #181616;
+  --carbon-3: #242120;
+  --kraft: #ecd9b6;      /* crema del logo */
+  --kraft-2: #d9c196;
+  --kraft-light: #f3e4c6;
+  --bone: #f4ecdd;
+  --paper: #fbf6ec;
   --ink: #141210;
   --ink-soft: #4f4840;
-  --red: #c42a1c;
-  --red-dark: #9b1f13;
-  --bulb: #ffcf7a;
+  --red: #e1261c;        /* rojo neón del logo */
+  --red-dark: #b51a12;
+  --neon: #ff3524;
   --line: rgba(20, 18, 16, .2);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .25 0 0 0 0 .18 0 0 0 0 .1 0 0 0 .16 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --fibers: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004 .08' numOctaves='3' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .24 0 0 0 0 .12 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
@@ -82,6 +81,7 @@ mark { background: rgba(196, 42, 28, .22); color: inherit; padding: 0 1px; }
   font: 700 12px/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; color: var(--red);
 }
 .kicker::before { content: ""; width: 10px; height: 10px; background: currentColor; transform: rotate(45deg); }
+.kicker { color: var(--red-dark); }
 .kicker--light { color: var(--kraft); }
 .kicker--center { justify-content: center; }
 
@@ -90,10 +90,10 @@ mark { background: rgba(196, 42, 28, .22); color: inherit; padding: 0 1px; }
   position: fixed; inset: 0 0 auto 0; z-index: 50; height: var(--header-h); color: var(--bone);
   transition: background-color .3s ease, box-shadow .3s ease;
 }
-html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-shadow: 0 3px 0 var(--red); }
+html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-shadow: 0 2px 0 var(--red), 0 6px 24px -6px rgba(255,53,36,.55); }
 .header__inner { height: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); display: flex; align-items: center; gap: 28px; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; margin-right: auto; }
-.brand__logo { width: 50px; height: 50px; border-radius: 50%; }
+.brand__logo { width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 0 14px rgba(255,53,36,.55); }
 .brand__wordmark { height: 54px; width: auto; }
 .brand__text { display: flex; flex-direction: column; gap: 2px; }
 .brand__name { font: 900 26px/.9 var(--font-display); letter-spacing: .03em; text-transform: uppercase; }
@@ -116,7 +116,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
   position: relative; min-height: calc(var(--vh) * 100); isolation: isolate; overflow: hidden;
   display: flex; align-items: center; padding: calc(var(--header-h) + 28px) 0 80px; color: var(--bone);
   background:
-    radial-gradient(ellipse 42% 62% at 30% 34%, rgba(255,207,122,.22), transparent 70%),
+    radial-gradient(ellipse 40% 60% at 28% 50%, rgba(255,53,36,.2), transparent 70%),
     radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.6)),
     /* ladrillo pintado de negro */
     repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 2px, transparent 2px 46px),
@@ -130,7 +130,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 }
 .hero__content { position: relative; z-index: 1; }
 .hero__title { font-size: clamp(56px, 7.4vw, 112px); line-height: .86; letter-spacing: 0; }
-.hero__title em { display: block; color: var(--kraft); }
+.hero__title em { display: block; color: var(--red); text-shadow: 0 0 28px rgba(255,53,36,.45); }
 .hero__by { display: inline-block; margin: 14px 0 0; font: 400 clamp(22px, 2.4vw, 30px)/1 var(--font-hand); color: #e04435; transform: rotate(-4deg); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
 .hero__facts {
@@ -139,6 +139,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 }
 .hero__facts li { border: 1.5px solid rgba(239,233,223,.45); padding: 9px 12px; }
 .hero__facts strong { color: var(--kraft); margin-right: 4px; }
+.hero__facts li { border-color: rgba(236,217,182,.35) !important; }
 .star { color: var(--kraft); }
 .today-status.is-open { border-color: #6fbf73 !important; }
 .today-status.is-open strong { color: #8fd18f; }
@@ -152,7 +153,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 .sign3d { position: relative; width: var(--d); height: var(--d); perspective: 1600px; }
 .sign3d__glow {
   position: absolute; inset: -16%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, rgba(255,214,150,.38) 0%, rgba(255,190,110,.12) 42%, transparent 66%);
+  background: radial-gradient(circle, rgba(255,53,36,.28) 0%, rgba(255,53,36,.1) 42%, transparent 66%);
   animation: glowPulse 5s ease-in-out infinite;
 }
 .sign3d__disc {
@@ -161,7 +162,8 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--fy, 0px));
 }
 .sign3d__disc > * { position: absolute; inset: 0; border-radius: 50%; }
-.sign3d__edge { background: linear-gradient(90deg, #0b0b0a, #3d3b37 30%, #6e6a63 50%, #34322e 70%, #0b0b0a); transform: translateZ(var(--z)); }
+.sign3d__disc > .sign3d__edge, .sign3d__disc > .sign3d__back, .sign3d__disc > .sign3d__shine { inset: 4%; }  /* el rótulo ocupa el 92 % de la imagen; el resto es el halo de neón */
+.sign3d__edge { background: linear-gradient(90deg, #050505, #2a2625 30%, #4a4442 50%, #262221 70%, #050505); transform: translateZ(var(--z)); }
 .sign3d__back { transform: translateZ(calc(var(--t) / -2)) rotateY(180deg); background: radial-gradient(circle at 40% 35%, #3a3834, #121110 70%); }
 .sign3d__face { width: 100%; height: 100%; transform: translateZ(calc(var(--t) / 2)); display: block; }
 .sign3d__shine {
@@ -185,12 +187,12 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 /* ---------- Cinta: cinta de carrocero sobre la pared ---------- */
 .ribbon-wrap { overflow: hidden; margin-top: -30px; padding: 18px 0; position: relative; z-index: 2; }
 .ribbon {
-  background: var(--fibers), var(--kraft); color: var(--ink); padding: 12px 0;
+  background: var(--red); color: var(--kraft-light); padding: 12px 0;
   transform: rotate(1.4deg) scaleX(1.04); box-shadow: 0 8px 18px -8px rgba(0,0,0,.6);
   -webkit-mask: linear-gradient(#000, #000); /* evita bordes pixelados al rotar */
 }
 .ribbon__track { display: flex; gap: 22px; width: max-content; animation: marquee 34s linear infinite; font: 900 26px/1 var(--font-display); letter-spacing: .06em; text-transform: uppercase; white-space: nowrap; }
-.ribbon__track span:nth-child(even) { color: var(--red); }
+.ribbon__track span:nth-child(even) { color: var(--ink); }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 /* ---------- Secciones ---------- */
@@ -209,13 +211,13 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 .carta .kicker { color: var(--kraft); }
 .sheet {
   position: relative; color: var(--ink);
-  background: var(--fibers), linear-gradient(170deg, #d4ae7f, var(--kraft) 40%, #c09764);
+  background: var(--fibers), linear-gradient(170deg, #f3e4c6, var(--kraft) 40%, #e2cba3);
   padding: 0 clamp(18px, 4vw, 56px) clamp(32px, 5vw, 56px);
   box-shadow: 0 30px 60px -20px rgba(0,0,0,.7);
 }
 .sheet::before { /* borde superior rasgado */
   content: ""; position: absolute; left: 0; right: 0; top: -10px; height: 12px;
-  background: linear-gradient(170deg, #d4ae7f, #d0a979);
+  background: linear-gradient(170deg, #f3e4c6, #f0dfbf);
   -webkit-mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 18px 100%;
           mask: conic-gradient(from 135deg at top, #0000, #000 1deg 89deg, #0000 90deg) 50% / 18px 100%;
 }
@@ -476,7 +478,7 @@ html:not(.js) .header, .header.is-solid { background: rgba(20,19,18,.97); box-sh
 .footer { background: var(--grain), var(--carbon); color: #b8ad9f; padding: 60px 0 120px; text-align: center; font-size: 15px; border-top: 6px solid var(--red); }
 .footer a { color: var(--bone); }
 .footer p { margin: 6px 0; }
-.footer__logo { width: 170px; height: 170px; margin: 0 auto 18px; border-radius: 50%; box-shadow: 0 0 60px rgba(255,207,122,.25); }
+.footer__logo { width: 170px; height: 170px; margin: 0 auto 18px; border-radius: 50%; box-shadow: 0 0 50px rgba(255,53,36,.45); }
 .footer__wordmark { width: 240px; height: auto; margin: 0 auto 22px; }
 .brand__name--footer { color: var(--bone); font-size: 44px; }
 .footer .footer__by { font: 400 20px/1 var(--font-hand); color: #e04435; margin: 4px 0 20px; }

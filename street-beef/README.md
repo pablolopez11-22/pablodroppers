@@ -13,8 +13,10 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - `js/cortes.js`: «Elige tu corte» (calculadora de la brasa, usa los precios de `menu.js`)
 - `js/sugerencias.js`: pizarra «Sugerencias del chef»
 - `js/reservas.js`: ventana de reserva (WhatsApp o teléfono)
-- `img/rotulo-3d.webp`: el logo como rótulo de bronce retroiluminado (portada)
-- `img/logo-dibujo.svg`: el logo original en vector, sin los iconos de redes
+- `img/logo-original.webp`: el logo oficial (rótulo negro con neón rojo)
+- `img/rotulo-3d.webp`: el logo preparado para la portada (con el halo de neón transparente)
+- `img/letras-claro.webp` / `img/letras-oscuro.webp`: las letras del logo (cabecera, pie y ticket)
+- `img/logo-dibujo.svg`: el logo anterior (dibujo a línea) en vector
 
 ## Pendiente
 - [ ] Fotos del local (sala, rincón motero, brasa, terraza) para «El local»
