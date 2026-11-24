@@ -18,6 +18,12 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - `img/letras-claro.webp` / `img/letras-oscuro.webp`: las letras del logo (cabecera, pie y ticket)
 - `img/logo-dibujo.svg`: el logo anterior (dibujo a línea) en vector
 
+## Vídeo de la portada
+- `video/parrilla.webm` / `video/parrilla.mp4` (+ `parrilla.jpg` de póster): «Grilled steak» de Coverr
+  (https://coverr.co/stock-video-footage/steak), licencia libre de uso comercial sin atribución
+  (https://coverr.co/license). Retocado de color y algo ralentizado.
+- [ ] Lo ideal: grabar un chuletón en la parrilla del propio local (10–15 s, plano fijo, horizontal) y sustituirlo.
+
 ## Cámara de maduración («Elige tu corte»)
 - Las fotos de los cortes (`img/cortes/`) son de referencia, de Flickr con licencias Creative Commons
   (autores y licencias en `CORTES_INFO`, `js/menu.js`). Mientras se usen, hay que mantener los créditos
