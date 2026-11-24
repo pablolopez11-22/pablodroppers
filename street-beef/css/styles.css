@@ -167,6 +167,11 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 .sign3d__edge { background: linear-gradient(90deg, #050505, #2a2625 30%, #4a4442 50%, #262221 70%, #050505); transform: translateZ(var(--z)); }
 .sign3d__back { transform: translateZ(calc(var(--t) / -2)) rotateY(180deg); background: radial-gradient(circle at 40% 35%, #3a3834, #121110 70%); }
 .sign3d__edge, .sign3d__back, .sign3d__shine { display: none; }
+/* Logo en 3D (WebGL): el lienzo es más grande que el rótulo para que quepan el brillo y el giro */
+.logo3d { position: absolute; left: -30%; top: -30%; width: 160%; height: 160%; pointer-events: auto; cursor: pointer; opacity: 0; transition: opacity .8s ease; }
+.scene__layer, .sign3d { pointer-events: none; }
+.scene.is-3d .logo3d { opacity: 1; }
+.scene.is-3d .sign3d__disc, .scene.is-3d .sign3d__glow { opacity: 0; transition: opacity .6s ease; }
 .sign3d__face { width: 100%; height: 100%; display: block; animation: neon 7s steps(1) infinite; }
 @keyframes neon { 0%, 61%, 64%, 66%, 100% { filter: brightness(1.08) contrast(1.06); } 62%, 65% { filter: brightness(.72) contrast(1.06); } }
 .sign3d__shine {

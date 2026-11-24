@@ -18,6 +18,10 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - `img/letras-claro.webp` / `img/letras-oscuro.webp`: las letras del logo (cabecera, pie y ticket)
 - `img/logo-dibujo.svg`: el logo anterior (dibujo a línea) en vector
 
+## Logo en 3D (portada)
+- `js/logo3d.js` es `js/logo3d.src.js` empaquetado con three.js 0.170 (esbuild). Usa `img/logo-cara.jpg` para la cara.
+- Si el navegador no tiene WebGL, se ve el rótulo plano (`img/rotulo-3d.webp`).
+
 ## Vídeo de la portada
 - `video/parrilla.webm` / `video/parrilla.mp4` (+ `parrilla.jpg` de póster): «Grilled steak» de Coverr
   (https://coverr.co/stock-video-footage/steak), licencia libre de uso comercial sin atribución
