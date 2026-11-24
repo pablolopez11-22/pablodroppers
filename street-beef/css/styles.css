@@ -115,17 +115,10 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 .hero {
   position: relative; min-height: calc(var(--vh) * 100); isolation: isolate; overflow: hidden;
   display: flex; align-items: center; padding: calc(var(--header-h) + 20px) 0 calc(var(--rh) + 40px); color: var(--bone);
-  background:
-    radial-gradient(ellipse 38% 55% at 72% 42%, rgba(255,53,36,.2), transparent 70%),
-    radial-gradient(ellipse 70% 30% at 50% 100%, rgba(255,110,30,.28), transparent 70%),
-    radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.6)),
-    /* ladrillo pintado de negro */
-    repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 2px, transparent 2px 46px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.03) 0 2px, transparent 2px 120px),
-    var(--carbon);
+  background: #070606;
 }
 .hero__inner {
-  --w: min(40vw, calc(var(--vh) * 54), 560px);
+  --w: min(44vw, calc(var(--vh) * 58), 640px);
   width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
   display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(20px, 4vw, 56px);
 }
@@ -147,26 +140,79 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 .today-status.is-closed strong { color: #ff7b6b; }
 .embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
+/* Pared de ladrillo: solo se ve donde le da la luz (el neón y el fuego) */
+.wall { position: absolute; inset: 0; z-index: -3; pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='138'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .45 0'/%3E%3CfeComposite in2='SourceGraphic' operator='in'/%3E%3C/filter%3E%3Crect width='480' height='138' fill='%231a110e'/%3E%3Crect x='2' y='2' width='115' height='41' rx='2' fill='%2393533a'/%3E%3Crect x='122' y='2' width='115' height='41' rx='2' fill='%23763f2c'/%3E%3Crect x='242' y='2' width='115' height='41' rx='2' fill='%236b3826'/%3E%3Crect x='362' y='2' width='115' height='41' rx='2' fill='%239c5b40'/%3E%3Crect x='-58' y='48' width='115' height='41' rx='2' fill='%23874a33'/%3E%3Crect x='422' y='48' width='115' height='41' rx='2' fill='%23874a33'/%3E%3Crect x='62' y='48' width='115' height='41' rx='2' fill='%23874a33'/%3E%3Crect x='182' y='48' width='115' height='41' rx='2' fill='%237a4330'/%3E%3Crect x='302' y='48' width='115' height='41' rx='2' fill='%23804634'/%3E%3Crect x='422' y='48' width='115' height='41' rx='2' fill='%23874a33'/%3E%3Crect x='2' y='94' width='115' height='41' rx='2' fill='%2393533a'/%3E%3Crect x='122' y='94' width='115' height='41' rx='2' fill='%23804634'/%3E%3Crect x='242' y='94' width='115' height='41' rx='2' fill='%23874a33'/%3E%3Crect x='362' y='94' width='115' height='41' rx='2' fill='%23804634'/%3E%3Crect width='480' height='138' fill='%23000' filter='url(%23n)'/%3E%3C/svg%3E") center / 480px 138px repeat;
+  -webkit-mask: radial-gradient(ellipse 42% 62% at 74% 44%, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%),
+                radial-gradient(ellipse 80% 42% at 50% 100%, #000 0%, rgba(0,0,0,.4) 55%, transparent 100%),
+                radial-gradient(ellipse 60% 26% at 50% 0%, rgba(0,0,0,.7), transparent 100%),
+                linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2));
+          mask: radial-gradient(ellipse 42% 62% at 74% 44%, #000 0%, rgba(0,0,0,.6) 55%, transparent 100%),
+                radial-gradient(ellipse 80% 42% at 50% 100%, #000 0%, rgba(0,0,0,.4) 55%, transparent 100%),
+                radial-gradient(ellipse 60% 26% at 50% 0%, rgba(0,0,0,.7), transparent 100%),
+                linear-gradient(rgba(0,0,0,.2), rgba(0,0,0,.2));
+}
+.wall { filter: brightness(.62) saturate(.9); }
+.wall::before { content: ""; position: absolute; inset: 0; z-index: 1;   /* sombra detrás de los textos y viñeta */
+  background:
+    linear-gradient(90deg, rgba(5,4,4,.82) 0%, rgba(5,4,4,.55) 32%, transparent 55%),
+    radial-gradient(ellipse 110% 95% at 60% 45%, transparent 55%, rgba(0,0,0,.7) 100%); }
+.wall::after { content: ""; position: absolute; inset: 0;   /* color de las luces sobre los ladrillos */
+  background:
+    radial-gradient(ellipse 30% 46% at 74% 44%, rgba(255,30,20,.38), transparent 70%),
+    radial-gradient(ellipse 70% 38% at 50% 100%, rgba(255,120,30,.35), transparent 70%),
+    radial-gradient(ellipse 50% 22% at 50% 0%, rgba(255,190,110,.18), transparent 70%);
+  mix-blend-mode: color-dodge; }
+
+/* Guirnalda de bombillas antiguas bajo la cabecera */
+.garland { position: absolute; left: 0; right: 0; top: var(--header-h); height: 56px; z-index: 0; pointer-events: none; }
+.garland__wire { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.garland__wire path { fill: none; stroke: #3a312b; stroke-width: 2px; vector-effect: non-scaling-stroke; }
+.bulb { position: absolute; left: var(--x); top: calc(var(--y) * 48px); width: 16px; height: 34px; margin-left: -8px;
+  transform-origin: 50% 0; animation: sway 3.6s ease-in-out var(--d) infinite alternate; }
+.bulb::before { content: ""; position: absolute; left: 5px; top: 0; width: 6px; height: 9px; background: #2a2420; border-radius: 1px; }  /* casquillo */
+.bulb i { position: absolute; left: 0; top: 8px; width: 16px; height: 22px; border-radius: 50% 50% 48% 48% / 40% 40% 60% 60%;
+  background: radial-gradient(circle at 50% 55%, #fff6d8 0 12%, #ffcf7a 30%, rgba(255,160,60,.55) 60%, rgba(255,140,40,.2) 100%);
+  box-shadow: 0 0 14px 4px rgba(255,180,80,.55), 0 0 46px 14px rgba(255,150,60,.22);
+  animation: filament 5s steps(1) var(--d) infinite; }
+@keyframes sway { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+@keyframes filament { 0%, 70%, 74%, 100% { opacity: 1; } 72% { opacity: .55; } }
+
+/* Humo que sube de la parrilla */
+.smoke { position: absolute; left: 0; right: 0; bottom: 0; height: 75%; z-index: -1; pointer-events: none; overflow: hidden; }
+.smoke span { position: absolute; bottom: -10%; width: 26vw; aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle, rgba(150,140,130,.16), rgba(120,110,100,.06) 45%, transparent 70%);
+  filter: blur(18px); animation: smoke 16s linear infinite; opacity: 0; }
+.smoke span:nth-child(1) { left: 2%; animation-delay: 0s; }
+.smoke span:nth-child(2) { left: 18%; animation-delay: -5s; }
+.smoke span:nth-child(3) { left: 36%; animation-delay: -10s; }
+.smoke span:nth-child(4) { left: 52%; animation-delay: -2.5s; }
+.smoke span:nth-child(5) { left: 68%; animation-delay: -7.5s; }
+.smoke span:nth-child(6) { left: 82%; animation-delay: -12.5s; }
+@keyframes smoke { 0% { transform: translate(0, 0) scale(.6); opacity: 0; } 15% { opacity: 1; } 100% { transform: translate(6vw, -90%) scale(1.5); opacity: 0; } }
+
 .scene { position: relative; width: var(--w); height: var(--w); perspective: 1400px; touch-action: pan-y; }
-.scene__layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transform: translate3d(var(--px, 0px), var(--py, 0px), 0); will-change: transform; pointer-events: none; }
+.scene__layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transform: translate(var(--px, 0px), var(--py, 0px)); pointer-events: none; }
 .scene__back { --d: calc(var(--w) * .96); }
 .scene__floor { display: none; }
 .sign3d { position: relative; width: var(--d); height: var(--d); perspective: 1600px; }
 .sign3d__glow {
   position: absolute; inset: -16%; border-radius: 50%; pointer-events: none;
-  background: radial-gradient(circle, rgba(255,53,36,.28) 0%, rgba(255,53,36,.1) 42%, transparent 66%);
+  background: radial-gradient(circle, rgba(255,40,25,.42) 0%, rgba(255,40,25,.14) 44%, transparent 68%);
   animation: glowPulse 5s ease-in-out infinite;
 }
 .sign3d__disc {
   --t: calc(var(--d) * .05);
-  position: absolute; inset: 0; transform-style: preserve-3d;
-  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--fy, 0px));
+  position: absolute; inset: 0;
+  transform: translateY(var(--fy, 0px)) rotate(calc(var(--ry, 0deg) * .15));
 }
 .sign3d__disc > * { position: absolute; inset: 0; border-radius: 50%; }
 .sign3d__disc > .sign3d__edge, .sign3d__disc > .sign3d__back, .sign3d__disc > .sign3d__shine { inset: 4%; }  /* el rótulo ocupa el 92 % de la imagen; el resto es el halo de neón */
 .sign3d__edge { background: linear-gradient(90deg, #050505, #2a2625 30%, #4a4442 50%, #262221 70%, #050505); transform: translateZ(var(--z)); }
 .sign3d__back { transform: translateZ(calc(var(--t) / -2)) rotateY(180deg); background: radial-gradient(circle at 40% 35%, #3a3834, #121110 70%); }
-.sign3d__face { width: 100%; height: 100%; transform: translateZ(calc(var(--t) / 2)); display: block; }
+.sign3d__edge, .sign3d__back, .sign3d__shine { display: none; }
+.sign3d__face { width: 100%; height: 100%; display: block; animation: neon 7s steps(1) infinite; }
+@keyframes neon { 0%, 61%, 64%, 66%, 100% { filter: brightness(1.08) contrast(1.06); } 62%, 65% { filter: brightness(.72) contrast(1.06); } }
 .sign3d__shine {
   transform: translateZ(calc(var(--t) / 2 + 1px)); pointer-events: none; mix-blend-mode: soft-light; opacity: .5;
   background: linear-gradient(110deg, transparent 35%, rgba(255,255,255,.5) 49%, transparent 60%);
@@ -569,6 +615,9 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
   .grill-bed { bottom: 62px; }
   .hero__inner { --w: min(84vw, calc(var(--vh) * 42), 400px); grid-template-columns: 1fr; gap: 18px; }
   .hero__inner .scene { justify-self: center; order: -1; }
+  .garland { height: 40px; }
+  .bulb { top: calc(var(--y) * 32px); transform: scale(.8); }
+  .wall { -webkit-mask: none; mask: none; opacity: .35; }
   .hero { --rw: 200px; }
   .hero__scroll { display: none; }
   .hero__actions .btn { flex: 1; padding-inline: 12px; font-size: 18px; white-space: nowrap; }
