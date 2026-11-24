@@ -943,14 +943,6 @@
       <a class="hero__scroll" href="#carta" aria-label="Bajar a la carta"><span></span></a>
     </section>
 
-    <!-- ============ CINTA ============ -->
-    <div class="ribbon-wrap" aria-hidden="true"><div class="ribbon">
-      <div class="ribbon__track">
-        <span>Carnes a la brasa</span><span>✦</span><span>De tapeo</span><span>✦</span><span>Sartenás</span><span>✦</span><span>Tostas</span><span>✦</span><span>Pan bao</span><span>✦</span><span>Chuletón</span><span>✦</span>
-        <span>Carnes a la brasa</span><span>✦</span><span>De tapeo</span><span>✦</span><span>Sartenás</span><span>✦</span><span>Tostas</span><span>✦</span><span>Pan bao</span><span>✦</span><span>Chuletón</span><span>✦</span>
-      </div>
-    </div></div>
-
     <!-- ============ CARTA ============ -->
     <section class="section carta" id="carta">
       <div class="container">
@@ -998,8 +990,6 @@
     <section class="section sugg" id="sugerencias" hidden>
       <div class="container">
         <div class="note reveal">
-          <span class="note__tape note__tape--l" aria-hidden="true"></span>
-          <span class="note__tape note__tape--r" aria-hidden="true"></span>
           <p class="note__kicker">Fuera de carta</p>
           <h2 class="note__title">Sugerencias <span id="suggPeriod">del chef</span></h2>
           <ul class="note__list" id="suggList"></ul>
@@ -1074,7 +1064,6 @@
               </div>
               <div class="grill__total" aria-live="polite"><span>Total aprox.</span><strong id="cutPrice"></strong></div>
               <p class="grill__fine">Orientativo: cada pieza se pesa en cocina y algunos cortes van según el precio de mercado.</p>
-              <div class="barcode" aria-hidden="true"></div>
               <a class="btn btn--gold" href="tel:+34744704232" data-reserve>Reservar mesa</a>
             </div>
           </div>
@@ -1097,7 +1086,6 @@
           <article class="stop">
             <figure class="stop__frame"><img src="img/rotulo-3d.webp" alt="Rótulo de Street Beef by Nacho García" loading="lazy" width="1200" height="1200" style="object-fit: contain; padding: 14%; background: radial-gradient(circle, #2a0d0a, #0e0d0d 72%)"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">01</span>
               <h3 class="stop__title">El rótulo</h3>
               <p></p>
             </div>
@@ -1106,7 +1094,6 @@
           <article class="stop stop--down">
             <figure class="stop__frame stop__frame--ph" data-label="Foto de la sala"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">02</span>
               <h3 class="stop__title">La sala</h3>
               <p></p>
             </div>
@@ -1115,7 +1102,6 @@
           <article class="stop">
             <figure class="stop__frame stop__frame--ph" data-label="Foto de la barra"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">03</span>
               <h3 class="stop__title">La barra</h3>
               <p></p>
             </div>
@@ -1124,7 +1110,6 @@
           <article class="stop stop--down">
             <figure class="stop__frame stop__frame--ph" data-label="Foto de la brasa o de un plato"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">04</span>
               <h3 class="stop__title">La brasa</h3>
               <p></p>
             </div>
@@ -1133,7 +1118,6 @@
           <article class="stop">
             <figure class="stop__frame stop__frame--ph" data-label="Foto de la terraza"></figure>
             <div class="stop__text">
-              <span class="stop__n" aria-hidden="true">05</span>
               <h3 class="stop__title">La terraza</h3>
               <p></p>
             </div>
@@ -1208,11 +1192,26 @@
 
   <!-- ============ PIE ============ -->
   <footer class="footer">
-    <div class="container footer__inner">
-      <img class="footer__logo" src="img/logo.png" alt="Rótulo de Street Beef by Nacho García" width="150" height="150" loading="lazy">
-      <img class="footer__wordmark" src="img/letras-claro.webp" alt="Street Beef by Nacho García" width="260" height="154" loading="lazy">
-      <p>Av. Jane Bowles, 17, Local 1 · 29011 Málaga · <a href="tel:+34744704232">744 70 42 32</a></p>
-      <p class="footer__small">© <span id="year"></span> Street Beef by Nacho García</p>
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img class="footer__wordmark" src="img/letras-claro.webp" alt="Street Beef by Nacho García" width="260" height="154" loading="lazy">
+        <p>Tapas y carnes a la brasa en Palma-Palmilla, Málaga.</p>
+      </div>
+      <div>
+        <h3 class="footer__h">Visítanos</h3>
+        <p>Av. Jane Bowles, 17, Local 1<br>29011 Málaga</p>
+      </div>
+      <div>
+        <h3 class="footer__h">Reservas</h3>
+        <p><a href="tel:+34744704232">744 70 42 32</a><br>Lunes cerrado</p>
+      </div>
+      <div>
+        <h3 class="footer__h">La web</h3>
+        <p><a href="#carta">Carta</a><br><a href="#cortes">Elige tu corte</a><br><a href="#visitanos">Horario</a></p>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <p>© <span id="year"></span> Street Beef by Nacho García</p>
     </div>
   </footer>
 
