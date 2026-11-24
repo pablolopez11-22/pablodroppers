@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Street Tapas · Street Beef</title>
+<meta name="description" content="Street Tapas, Street Beef by Nacho García. Bar restaurante con terraza en Palma-Palmilla, Málaga.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  :root {
+    --bg: #111010;
+    --bg2: #1B1918;
+    --card: #232120;
+    --line: #3A3634;
+    --ink: #F6F1EA;
+    --muted: #B9B0A6;
+    --fire: #FF5A1F;
+    --mustard: #FFC23D;
+    --radius: 18px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.55; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+  .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+  .display { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: .5px; line-height: .95; font-weight: 400; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; z-index: 20; background: rgba(17,16,16,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
+  .logo { text-decoration: none; display: flex; align-items: baseline; gap: 8px; font-size: 22px; }
+  .logo span { color: var(--fire); }
+  .links { display: flex; gap: 26px; align-items: center; }
+  .links a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 15px; }
+  .links a:hover { color: var(--ink); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 40px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent; transition: transform .15s, background .15s; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn.fire { background: var(--fire); color: #140A05; }
+  .btn.ghost { border-color: var(--ink); color: var(--ink); }
+  .btn.sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
+  .btn svg { width: 18px; height: 18px; }
+
+  /* HERO */
+  .hero { position: relative; overflow: hidden; padding: 90px 0 80px; }
+  .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(600px 400px at 85% 20%, rgba(255,90,31,.28), transparent 70%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 2px, transparent 2px 14px); }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
+  .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--mustard); font-weight: 700; letter-spacing: 2px; font-size: 13px; text-transform: uppercase; margin-bottom: 18px; }
+  .kicker::before { content: ""; width: 34px; height: 3px; background: var(--mustard); }
+  .hero h1 { font-size: clamp(58px, 10vw, 128px); margin: 0; }
+  .hero h1 .o { color: var(--fire); display: block; }
+  .hero h1 small { display: block; font-family: 'Inter', sans-serif; text-transform: none; font-size: 20px; letter-spacing: 0; color: var(--muted); font-weight: 500; margin-top: 18px; }
+  .hero p.lead { font-size: 19px; color: var(--muted); max-width: 520px; margin: 22px 0 30px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; }
+  .stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .chip { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 40px; padding: 10px 16px; font-size: 15px; font-weight: 600; }
+  .chip b { color: var(--mustard); }
+  .stars { color: var(--mustard); letter-spacing: 2px; }
+
+  .badge { aspect-ratio: 1; border-radius: 50%; background: var(--fire); color: #140A05; display: grid; place-items: center; text-align: center; padding: 14%; transform: rotate(-8deg); box-shadow: 0 0 0 10px var(--bg), 0 0 0 12px var(--fire); max-width: 400px; justify-self: center; width: 100%; }
+  .badge .display { font-size: clamp(38px, 5.2vw, 64px); }
+  .badge .small { font-weight: 700; letter-spacing: 3px; font-size: 13px; text-transform: uppercase; margin-top: 10px; }
+
+  /* MARQUEE */
+  .strip { background: var(--mustard); color: #140A05; overflow: hidden; white-space: nowrap; padding: 14px 0; }
+  .strip .track { display: inline-block; animation: slide 28s linear infinite; font-family: 'Anton', Impact, sans-serif; font-size: 26px; text-transform: uppercase; }
+  .strip .track span { margin: 0 22px; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .strip .track { animation: none; } .btn:hover { transform: none; } }
+
+  /* SECTIONS */
+  section { padding: 90px 0; }
+  .alt { background: var(--bg2); }
+  .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 40px; }
+  .head h2 { font-size: clamp(44px, 6vw, 72px); margin: 0; }
+  .head h2 span { color: var(--fire); }
+  .head p { color: var(--muted); max-width: 420px; margin: 0; }
+
+  /* ABOUT */
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .about p { color: var(--muted); font-size: 18px; }
+  .about p strong { color: var(--ink); }
+  .ph { border: 2px dashed var(--line); border-radius: var(--radius); background: var(--card); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 14px; padding: 20px; min-height: 300px; }
+  .ph svg { width: 40px; height: 40px; margin: 0 auto 10px; color: var(--fire); }
+  .todo { color: var(--mustard); font-weight: 600; }
+
+  /* MENU */
+  .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .tab { min-height: 44px; padding: 0 20px; border-radius: 40px; border: 2px solid var(--line); background: transparent; color: var(--muted); font: 600 15px 'Inter', sans-serif; cursor: pointer; }
+  .tab[aria-selected="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .panel { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .panel[hidden] { display: none; }
+  .dish { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; }
+  .dish h3 { margin: 0 0 4px; font-size: 18px; }
+  .dish p { margin: 0; color: var(--muted); font-size: 15px; }
+  .price { font-family: 'Anton', Impact, sans-serif; font-size: 22px; color: var(--mustard); white-space: nowrap; }
+  .menu-note { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; color: var(--muted); }
+
+  /* REVIEWS */
+  .rating { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 40px; }
+  .rating .big { font-family: 'Anton', Impact, sans-serif; font-size: 120px; line-height: .9; color: var(--mustard); }
+  .rating .stars { font-size: 28px; }
+  .rating p { color: var(--muted); margin: 8px 0 20px; font-size: 18px; }
+
+  /* VISIT */
+  .visit { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
+  .info { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; gap: 22px; }
+  .row { display: flex; gap: 16px; }
+  .row svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--fire); margin-top: 2px; }
+  .row h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .row p { margin: 0; font-size: 17px; }
+  .row a { text-decoration-color: var(--fire); text-underline-offset: 3px; }
+  .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); min-height: 380px; }
+  .map iframe { width: 100%; height: 100%; min-height: 380px; border: 0; filter: grayscale(.3) contrast(1.05); }
+
+  footer { border-top: 1px solid var(--line); padding: 34px 0; color: var(--muted); font-size: 14px; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
+
+  .fab { position: fixed; right: 16px; bottom: 16px; z-index: 30; display: none; box-shadow: 0 10px 30px rgba(0,0,0,.5); }
+
+  @media (max-width: 860px) {
+    .links a:not(.btn) { display: none; }
+    .hero { padding: 56px 0 60px; }
+    .hero .wrap, .about, .visit { grid-template-columns: 1fr; }
+    .badge { max-width: 260px; }
+    .panel { grid-template-columns: 1fr; }
+    .rating { grid-template-columns: 1fr; gap: 10px; padding: 28px; text-align: center; }
+    .rating .big { font-size: 96px; }
+    section { padding: 64px 0; }
+    .fab { display: inline-flex; }
+  }
+</style>
+</head>
+<body>
+
+<nav aria-label="Principal">
+  <div class="wrap">
+    <a class="logo display" href="#inicio">Street <span>Tapas</span></a>
+    <div class="links">
+      <a href="#nosotros">Nosotros</a>
+      <a href="#carta">Carta</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#visitanos">Visítanos</a>
+      <a class="btn fire sm" href="tel:+34744704232">Reservar</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <div class="kicker">Bar restaurante · Málaga</div>
+      <h1 class="display">Street Tapas<span class="o">Street Beef</span><small>by Nacho García</small></h1>
+      <p class="lead">Tapas y carne con actitud de calle, en Palma-Palmilla. Ven a cenar o a tomar algo en nuestra terraza.</p>
+      <div class="cta">
+        <a class="btn fire" href="tel:+34744704232">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+          Llamar · 744 70 42 32
+        </a>
+        <a class="btn ghost" href="#carta">Ver la carta</a>
+      </div>
+      <div class="stats">
+        <div class="chip"><span class="stars" aria-hidden="true">★★★★★</span><b>4,6</b>· 804 reseñas</div>
+        <div class="chip">10–20 € por persona</div>
+        <div class="chip">Terraza</div>
+      </div>
+    </div>
+    <div class="badge" aria-hidden="true">
+      <div>
+        <div class="display">Abrimos<br>a las 20:00</div>
+        <div class="small">Palma-Palmilla</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="track">
+    <span>Tapas</span><span>★</span><span>Beef</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
+    <span>Tapas</span><span>★</span><span>Beef</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
+  </div>
+</div>
+
+<section id="nosotros">
+  <div class="wrap about">
+    <div>
+      <div class="kicker">Nosotros</div>
+      <h2 class="display" style="font-size:clamp(44px,6vw,72px);margin:0 0 20px">Sabor de <span style="color:var(--fire)">calle</span></h2>
+      <p><strong>Street Tapas, Street Beef</strong> es el bar restaurante de <strong>Nacho García</strong> en la Avenida Jane Bowles, junto al Parque Periurbano La Virreina.</p>
+      <p class="todo">[Aquí va la historia del restaurante: cómo empezó, qué tipo de cocina hacéis y qué os hace diferentes.]</p>
+    </div>
+    <div class="ph">
+      <div>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/></svg>
+        [Foto del local o de un plato]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="carta" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">La <span>carta</span></h2>
+      <p>Sustituye los huecos por los platos y precios reales de vuestra carta.</p>
+    </div>
+    <div class="tabs" role="tablist" aria-label="Secciones de la carta">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p-tapas" id="t-tapas">Tapas</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-beef" id="t-beef">Beef</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-postres" id="t-postres">Postres</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-bebidas" id="t-bebidas">Bebidas</button>
+    </div>
+    <div class="panel" role="tabpanel" id="p-tapas" aria-labelledby="t-tapas">
+      <div class="dish"><div><h3>[Tapa 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Tapa 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Tapa 3]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Tapa 4]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-beef" aria-labelledby="t-beef" hidden>
+      <div class="dish"><div><h3>[Plato de carne 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Plato de carne 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Plato de carne 3]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Plato de carne 4]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-postres" aria-labelledby="t-postres" hidden>
+      <div class="dish"><div><h3>[Postre 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Postre 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-bebidas" aria-labelledby="t-bebidas" hidden>
+      <div class="dish"><div><h3>[Bebida 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>[Bebida 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    </div>
+    <div class="menu-note">
+      <span>La carta completa también está en nuestro Facebook.</span>
+      <a class="btn ghost sm" href="#" title="Pon aquí el enlace a la página de Facebook">[Enlace a Facebook]</a>
+    </div>
+  </div>
+</section>
+
+<section id="opiniones">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">Lo que <span>opinan</span></h2>
+    </div>
+    <div class="rating">
+      <div class="big">4,6</div>
+      <div>
+        <div class="stars" aria-label="4,6 de 5 estrellas">★★★★★</div>
+        <p>Valoración media en Google con <strong style="color:var(--ink)">804 reseñas</strong>.</p>
+        <a class="btn fire sm" href="https://www.google.com/maps/search/?api=1&amp;query=Street+Tapas+Street+Beef+Av.+Jane+Bowles+17+M%C3%A1laga" target="_blank" rel="noopener">Ver reseñas en Google</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visitanos" class="alt">
+  <div class="wrap">
+    <div class="head">
+      <h2 class="display">Ven a <span>vernos</span></h2>
+      <p>Junto al Parque Periurbano La Virreina, con terraza.</p>
+    </div>
+    <div class="visit">
+      <div class="info">
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <div><h3>Dirección</h3><p>Av. Jane Bowles, 17, Local 1<br>Palma-Palmilla, 29011 Málaga</p></div>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+          <div><h3>Teléfono y reservas</h3><p><a href="tel:+34744704232">744 70 42 32</a></p></div>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          <div><h3>Horario</h3><p>Abrimos a las 20:00</p><p class="todo">[Días de apertura y hora de cierre]</p></div>
+        </div>
+        <div class="row">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18M5 11V8a7 7 0 0 1 14 0v3M7 11v10M17 11v10"/></svg>
+          <div><h3>Servicios</h3><p>Terraza · 10–20 € por persona</p></div>
+        </div>
+        <a class="btn fire" href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Jane+Bowles+17+29011+M%C3%A1laga" target="_blank" rel="noopener">Cómo llegar</a>
+      </div>
+      <div class="map">
+        <iframe title="Mapa: Av. Jane Bowles 17, Málaga" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://maps.google.com/maps?q=Av.%20Jane%20Bowles%2017%2C%2029011%20M%C3%A1laga&amp;z=16&amp;output=embed"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="display" style="font-size:20px;color:var(--ink)">Street Tapas · <span style="color:var(--fire)">Street Beef</span></span>
+    <span>Av. Jane Bowles, 17 · 29011 Málaga · 744 70 42 32</span>
+  </div>
+</footer>
+
+<a class="btn fire fab" href="tel:+34744704232">Reservar</a>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t => {
+      const on = t === tab;
+      t.setAttribute('aria-selected', on);
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
+    });
+  }));
+</script>
+</body>
+</html>
