@@ -85,22 +85,22 @@
   }
 
 
-  // ---------- Brasas de la parrilla (al pie de la portada) ----------
-  // Lecho de carbón: trozos oscuros con ceniza; las grietas entre trozos y
-  // algunas zonas de cada trozo arden en rojo/naranja y laten despacio.
-  // Se calcula a baja resolución (1 píxel cada 3) y se amplía con suavizado.
-  var coalCanvas = document.getElementById('coals');
-  var cctx = coalCanvas && coalCanvas.getContext('2d');
-  var buf = document.createElement('canvas'), bctx = buf.getContext('2d');
-  var CW = 0, CH = 0, BW = 0, BH = 0, img = null, owner = null, edge = null, tex = null, seeds = [];
-  var RAMP = [[0, 16, 13, 12], [.18, 38, 22, 18], [.34, 95, 22, 10], [.5, 175, 38, 10], [.66, 232, 82, 18], [.82, 255, 150, 45], [1, 255, 228, 150]];
-  function ramp(h, out) {
-    for (var i = 1; i < RAMP.length; i++) if (h <= RAMP[i][0]) {
-      var a = RAMP[i - 1], b = RAMP[i], k = (h - a[0]) / (b[0] - a[0]);
-      out[0] = a[1] + (b[1] - a[1]) * k; out[1] = a[2] + (b[2] - a[2]) * k; out[2] = a[3] + (b[3] - a[3]) * k; return;
-    }
-    out[0] = 255; out[1] = 228; out[2] = 150;
+  // ---------- Llamas de la parrilla (al pie de la portada) ----------
+  // Fuego de partículas: cada llamita nace en la parrilla, sube balanceándose,
+  // se encoge y pasa de blanco-amarillo a naranja, rojo y humo. Nacen más en
+  // unos «focos» que se mueven, así se forman lenguas de fuego que bailan.
+  var fireCanvas = document.getElementById('coals');
+  var fctx = fireCanvas && fireCanvas.getContext('2d');
+  var FW = 0, FH = 0, flames = [], SPR = [], focos = [], fprev = 0;
+  function sprite(r, g, b) {
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var x = c.getContext('2d'), gr = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+    gr.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',1)');
+    gr.addColorStop(.35, 'rgba(' + r + ',' + g + ',' + b + ',.55)');
+    gr.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+    x.fillStyle = gr; x.fillRect(0, 0, 64, 64); return c;
   }
+  if (fctx) SPR = [sprite(255, 246, 200), sprite(255, 196, 70), sprite(255, 120, 25), sprite(220, 45, 12), sprite(120, 18, 8)];
   function hash(x, y) { var n = Math.sin(x * 127.1 + y * 311.7) * 43758.5453; return n - Math.floor(n); }
   function vnoise(x, y) {
     var xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi;
@@ -109,66 +109,63 @@
     return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v;
   }
   function resizeCoals() {
-    if (!cctx) return;
+    if (!fctx) return;
     var d = Math.min(window.devicePixelRatio || 1, 2);
-    CW = coalCanvas.clientWidth; CH = coalCanvas.clientHeight;
-    coalCanvas.width = CW * d; coalCanvas.height = CH * d;
-    cctx.setTransform(d, 0, 0, d, 0, 0);
-    BW = Math.ceil(CW / 3); BH = Math.ceil(CH / 3);
-    buf.width = BW; buf.height = BH; img = bctx.createImageData(BW, BH);
-    // semillas de los trozos de carbón (rejilla con desorden), aplastadas en vertical por la perspectiva
-    seeds = []; var cell = 13;
-    for (var gy = -1; gy * cell * .6 < BH + cell; gy++) for (var gx = -1; gx * cell < BW + cell; gx++) {
-      seeds.push({ x: (gx + Math.random()) * cell, y: (gy + Math.random()) * cell * .6,
-        h: .25 + Math.random() * .75, ph: Math.random() * 6.28, sp: .4 + Math.random() * 1.1 });
-    }
-    owner = new Int32Array(BW * BH); edge = new Float32Array(BW * BH); tex = new Float32Array(BW * BH);
-    for (var y = 0; y < BH; y++) for (var x = 0; x < BW; x++) {
-      var f1 = 1e9, f2 = 1e9, id = 0;
-      for (var k = 0; k < seeds.length; k++) {
-        var dx = x - seeds[k].x; if (dx > 2 * cell || dx < -2 * cell) continue;
-        var dy = (y - seeds[k].y) / .6, dd = dx * dx + dy * dy;
-        if (dd < f1) { f2 = f1; f1 = dd; id = k; } else if (dd < f2) f2 = dd;
-      }
-      var i = y * BW + x;
-      owner[i] = id; edge[i] = Math.sqrt(f2) - Math.sqrt(f1);
-      tex[i] = vnoise(x * .35, y * .55) * .65 + vnoise(x * 1.1, y * 1.6) * .35;
+    FW = fireCanvas.clientWidth; FH = fireCanvas.clientHeight;
+    fireCanvas.width = FW * d; fireCanvas.height = FH * d;
+    fctx.setTransform(d, 0, 0, d, 0, 0);
+    flames = []; focos = [];
+    var nf = Math.max(4, Math.round(FW / 120));
+    for (var i = 0; i < nf; i++) focos.push({ x: (i + Math.random()) / nf, ph: Math.random() * 6.28, sp: .3 + Math.random() * .5 });
+    for (var k = 0; k < 90; k++) tickFire(k * 33, 33);
+  }
+  function spawnFlame(t) {
+    if (!focos.length) return;
+    var s = t / 1000, f = focos[(Math.random() * focos.length) | 0];
+    var fx = (f.x + Math.sin(s * f.sp + f.ph) * .04) * FW;
+    var power = .55 + .45 * Math.sin(s * f.sp * 2.3 + f.ph * 3);          // cada foco crece y mengua
+    var scale = Math.min(1.4, Math.max(.6, FH / 260));
+    flames.push({
+      x: fx + (Math.random() - .5) * 90 * scale, y: FH + 4,
+      vx: (Math.random() - .5) * 18, vy: -(70 + Math.random() * 120) * (.6 + power * .7) * scale,
+      r: (14 + Math.random() * 20) * scale, age: 0, life: .55 + Math.random() * .7 * power,
+      sway: Math.random() * 6.28, cx: fx
+    });
+  }
+  function tickFire(t, dt) {
+    var step = Math.min(.05, dt / 1000);
+    var want = FW * .9 * step * 1.5;                                        // nacimientos por fotograma
+    for (var n = 0; n < want; n++) spawnFlame(t);
+    for (var i = flames.length - 1; i >= 0; i--) {
+      var p = flames[i];
+      p.age += step;
+      if (p.age > p.life) { flames.splice(i, 1); continue; }
+      var k = p.age / p.life;
+      p.vx += (p.cx - p.x) * .9 * step;                                    // se junta hacia el centro de la lengua
+      p.x += (p.vx + Math.sin(t / 220 + p.sway) * 26 * k) * step;
+      p.y += p.vy * step; p.vy *= 1 - .6 * step;
     }
   }
-  var col = [0, 0, 0], lastCoals = -1e9, coalsDrawn = false;
   function drawCoals(t) {
-    if (!img) return;
-    var s = t / 1000, data = img.data;
-    for (var k = 0; k < seeds.length; k++) {
-      var sd = seeds[k];
-      sd.f = calm ? sd.h : sd.h * (.55 + .45 * Math.sin(s * sd.sp + sd.ph) * Math.sin(s * sd.sp * .37 + sd.ph * 1.7));
+    if (!FW) return;
+    var dt = fprev ? t - fprev : 33; fprev = t;
+    tickFire(t, dt);
+    fctx.clearRect(0, 0, FW, FH);
+    // base al rojo vivo sobre la parrilla
+    var g = fctx.createLinearGradient(0, FH, 0, FH - 60);
+    g.addColorStop(0, 'rgba(255,110,30,.75)'); g.addColorStop(.4, 'rgba(220,50,12,.35)'); g.addColorStop(1, 'rgba(200,40,10,0)');
+    fctx.fillStyle = g; fctx.fillRect(0, FH - 60, FW, 60);
+    fctx.globalCompositeOperation = 'lighter';
+    for (var i = 0; i < flames.length; i++) {
+      var p = flames[i], k = p.age / p.life;
+      var si = k < .07 ? 0 : k < .25 ? 1 : k < .5 ? 2 : k < .78 ? 3 : 4;
+      var r = p.r * (1 - k * .75);
+      fctx.globalAlpha = (k < .1 ? k / .1 : 1) * (1 - k) * (si < 2 ? .32 : .5);
+      fctx.drawImage(SPR[si], p.x - r, p.y - r * 1.5, r * 2, r * 3);       // estirada en vertical: forma de llama
     }
-    for (var y = 0; y < BH; y++) {
-      var depth = y / BH;                                  // abajo, más calor
-      var fadeTop = Math.min(1, depth / .35);              // arriba se funde con la pared
-      for (var x = 0; x < BW; x++) {
-        var i = y * BW + x, sd2 = seeds[owner[i]], e = edge[i], n = tex[i];
-        var crack = Math.exp(-e * .8);                     // grieta entre trozos: lo que más brilla
-        var spot = Math.max(0, n - .52) * 2.2;              // vetas encendidas dentro del trozo
-        var heat = crack * (.45 + .55 * sd2.f) + spot * sd2.f * .9;
-        heat *= .55 + .6 * depth;
-        heat += (vnoise(x * .2 + s * .6, y * .3 - s * .9) - .5) * .12;   // titileo del aire caliente
-        if (heat < 0) heat = 0; if (heat > 1) heat = 1;
-        ramp(heat, col);
-        if (heat < .3) { var ash = (n - .35) * 70 * (1 - heat / .3); if (ash > 0) { col[0] += ash; col[1] += ash * .95; col[2] += ash * .9; } }  // ceniza gris
-        var p = i * 4;
-        data[p] = col[0]; data[p + 1] = col[1]; data[p + 2] = col[2]; data[p + 3] = 255 * fadeTop;
-      }
-    }
-    bctx.putImageData(img, 0, 0);
-    cctx.clearRect(0, 0, CW, CH);
-    cctx.imageSmoothingEnabled = true; cctx.imageSmoothingQuality = 'high';
-    cctx.drawImage(buf, 0, 0, CW, CH);
-    // resplandor suave: la misma imagen, más pequeña y ampliada (sale difuminada), sumada
-    cctx.globalCompositeOperation = 'lighter'; cctx.globalAlpha = .35;
-    cctx.drawImage(buf, 0, 0, BW, BH, -6, -4, CW + 12, CH + 8);
-    cctx.globalAlpha = 1; cctx.globalCompositeOperation = 'source-over';
+    fctx.globalAlpha = 1; fctx.globalCompositeOperation = 'source-over';
   }
+  var lastCoals = -1e9, coalsDrawn = false;
 
   // ---------- Animación ----------
   var visible = true, start = performance.now();
@@ -195,7 +192,7 @@
         l.style.setProperty('--py', ((user.y + autoY) * dpt * w * 0.015).toFixed(1) + 'px');
       });
       if (ctx && !calm) drawSparks(t);
-      if (cctx && (calm ? !coalsDrawn : t - lastCoals > 45)) { drawCoals(t); lastCoals = t; coalsDrawn = true; }
+      if (fctx && (calm ? !coalsDrawn : t - lastCoals > 33)) { drawCoals(t); lastCoals = t; coalsDrawn = true; }
     }
     requestAnimationFrame(frame);
   }

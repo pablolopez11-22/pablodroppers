@@ -20,9 +20,7 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 
 ## Pendiente
 - [ ] Fotos del local (sala, rincón motero, brasa, terraza) para «El local»
-- [x] Moto de la portada: foto real de una Harley-Davidson Knucklehead de los años 40 (`img/moto.webp`), recortada.
-      Autor: Mike Mekinda, Flickr (https://www.flickr.com/photos/20837850@N04/52259682801), licencia CC BY 2.0:
-      hay que mantener el crédito del pie de página. Si el local tiene una moto propia, se puede cambiar por una foto suya.
+- [x] Moto de la portada: Harley antigua dibujada (dentro de `index.html`), con el logo en el depósito y las letras en la alforja; cruza la portada sobre las llamas.
 - [ ] Foto de la fachada para la animación de entrada
 - [ ] Confirmar que el 744 70 42 32 tiene WhatsApp (`PHONE` en `js/reservas.js`)
 - [ ] Instagram del local (pie de página)
