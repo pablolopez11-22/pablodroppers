@@ -107,6 +107,11 @@
   .menu-note { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; color: var(--muted); }
 
   /* REVIEWS */
+  .hours { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 15px; }
+  .hours th, .hours td { padding: 7px 0; border-bottom: 1px solid var(--line); text-align: left; font-weight: 500; }
+  .hours td { text-align: right; color: var(--muted); }
+  .hours .closed { color: var(--red); font-weight: 700; }
+  .hours tr.today th, .hours tr.today td { color: var(--fire); font-weight: 700; }
   .rating { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 40px; }
   .rating .big { font-family: 'Bangers', Impact, sans-serif; font-size: 120px; line-height: .9; color: var(--mustard); }
   .rating .stars { font-size: 28px; }
@@ -199,7 +204,7 @@
         <div class="chip"><span class="stars" aria-hidden="true">★★★★★</span><b>4,6</b>· 804 reseñas</div>
         <div class="chip">10–20 € por persona</div>
         <div class="chip">Terraza</div>
-        <div class="chip"><b>Abrimos a las 20:00</b></div>
+        <div class="chip" id="hoy"><b>Lunes cerrado</b></div>
       </div>
     </div>
     <div class="hero-logo">
@@ -246,7 +251,7 @@
   <div class="wrap">
     <div class="head">
       <h2 class="display">La <span>carta</span></h2>
-      <p>Sustituye los huecos por los platos y precios reales de vuestra carta.</p>
+      <a class="btn fire sm" href="https://cartadigital.barmanagerapp.com/site/index/show/STREETTAPAS" target="_blank" rel="noopener">Ver la carta digital completa</a>
     </div>
     <div class="tabs" role="tablist" aria-label="Secciones de la carta">
       <button class="tab" role="tab" aria-selected="true" aria-controls="p-tapas" id="t-tapas">Entrantes</button>
@@ -275,8 +280,8 @@
       <div class="dish"><div><h3>[Bebida 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
     </div>
     <div class="menu-note">
-      <span>La carta completa también está en nuestro Facebook.</span>
-      <a class="btn ghost sm" href="#" title="Pon aquí el enlace a la página de Facebook">[Enlace a Facebook]</a>
+      <span>Consulta todos los platos, precios y alérgenos en nuestra carta digital.</span>
+      <a class="btn ghost sm" href="https://cartadigital.barmanagerapp.com/site/index/show/STREETTAPAS" target="_blank" rel="noopener">Abrir la carta</a>
     </div>
   </div>
 </section>
@@ -315,7 +320,16 @@
         </div>
         <div class="row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-          <div><h3>Horario</h3><p>Abrimos a las 20:00</p><p class="todo">[Días de apertura y hora de cierre]</p></div>
+          <div style="flex:1"><h3>Horario</h3>
+            <table class="hours">
+              <tr data-d="2"><th>Martes</th><td>20:00 – 00:00</td></tr>
+              <tr data-d="3"><th>Miércoles</th><td>13:00 – 16:00 · 20:00 – 00:00</td></tr>
+              <tr data-d="4"><th>Jueves</th><td>12:30 – 16:00 · 20:00 – 00:00</td></tr>
+              <tr data-d="5"><th>Viernes</th><td>12:30 – 16:00 · 20:00 – 00:00</td></tr>
+              <tr data-d="6"><th>Sábado</th><td>12:30 – 16:00 · 20:00 – 00:00</td></tr>
+              <tr data-d="0"><th>Domingo</th><td>12:30 – 16:00</td></tr>
+              <tr data-d="1"><th>Lunes</th><td class="closed">Cerrado</td></tr>
+            </table></div>
         </div>
         <div class="row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h18M5 11V8a7 7 0 0 1 14 0v3M7 11v10M17 11v10"/></svg>
@@ -349,6 +363,15 @@
       document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
     });
   }));
+  const H = {0:[[750,960]],1:[],2:[[1200,1440]],3:[[780,960],[1200,1440]],4:[[750,960],[1200,1440]],5:[[750,960],[1200,1440]],6:[[750,960],[1200,1440]]};
+  const now = new Date(), d = now.getDay(), m = now.getHours()*60 + now.getMinutes();
+  const fmt = x => String(Math.floor(x/60)%24).padStart(2,'0') + ':' + String(x%60).padStart(2,'0');
+  const row = document.querySelector('.hours tr[data-d="'+d+'"]'); if (row) row.classList.add('today');
+  const open = H[d].some(([a,b]) => m >= a && m < b);
+  const next = H[d].find(([a]) => m < a);
+  document.getElementById('hoy').innerHTML = open ? '<b>Abierto ahora</b>'
+    : next ? 'Hoy abrimos a las <b>' + fmt(next[0]) + '</b>'
+    : (H[d].length ? 'Cerrado ahora' : '<b>Hoy cerrado</b>');
 </script>
 </body>
 </html>
