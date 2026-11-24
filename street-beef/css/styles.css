@@ -839,3 +839,36 @@ html:not(.js) .header, .header.is-solid { background: rgba(12,11,11,.92); backdr
 .visit .btn--outline:hover { background: var(--text); color: #111; }
 .visit .section__title { font-size: clamp(44px, 5.2vw, 76px); }
 @media (min-width: 901px) { .footer { padding-bottom: 64px; } }
+
+/* ---------- Cámara de maduración real (foto del bar) ---------- */
+.aging { display: block; }
+.camara { position: relative; margin: 0 auto; max-width: 460px; }
+.camara img { width: 100%; height: auto; display: block; filter: drop-shadow(0 40px 50px rgba(0,0,0,.7)); }
+.camara figcaption { margin-top: 14px; text-align: center; font: 500 13px/1.4 var(--font-body); color: var(--text-soft); letter-spacing: .04em; }
+.camara__spots { position: absolute; inset: 0 0 32px 0; }
+.spot { position: absolute; transform: translate(-50%, -50%); width: 44px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.spot__dot { position: absolute; left: 50%; top: 50%; width: 18px; height: 18px; margin: -9px 0 0 -9px; border-radius: 50%;
+  background: #fff; box-shadow: 0 0 0 4px rgba(225,38,28,.85), 0 4px 10px rgba(0,0,0,.6); }
+.spot__dot::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; border: 2px solid #fff; animation: spotPulse 2s ease-out infinite; }
+@keyframes spotPulse { from { transform: scale(1); opacity: .9; } to { transform: scale(2.4); opacity: 0; } }
+.spot__label { position: absolute; left: 50%; bottom: calc(100% + 2px); transform: translateX(-50%) translateY(4px); white-space: nowrap;
+  padding: 7px 11px; border-radius: 6px; background: rgba(12,11,11,.92); color: #fff; font: 600 12px/1 var(--font-body); letter-spacing: .04em;
+  opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; box-shadow: 0 8px 18px rgba(0,0,0,.5); }
+.spot__label small { font-weight: 500; color: var(--text-soft); margin-left: 3px; }
+.spot:hover .spot__label, .spot:focus-visible .spot__label, .spot.is-on .spot__label { opacity: 1; transform: translateX(-50%); }
+.spot.is-on .spot__dot { background: var(--red); box-shadow: 0 0 0 4px #fff, 0 4px 10px rgba(0,0,0,.6); }
+
+/* Lista de cortes */
+.cuts__label { margin: 34px 0 12px; font: 600 12px/1 var(--font-body); letter-spacing: .22em; text-transform: uppercase; color: var(--text-soft); }
+.cuts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.cuts .cut { display: flex; align-items: center; gap: 8px; flex: none; padding: 12px 14px; border: 1px solid var(--hair); border-radius: 8px;
+  background: var(--surface); color: var(--text); text-align: left; transform: none !important; clip-path: none; transition: border-color .2s ease, background-color .2s ease; }
+.cuts .cut::before { display: none; }
+.cuts .cut:hover { border-color: rgba(255,255,255,.3); }
+.cuts .cut__name { flex: 1; font: 600 14px/1.2 var(--font-body); text-transform: none; letter-spacing: 0; }
+.cuts .cut__price { font: 600 13px/1 var(--font-body); color: var(--text-soft); font-variant-numeric: tabular-nums; }
+.cuts .cut__live { flex: none; padding: 3px 6px; border-radius: 3px; background: rgba(225,38,28,.18); color: #ff7a6a; font: 700 9px/1 var(--font-body); letter-spacing: .12em; text-transform: uppercase; }
+.cuts .cut[aria-checked="true"] { border-color: var(--red); background: rgba(225,38,28,.12); }
+.cuts .cut[aria-checked="true"] .cut__price { color: #fff; }
+@media (max-width: 900px) { .camara { max-width: 380px; } }
+@media (max-width: 560px) { .cuts { grid-template-columns: 1fr; } }

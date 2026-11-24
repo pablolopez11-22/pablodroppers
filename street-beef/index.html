@@ -1004,35 +1004,19 @@
         <header class="section__head reveal">
           <p class="kicker">La brasa · Al peso</p>
           <h2 class="section__title">Elige tu <em>corte</em></h2>
-          <p class="section__sub">Abre la cámara de maduración, elige tu pieza y los gramos: te decimos cuánto sale antes de pedir.</p>
+          <p class="section__sub">Esta es nuestra cámara de maduración. Pulsa una pieza, elige los gramos y te decimos cuánto sale antes de pedir.</p>
         </header>
 
         <div class="grill reveal">
           <!-- Cámara de maduración en 3D: se abre y dentro están los cortes -->
           <div class="aging">
-            <div class="cab" id="cab">
-              <div class="cab__body">
-                <div class="cab__side" aria-hidden="true"></div>
-                <div class="cab__top" aria-hidden="true"><span class="cab__badge">Dry aged</span></div>
-
-                <div class="cab__inside">
-                  <div class="cab__salt" aria-hidden="true"></div>
-                  <div class="cab__led" aria-hidden="true"></div>
-                  <img class="cab__hang cab__hang--l" src="img/cortes/pieza-madurada.webp" alt="" width="520" height="366" loading="lazy">
-                  <img class="cab__hang cab__hang--r" src="img/cortes/pieza-madurada.webp" alt="" width="520" height="366" loading="lazy">
-                  <div class="cab__shelves" id="cutList" role="radiogroup" aria-label="Cortes de la cámara"></div>
-                </div>
-
-                <button class="cab__door" id="cabDoor" type="button" aria-controls="cutList" aria-expanded="false">
-                  <span class="cab__glass" aria-hidden="true"></span>
-                  <img class="cab__logo" src="img/rotulo-3d.webp" alt="" width="1280" height="1280" loading="lazy">
-                  <span class="cab__display" aria-hidden="true"><b>1,5 °C</b> · 82 % HR</span>
-                  <span class="cab__handle" aria-hidden="true"></span>
-                  <span class="cab__cta" id="cabCta">Abrir la cámara</span>
-                </button>
-              </div>
-              <div class="cab__floor" aria-hidden="true"></div>
-            </div>
+            <figure class="camara">
+              <img src="img/camara.webp" alt="Cámara de maduración de Street Beef con las piezas de vaca rubia gallega, T-bone, lomo alto y lomo bajo" width="997" height="1577" loading="lazy">
+              <div class="camara__spots" id="cutSpots"></div>
+              <figcaption>Nuestra cámara de maduración · 2 °C · 85 % de humedad</figcaption>
+            </figure>
+            <p class="cuts__label">Todos los cortes a la brasa</p>
+            <div class="cuts" id="cutList" role="radiogroup" aria-label="Cortes a la brasa"></div>
           </div>
 
           <div class="pick">
