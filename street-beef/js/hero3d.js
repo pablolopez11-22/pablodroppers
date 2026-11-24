@@ -91,10 +91,10 @@
       var t = now - start;
       user.x += (target.x - user.x) * 0.08;
       user.y += (target.y - user.y) * 0.08;
-      var swayY = calm ? 0 : Math.sin(t / 2600) * 16;        // giro automático lento
+      var swayY = calm ? 0 : Math.sin(t / 2600) * 9;        // giro automático lento
       var swayX = calm ? 0 : Math.sin(t / 3700) * 4;
-      var ry = swayY + user.x * 22;
-      var rx = 6 + swayX - user.y * 16;
+      var ry = swayY + user.x * 16;
+      var rx = 3 + swayX - user.y * 12;
       var fy = calm ? 0 : Math.sin(t / 1900) * (sign.clientWidth * 0.012);  // flota
       disc.style.setProperty('--ry', ry.toFixed(2) + 'deg');
       disc.style.setProperty('--rx', rx.toFixed(2) + 'deg');

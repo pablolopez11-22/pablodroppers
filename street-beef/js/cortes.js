@@ -42,9 +42,8 @@
       b.tabIndex = on ? 0 : -1;
     });
     nameEl.textContent = c.name;
-    originEl.textContent = info.origen || '';
-    originEl.hidden = !info.origen;
-    noteEl.textContent = info.nota || c.desc || '';
+    originEl.textContent = info.origen || 'Al peso';
+    noteEl.textContent = info.nota || '';
     weightEl.textContent = state.g >= 1000 ? (state.g / 1000).toFixed(state.g % 1000 ? 2 : 0).replace('.', ',') + ' kg' : state.g + ' g';
     priceEl.textContent = eur(c.price * state.g / 100);
     perEl.textContent = eur(c.price) + ' cada 100 g';
