@@ -904,21 +904,6 @@
     <section class="hero">
       <canvas class="embers" id="embers" aria-hidden="true"></canvas>
       <div class="hero__inner">
-        <!-- Escena 3D: el rótulo retroiluminado de la casa -->
-        <div class="scene" id="scene" aria-hidden="true">
-          <div class="scene__layer scene__back" data-depth="-0.5">
-            <div class="sign3d" id="sign3d">
-              <div class="sign3d__glow"></div>
-              <div class="sign3d__disc" id="disc">
-                <div class="sign3d__back"></div>
-                <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="1200" height="1200" fetchpriority="high">
-                <div class="sign3d__shine"></div>
-              </div>
-              <div class="sign3d__shadow"></div>
-            </div>
-          </div>
-        </div>
-
         <div class="hero__content">
           <p class="kicker kicker--light">Bar restaurante · Málaga</p>
           <h1 class="hero__title">Tapas y carnes <em>a la brasa</em></h1>
@@ -933,6 +918,34 @@
             <li class="today-status" id="todayStatus"><strong>Hoy</strong> <span>…</span></li>
           </ul>
         </div>
+
+        <!-- Escena 3D: el rótulo de neón al fondo y la Harley de la casa delante -->
+        <div class="scene" id="scene" aria-hidden="true">
+          <div class="scene__layer scene__back" data-depth="-0.6">
+            <div class="sign3d" id="sign3d">
+              <div class="sign3d__glow"></div>
+              <div class="sign3d__disc" id="disc">
+                <div class="sign3d__back"></div>
+                <img class="sign3d__face" src="img/rotulo-3d.webp" alt="" width="1200" height="1200" fetchpriority="high">
+                <div class="sign3d__shine"></div>
+              </div>
+            </div>
+          </div>
+          <div class="scene__layer scene__front" data-depth="1">
+            <div class="moto" id="moto">
+              <div class="moto__shadow"></div>
+              <div class="moto__beam"></div>
+              <img class="moto__img" src="img/moto.svg" alt="" width="1200" height="760">
+              <div class="moto__lamp"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parrilla: brasas encendidas al pie de la portada (se dibujan en js/hero3d.js) -->
+      <div class="grill-bed" aria-hidden="true">
+        <canvas class="grill-bed__coals" id="coals"></canvas>
+        <div class="grill-bed__grate"></div>
       </div>
       <a class="hero__scroll" href="#carta" aria-label="Bajar a la carta"><span></span></a>
     </section>

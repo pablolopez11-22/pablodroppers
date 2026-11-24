@@ -114,9 +114,10 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 /* ---------- Portada: pared oscura, rótulo encendido ---------- */
 .hero {
   position: relative; min-height: calc(var(--vh) * 100); isolation: isolate; overflow: hidden;
-  display: flex; align-items: center; padding: calc(var(--header-h) + 28px) 0 80px; color: var(--bone);
+  display: flex; align-items: center; padding: calc(var(--header-h) + 28px) 0 130px; color: var(--bone);
   background:
-    radial-gradient(ellipse 40% 60% at 28% 50%, rgba(255,53,36,.2), transparent 70%),
+    radial-gradient(ellipse 38% 55% at 72% 42%, rgba(255,53,36,.2), transparent 70%),
+    radial-gradient(ellipse 70% 30% at 50% 100%, rgba(255,110,30,.28), transparent 70%),
     radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgba(0,0,0,.6)),
     /* ladrillo pintado de negro */
     repeating-linear-gradient(0deg, rgba(255,255,255,.035) 0 2px, transparent 2px 46px),
@@ -124,12 +125,12 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
     var(--carbon);
 }
 .hero__inner {
-  --w: min(42vw, calc(var(--vh) * 72), 600px);
+  --w: min(44vw, calc(var(--vh) * 60), 620px);
   width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter);
-  display: grid; grid-template-columns: auto 1fr; align-items: center; gap: clamp(28px, 5vw, 72px);
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(20px, 4vw, 56px);
 }
 .hero__content { position: relative; z-index: 1; }
-.hero__title { font-size: clamp(56px, 7.4vw, 112px); line-height: .86; letter-spacing: 0; }
+.hero__title { font-size: clamp(46px, min(6.6vw, calc(var(--vh) * 11)), 108px); line-height: .86; letter-spacing: 0; }
 .hero__title em { display: block; color: var(--red); text-shadow: 0 0 28px rgba(255,53,36,.45); }
 .hero__by { display: inline-block; margin: 14px 0 0; font: 400 clamp(22px, 2.4vw, 30px)/1 var(--font-hand); color: #e04435; transform: rotate(-4deg); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 34px; }
@@ -146,9 +147,9 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 .today-status.is-closed strong { color: #ff7b6b; }
 .embers { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
-.scene { position: relative; width: var(--w); height: var(--w); perspective: 1400px; touch-action: pan-y; }
+.scene { position: relative; width: var(--w); height: calc(var(--w) * 1.08); perspective: 1400px; touch-action: pan-y; }
 .scene__layer { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; transform: translate3d(var(--px, 0px), var(--py, 0px), 0); will-change: transform; pointer-events: none; }
-.scene__back { --d: calc(var(--w) * .9); }
+.scene__back { --d: calc(var(--w) * .86); align-items: flex-start; }
 .scene__floor { display: none; }
 .sign3d { position: relative; width: var(--d); height: var(--d); perspective: 1600px; }
 .sign3d__glow {
@@ -177,7 +178,49 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 }
 @keyframes glowPulse { 50% { opacity: .7; transform: scale(.97); } }
 
-.hero__scroll {
+/* La Harley delante del rótulo */
+.scene__front { align-items: flex-end; justify-content: center; }
+.moto { position: relative; width: 92%; margin-left: -18%; margin-bottom: -4%; aspect-ratio: 1200 / 760; transform-origin: 30% 100%; }
+.moto__img { position: relative; width: 100%; height: 100%; display: block;
+  filter: drop-shadow(0 0 1px rgba(255,228,190,.5)) drop-shadow(0 0 26px rgba(0,0,0,.95)) drop-shadow(0 18px 20px rgba(0,0,0,.6)); }
+.moto__shadow { position: absolute; left: 8%; right: 4%; bottom: 0; height: 8%; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,.8), transparent 70%); filter: blur(4px); }
+/* Faro: punto de luz y haz hacia la derecha */
+.moto__lamp {
+  position: absolute; left: 74.2%; top: 36.3%; width: 10%; aspect-ratio: 1; transform: translate(-50%, -50%); border-radius: 50%;
+  background: radial-gradient(circle, #fffbe8 0 18%, rgba(255,226,150,.85) 32%, rgba(255,190,90,.25) 55%, transparent 72%);
+  mix-blend-mode: screen; opacity: 0;
+}
+.moto__beam {
+  position: absolute; left: 76%; top: 36.3%; width: 60%; height: 46%; transform: translateY(-22%);
+  background: linear-gradient(90deg, rgba(255,224,150,.4), rgba(255,210,130,.1) 50%, transparent 85%);
+  clip-path: polygon(0 18%, 100% 0, 100% 100%, 0 26%); filter: blur(6px); mix-blend-mode: screen; opacity: 0; pointer-events: none;
+}
+.moto.is-on .moto__lamp, .moto.is-on .moto__beam { opacity: 1; animation: lampOn .9s steps(1) both; }
+@keyframes lampOn { 0% { opacity: 0; } 15% { opacity: 1; } 25% { opacity: .2; } 40% { opacity: 1; } 50% { opacity: .5; } 60%, 100% { opacity: 1; } }
+/* Entrada: la moto llega rodando desde la izquierda y frena */
+.moto.is-arriving { animation: rideIn 1.5s cubic-bezier(.2, .7, .25, 1) both; }
+@keyframes rideIn {
+  0% { transform: translateX(-130%) rotate(1.5deg); filter: blur(5px); opacity: 0; }
+  15% { opacity: 1; }
+  70% { transform: translateX(3%) rotate(-1.2deg); filter: blur(0); }
+  85% { transform: translateX(-1%) rotate(.4deg); }
+  100% { transform: none; }
+}
+
+/* Parrilla al pie de la portada: brasas animadas bajo una rejilla */
+.grill-bed { position: absolute; left: 0; right: 0; bottom: 0; height: 120px; z-index: -1; pointer-events: none; }
+.grill-bed__coals { position: absolute; inset: 0; width: 100%; height: 100%; }
+.grill-bed__grate {
+  position: absolute; left: 0; right: 0; bottom: 34px; height: 46px;
+  background:
+    linear-gradient(180deg, #4a403b 0 3px, #120f0e 3px 8px, transparent 8px),
+    repeating-linear-gradient(90deg, transparent 0 30px, #191514 30px 33px, #5b4f48 33px 35px, #191514 35px 38px);
+  -webkit-mask: linear-gradient(180deg, #000 60%, transparent);
+          mask: linear-gradient(180deg, #000 60%, transparent);
+  opacity: .9;
+}
+
+.hero__scroll { display: none !important;
   position: absolute; left: 50%; bottom: 28px; margin-left: -18px; width: 36px; height: 36px;
   border: 2px solid rgba(239,233,223,.5); display: grid; place-items: center;
 }
@@ -533,8 +576,9 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 
 @media (max-width: 700px) {
   .hero { padding: calc(var(--header-h) + 10px) 0 130px; align-items: flex-start; }
-  .hero__inner { --w: min(88vw, calc(var(--vh) * 44), 420px); grid-template-columns: 1fr; gap: 18px; }
-  .hero__inner .scene { justify-self: center; }
+  .hero__inner { --w: min(84vw, calc(var(--vh) * 42), 400px); grid-template-columns: 1fr; gap: 18px; }
+  .hero__inner .scene { justify-self: center; order: -1; }
+  .grill-bed { height: 96px; }
   .hero__scroll { display: none; }
   .hero__actions .btn { flex: 1; padding-inline: 12px; font-size: 18px; white-space: nowrap; }
   .sheet { padding-inline: 16px; }

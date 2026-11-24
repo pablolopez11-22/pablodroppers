@@ -20,7 +20,7 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 
 ## Pendiente
 - [ ] Fotos del local (sala, rincón motero, brasa, terraza) para «El local»
-- [ ] Foto de una moto de la casa para la portada (como la Vespa de Italian Street)
+- [x] Moto de la portada: Harley antigua dibujada en vector (`img/moto.svg`). Si hay foto de una moto real del local, se puede cambiar
 - [ ] Foto de la fachada para la animación de entrada
 - [ ] Confirmar que el 744 70 42 32 tiene WhatsApp (`PHONE` en `js/reservas.js`)
 - [ ] Instagram del local (pie de página)
