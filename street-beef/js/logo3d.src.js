@@ -86,9 +86,9 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
   function glowTexture(inner) {
     var c = document.createElement('canvas'); c.width = c.height = 512;
     var x = c.getContext('2d');
-    x.filter = 'blur(' + (inner ? 14 : 34) + 'px)';
+    x.filter = 'blur(' + (inner ? 6 : 34) + 'px)';
     x.strokeStyle = inner ? 'rgba(255,70,45,1)' : 'rgba(255,40,25,.9)';
-    x.lineWidth = inner ? 16 : 46;
+    x.lineWidth = inner ? 8 : 46;
     x.beginPath(); x.arc(256, 256, 256 * 0.62, 0, Math.PI * 2); x.stroke();
     var t = new CanvasTexture(c); t.colorSpace = SRGBColorSpace; return t;
   }
@@ -100,7 +100,7 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
   }
   var glowSize = (R + 0.075) / 0.62 * 2;
   var glowMats = [];
-  [[glowTexture(false), -0.05, 1], [glowTexture(true), 0.05, 0.9]].forEach(function (g) {
+  [[glowTexture(true), 0.05, 0.55]].forEach(function (g) {   // solo un brillo fino pegado al tubo
     var m = new MeshBasicMaterial({ map: g[0], transparent: true, blending: AdditiveBlending, depthWrite: false, opacity: g[2], toneMapped: false, side: DoubleSide });
     var p = new Mesh(new PlaneGeometry(glowSize, glowSize), m);
     p.position.z = g[1];
@@ -111,8 +111,8 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
   // ---------- Luces ----------
   scene.add(new AmbientLight(0xffffff, 0.25));
   var key = new DirectionalLight(0xfff1dc, 1.4); key.position.set(-2.5, 3, 4); scene.add(key);
-  var fire = new PointLight(0xff7a2a, 5, 9, 1.6); fire.position.set(0.3, -2.4, 1.8); scene.add(fire);
-  var red = new PointLight(0xff2a1a, 4, 6, 1.5); red.position.set(1.6, 0.6, 1.2); scene.add(red);
+  var fire = new PointLight(0xff7a2a, 3, 9, 1.6); fire.position.set(0.3, -2.4, 1.8); scene.add(fire);
+  var red = new PointLight(0xff2a1a, 2, 6, 1.5); red.position.set(1.6, 0.6, 1.2); scene.add(red);
 
   // ---------- Tamaño ----------
   function resize() {
@@ -166,12 +166,12 @@ import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment
     sign.position.y = calm ? 0 : Math.sin(t * 0.9) * 0.05;
 
     // la parrilla parpadea; el neón tiembla de vez en cuando
-    fire.intensity = 4.5 + Math.sin(t * 7.3) * 0.9 + Math.sin(t * 13.1) * 0.6;
+    fire.intensity = 3 + Math.sin(t * 7.3) * 0.6 + Math.sin(t * 13.1) * 0.4;
     var off = !calm && (t % 7.1 > 6.6 && t % 7.1 < 6.68 || t % 7.1 > 6.78 && t % 7.1 < 6.83);
     var n = off ? 0.25 : 1;
     neonMat.color.setRGB(2.2 * n, 0.26 * n, 0.15 * n);
-    glowMats[0].opacity = 1 * n; glowMats[1].opacity = 0.9 * n;
-    red.intensity = 4 * n;
+    glowMats[0].opacity = 0.55 * n;
+    red.intensity = 2 * n;
 
     renderer.render(scene, camera);
   }
