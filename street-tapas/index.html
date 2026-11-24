@@ -103,7 +103,9 @@
   .dish { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; }
   .dish h3 { margin: 0 0 4px; font-size: 18px; }
   .dish p { margin: 0; color: var(--muted); font-size: 15px; }
-  .price { font-family: 'Bangers', Impact, sans-serif; font-size: 22px; color: var(--mustard); white-space: nowrap; }
+  .price { font-family: 'Bangers', Impact, sans-serif; font-size: 24px; letter-spacing: .5px; color: var(--mustard); white-space: nowrap; text-align: right; }
+  .price small { display: block; font-family: 'Inter', sans-serif; font-size: 12px; letter-spacing: 0; color: var(--muted); font-weight: 600; margin-top: 2px; }
+  .allergens { color: var(--muted); font-size: 14px; margin: 18px 0 0; }
   .menu-note { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; color: var(--muted); }
 
   /* REVIEWS */
@@ -140,6 +142,9 @@
     .hero .wrap, .about, .visit { grid-template-columns: 1fr; }
     .hero-logo { max-width: 280px; }
     .panel { grid-template-columns: 1fr; }
+    .tabs { flex-wrap: nowrap; overflow-x: auto; margin: 0 -20px 24px; padding: 0 20px 6px; scrollbar-width: none; }
+    .tabs::-webkit-scrollbar { display: none; }
+    .tab { flex-shrink: 0; }
     .rating { grid-template-columns: 1fr; gap: 10px; padding: 28px; text-align: center; }
     .rating .big { font-size: 96px; }
     section { padding: 64px 0; }
@@ -225,8 +230,8 @@
 
 <div class="strip" aria-hidden="true">
   <div class="track">
-    <span>Street Beef</span><span>★</span><span>Beef</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
-    <span>Street Beef</span><span>★</span><span>Beef</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
+    <span>Street Beef</span><span>★</span><span>A la brasa</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
+    <span>Street Beef</span><span>★</span><span>A la brasa</span><span>★</span><span>Terraza</span><span>★</span><span>Málaga</span><span>★</span><span>Street food</span><span>★</span>
   </div>
 </div>
 
@@ -236,7 +241,8 @@
       <div class="kicker">Nosotros</div>
       <h2 class="display" style="font-size:clamp(44px,6vw,72px);margin:0 0 20px">Sabor de <span style="color:var(--ink)">calle</span></h2>
       <p><strong>Street Beef by Nacho García</strong> es el bar restaurante en la Avenida Jane Bowles, junto al Parque Periurbano La Virreina.</p>
-      <p class="todo">[Aquí va la historia del restaurante: cómo empezó, qué tipo de cocina hacéis y qué os hace diferentes.]</p>
+      <p>Carnes a la brasa por peso (chuletón de vaca rubia gallega, entrecot madurado 21 días, tomahawk, T-bone…), tapas, sartenás, tostas y platos orientales como el pan bao o el tataki de ternera.</p>
+      <p class="todo">[Opcional: la historia del restaurante y de Nacho García.]</p>
     </div>
     <div class="ph">
       <div>
@@ -254,33 +260,120 @@
       <a class="btn fire sm" href="https://cartadigital.barmanagerapp.com/site/index/show/STREETTAPAS" target="_blank" rel="noopener">Ver la carta digital completa</a>
     </div>
     <div class="tabs" role="tablist" aria-label="Secciones de la carta">
-      <button class="tab" role="tab" aria-selected="true" aria-controls="p-tapas" id="t-tapas">Entrantes</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-beef" id="t-beef">Beef</button>
-      <button class="tab" role="tab" aria-selected="false" aria-controls="p-postres" id="t-postres">Postres</button>
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p-sug" id="t-sug">Sugerencias del chef</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-tapeo" id="t-tapeo">De tapeo</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-huerto" id="t-huerto">Del huerto</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-entrantes" id="t-entrantes">Entrantes</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-sartena" id="t-sartena">Sartená</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-oriental" id="t-oriental">Orientales</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-brasa" id="t-brasa">A la brasa</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-tostas" id="t-tostas">Tostas</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p-peques" id="t-peques">Peques</button>
       <button class="tab" role="tab" aria-selected="false" aria-controls="p-bebidas" id="t-bebidas">Bebidas</button>
     </div>
-    <div class="panel" role="tabpanel" id="p-tapas" aria-labelledby="t-tapas">
-      <div class="dish"><div><h3>[Entrante 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Entrante 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Entrante 3]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Entrante 4]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    <div class="panel" role="tabpanel" id="p-sug" aria-labelledby="t-sug">
+      <div class="dish"><div><h3>Anchoas del Cantábrico en mantequilla</h3><p>De 12 a 15 filetes de anchoa</p></div><div class="price">22,50 €</div></div>
+      <div class="dish"><div><h3>Croquetas de chuletón gallego</h3><p>Seis unidades</p></div><div class="price">13,50 €</div></div>
+      <div class="dish"><div><h3>Hamburguesa Street</h3><p>200 g de carne de chuletón, pulled pork, cebolla caramelizada, pepinillo, cheddar y salsa emy</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Jamón ibérico de bellota</h3></div><div class="price">22,80 €</div></div>
+      <div class="dish"><div><h3>Tabla de queso curado</h3></div><div class="price">12,80 €</div></div>
+      <div class="dish"><div><h3>Cecina de vaca gallega</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Aleyei</h3><p>El típico flamenquín, pero XXL</p></div><div class="price">15 €</div></div>
     </div>
-    <div class="panel" role="tabpanel" id="p-beef" aria-labelledby="t-beef" hidden>
-      <div class="dish"><div><h3>[Plato de carne 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Plato de carne 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Plato de carne 3]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Plato de carne 4]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    <div class="panel" role="tabpanel" id="p-tapeo" aria-labelledby="t-tapeo" hidden>
+      <div class="dish"><div><h3>Bollito Street</h3><p>Carrillada en salsa</p></div><div class="price">5 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Bollito Borodin</h3><p>Hamburguesitas o cresta</p></div><div class="price">4 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Camperito Bruckner</h3><p>Jamón cocido, queso, lechuga y mayonesa</p></div><div class="price">4 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Ensaladilla Alejandro Pushkin</h3><p>Ensaladilla rusa</p></div><div class="price">3,50 €<small>Media 6,50 €</small></div></div>
+      <div class="dish"><div><h3>Albóndigas Gounod</h3><p>Albóndigas con salsa de almendras</p></div><div class="price">4 €<small>Media 6,50 €</small></div></div>
+      <div class="dish"><div><h3>Solomillo Benjamin Britten</h3><p>Magro con fritada de tomate casero</p></div><div class="price">4 €<small>Media 6,50 €</small></div></div>
+      <div class="dish"><div><h3>Pincho de langostino</h3><p>Solo en verano</p></div><div class="price">4 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Pollo tikka masala</h3></div><div class="price">4 €<small>Media 7 €</small></div></div>
+      <div class="dish"><div><h3>Patatas bravas</h3></div><div class="price">3,50 €<small>Media 6,50 €</small></div></div>
+      <div class="dish"><div><h3>Torreznos de Soria</h3></div><div class="price">6,50 €</div></div>
+      <div class="dish"><div><h3>Taco mexicano</h3><p>Por unidades</p></div><div class="price">5 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Flor de alcachofa gratinada</h3><p>Con portobello y cecina</p></div><div class="price">4 €<small>Unidad</small></div></div>
     </div>
-    <div class="panel" role="tabpanel" id="p-postres" aria-labelledby="t-postres" hidden>
-      <div class="dish"><div><h3>[Postre 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Postre 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+    <div class="panel" role="tabpanel" id="p-huerto" aria-labelledby="t-huerto" hidden>
+      <div class="dish"><div><h3>Ensalada mixta</h3><p>Cebolla, tomate, atún, maíz y zanahoria</p></div><div class="price">9 €</div></div>
+      <div class="dish"><div><h3>Ensalada frutos del bosque</h3><p>Bolitas de queso de cabra con membrillo, frutos del bosque, cebolla caramelizada y balsámico de frutos del bosque</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Ensalada César</h3><p>Pollo crujiente, tomates cherry, picatostes, nueces y parmesano</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Ensalada Street</h3><p>Quinoa, queso feta, aceitunas negras, tomate cherry, nueces y brotes frescos</p></div><div class="price">10 €</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-entrantes" aria-labelledby="t-entrantes" hidden>
+      <div class="dish"><div><h3>Lagrimitas de pollo</h3><p>Con patatas y 5 salsas</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Flamenquín de pollo con patatas</h3><p>Con pollo, cebolla caramelizada y queso de cabra</p></div><div class="price">9,50 €</div></div>
+      <div class="dish"><div><h3>Surtido de croquetas</h3><p>4 / 8 unidades</p></div><div class="price">5,90 €<small>Media 10 €</small></div></div>
+      <div class="dish"><div><h3>Tartar de salchichón de Málaga</h3><p>Pasas, sésamo, pipas, cebollino, cebolla roja, alcaparras, mostaza y alioli</p></div><div class="price">9,90 €</div></div>
+      <div class="dish"><div><h3>Nachos</h3><p>Con carne, guacamole, salsa de queso, jalapeños y verduras</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Filetitos Street</h3><p>Lomo, huevo de codorniz y alioli · 4 / 6 unidades</p></div><div class="price">7 €<small>Media 8,50 €</small></div></div>
+      <div class="dish"><div><h3>Gambas al pil-pil a la crema</h3><p>10 unidades</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Patatas con bacon y queso</h3></div><div class="price">10,50 €</div></div>
+      <div class="dish"><div><h3>Patatas fritas</h3></div><div class="price">3,90 €</div></div>
+      <div class="dish"><div><h3>Pata de pulpo a la brasa</h3><p>Puede variar según precio de mercado</p></div><div class="price">25 €</div></div>
+      <div class="dish"><div><h3>Colas de tigre a la gabardina</h3></div><div class="price">9,50 €</div></div>
+      <div class="dish"><div><h3>Tequeños</h3></div><div class="price">7 €</div></div>
+      <div class="dish"><div><h3>Extra de salsas</h3><p>Kétchup, mayonesa…</p></div><div class="price">1 €</div></div>
+      <div class="dish"><div><h3>Pan o bolsa de picos</h3></div><div class="price">0,80 €<small>Unidad</small></div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-sartena" aria-labelledby="t-sartena" hidden>
+      <div class="dish"><div><h3>Montañez</h3><p>Patatas, chistorra, pimiento y huevo</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Secreta</h3><p>Patatas, secreto ibérico, cebolla rehogada y huevo</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Marinera</h3><p>Patatas, gulas, gambas y huevo</p></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Carrillada</h3><p>Patatas, huevo y carrillada</p></div><div class="price">15 €</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-oriental" aria-labelledby="t-oriental" hidden>
+      <div class="dish"><div><h3>Pan bao de pato confitado</h3><p>Con reducción de carne y rúcula</p></div><div class="price">5 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Pan bao de calamares</h3><p>Al pil-pil, con rúcula y alioli</p></div><div class="price">5 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Pan mantou</h3></div><div class="price">4,50 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Gyozas de pollo o ternera</h3></div><div class="price">1,90 €<small>Unidad</small></div></div>
+      <div class="dish"><div><h3>Tataki de ternera</h3></div><div class="price">20 €</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-brasa" aria-labelledby="t-brasa" hidden>
+      <div class="dish"><div><h3>Solomillo de cerdo</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Secreto ibérico</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Presa ibérica</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Brocheta de solomillo</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Brocheta de pollo</h3></div><div class="price">15 €</div></div>
+      <div class="dish"><div><h3>Mogote ibérico</h3></div><div class="price">S/M<small>Según mercado</small></div></div>
+      <div class="dish"><div><h3>Tomahawk</h3><p>Según precio de mercado</p></div><div class="price">9,50 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>T-Bone</h3><p>Según precio de mercado</p></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Flap meat uruguayo</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Entrecot de lomo alto</h3><p>Maduración mínima de 21 días</p></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Entrecot de lomo bajo</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Lomo bajo premium</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Chuletón de frisona</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Chuletón de vaca rubia gallega</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Chuletón de añojo sin hueso</h3></div><div class="price">9 €<small>100 g</small></div></div>
+      <div class="dish"><div><h3>Cube roll argentino</h3></div><div class="price">9 €<small>100 g</small></div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-tostas" aria-labelledby="t-tostas" hidden>
+      <div class="dish"><div><h3>Street</h3><p>Queso de cabra, cebolla caramelizada, nueces y salsa de frutos del bosque</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Cabina</h3><p>Sobrasada ibérica, filete de pata, mozzarella gratinada y cebolla crujiente</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Señal</h3><p>Morcilla, queso de cabra y cebolla caramelizada</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Criss</h3><p>Queso de cabra, bacon y huevo de codorniz</p></div><div class="price">10 €</div></div>
+      <div class="dish"><div><h3>Tosta del chef</h3><p>Pesto, pastrami, tomate seco, mozzarella fresca y tartufata</p></div><div class="price">10 €</div></div>
+    </div>
+    <div class="panel" role="tabpanel" id="p-peques" aria-labelledby="t-peques" hidden>
+      <div class="dish"><div><h3>Nuggets de pollo con patatas fritas</h3><p>6 unidades</p></div><div class="price">6,60 €</div></div>
+      <div class="dish"><div><h3>San Jacobo casero con patatas fritas</h3></div><div class="price">6,60 €</div></div>
+      <div class="dish"><div><h3>Filete de pollo empanado con patatas fritas</h3></div><div class="price">6,60 €</div></div>
+      <div class="dish"><div><h3>Croquetas peque con patatas fritas</h3></div><div class="price">6,60 €</div></div>
     </div>
     <div class="panel" role="tabpanel" id="p-bebidas" aria-labelledby="t-bebidas" hidden>
-      <div class="dish"><div><h3>[Bebida 1]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
-      <div class="dish"><div><h3>[Bebida 2]</h3><p>[Descripción breve]</p></div><div class="price">[0,00 €]</div></div>
+      <div class="dish"><div><h3>Cerveza Estrella 1906</h3></div><div class="price">3,50 €</div></div>
+      <div class="dish"><div><h3>Cerveza Alhambra</h3></div><div class="price">3,50 €</div></div>
+      <div class="dish"><div><h3>Cerveza Águila sin filtrar</h3></div><div class="price">3,10 €</div></div>
+      <div class="dish"><div><h3>Vermut</h3></div><div class="price">5 €</div></div>
+      <div class="dish"><div><h3>Refrescos</h3></div><div class="price">2,10 €</div></div>
+      <div class="dish"><div><h3>Zumos</h3></div><div class="price">2,50 €</div></div>
+      <div class="dish"><div><h3>Lipton, Aquarade o tónica</h3></div><div class="price">2,30 €</div></div>
+      <div class="dish"><div><h3>Lipton maracuyá y mango</h3></div><div class="price">2,30 €</div></div>
+      <div class="dish"><div><h3>Agua Fuente Liviana</h3><p>50 cl</p></div><div class="price">2 €</div></div>
+      <div class="dish"><div><h3>Agua con gas</h3><p>50 cl</p></div><div class="price">2,50 €</div></div>
     </div>
     <div class="menu-note">
-      <span>Consulta todos los platos, precios y alérgenos en nuestra carta digital.</span>
+      <span>Nuestros platos pueden contener alérgenos: pregunta al camarero por la carta de alérgenos. Los precios pueden cambiar; la carta digital siempre está al día.</span>
       <a class="btn ghost sm" href="https://cartadigital.barmanagerapp.com/site/index/show/STREETTAPAS" target="_blank" rel="noopener">Abrir la carta</a>
     </div>
   </div>
