@@ -3,20 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Street Tapas · Street Beef</title>
+<title>Street Beef · Street Tapas</title>
+<link rel="icon" href="logo.png">
 <meta name="description" content="Street Tapas, Street Beef by Nacho García. Bar restaurante con terraza en Palma-Palmilla, Málaga.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Inter:wght@400;500;600;700&display=swap">
 <style>
   :root {
-    --bg: #111010;
-    --bg2: #1B1918;
-    --card: #232120;
-    --line: #3A3634;
+    --bg: #161616;
+    --bg2: #202020;
+    --card: #2A2A2A;
+    --line: #3E3E3E;
     --ink: #F6F1EA;
     --muted: #B9B0A6;
-    --fire: #FF5A1F;
-    --mustard: #FFC23D;
+    --fire: #F2D21B;
+    --mustard: #F2D21B;
+    --red: #E0262F;
     --radius: 18px;
   }
   * { box-sizing: border-box; }
@@ -25,19 +27,20 @@
   a { color: inherit; }
   img { max-width: 100%; display: block; }
   .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-  .display { font-family: 'Anton', Impact, sans-serif; text-transform: uppercase; letter-spacing: .5px; line-height: .95; font-weight: 400; }
+  .display { font-family: 'Bangers', Impact, sans-serif; text-transform: uppercase; letter-spacing: 1.5px; line-height: .95; font-weight: 400; color: var(--fire); text-shadow: 3px 3px 0 #000; }
+  .marker { font-family: 'Permanent Marker', cursive; color: var(--red); text-transform: none; letter-spacing: 0; }
 
   /* NAV */
   nav { position: sticky; top: 0; z-index: 20; background: rgba(17,16,16,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
   nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 68px; }
-  .logo { text-decoration: none; display: flex; align-items: baseline; gap: 8px; font-size: 22px; }
-  .logo span { color: var(--fire); }
+  .logo { text-decoration: none; display: flex; align-items: center; gap: 12px; font-size: 26px; }
+  .logo img { width: 48px; height: 48px; }
   .links { display: flex; gap: 26px; align-items: center; }
   .links a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 15px; }
   .links a:hover { color: var(--ink); }
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 0 24px; border-radius: 40px; font-weight: 700; font-size: 16px; text-decoration: none; border: 2px solid transparent; transition: transform .15s, background .15s; }
   .btn:hover { transform: translateY(-2px); }
-  .btn.fire { background: var(--fire); color: #140A05; }
+  .btn.fire { background: var(--fire); color: #111; }
   .btn.ghost { border-color: var(--ink); color: var(--ink); }
   .btn.sm { min-height: 44px; padding: 0 18px; font-size: 15px; }
   .btn svg { width: 18px; height: 18px; }
@@ -45,14 +48,14 @@
   /* HERO */
   .hero { position: relative; overflow: hidden; padding: 90px 0 80px; }
   .hero::before { content: ""; position: absolute; inset: 0; background:
-      radial-gradient(600px 400px at 85% 20%, rgba(255,90,31,.28), transparent 70%),
+      radial-gradient(600px 400px at 85% 20%, rgba(224,38,47,.22), transparent 70%),
       repeating-linear-gradient(135deg, rgba(255,255,255,.025) 0 2px, transparent 2px 14px); }
   .hero .wrap { position: relative; display: grid; grid-template-columns: 1.3fr 1fr; gap: 40px; align-items: center; }
-  .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--mustard); font-weight: 700; letter-spacing: 2px; font-size: 13px; text-transform: uppercase; margin-bottom: 18px; }
-  .kicker::before { content: ""; width: 34px; height: 3px; background: var(--mustard); }
+  .kicker { display: inline-flex; gap: 10px; align-items: center; color: var(--red); font-weight: 700; letter-spacing: 2px; font-size: 13px; text-transform: uppercase; margin-bottom: 18px; }
+  .kicker::before { content: ""; width: 34px; height: 3px; background: var(--red); }
   .hero h1 { font-size: clamp(58px, 10vw, 128px); margin: 0; }
-  .hero h1 .o { color: var(--fire); display: block; }
-  .hero h1 small { display: block; font-family: 'Inter', sans-serif; text-transform: none; font-size: 20px; letter-spacing: 0; color: var(--muted); font-weight: 500; margin-top: 18px; }
+  .hero h1 .o { color: var(--ink); display: block; }
+  .hero h1 small { display: block; font-size: 30px; margin-top: 14px; text-shadow: none; }
   .hero p.lead { font-size: 19px; color: var(--muted); max-width: 520px; margin: 22px 0 30px; }
   .cta { display: flex; flex-wrap: wrap; gap: 12px; }
   .stats { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
@@ -60,14 +63,15 @@
   .chip b { color: var(--mustard); }
   .stars { color: var(--mustard); letter-spacing: 2px; }
 
-  .badge { aspect-ratio: 1; border-radius: 50%; background: var(--fire); color: #140A05; display: grid; place-items: center; text-align: center; padding: 14%; transform: rotate(-8deg); box-shadow: 0 0 0 10px var(--bg), 0 0 0 12px var(--fire); max-width: 400px; justify-self: center; width: 100%; }
-  .badge .display { font-size: clamp(38px, 5.2vw, 64px); }
-  .badge .small { font-weight: 700; letter-spacing: 3px; font-size: 13px; text-transform: uppercase; margin-top: 10px; }
+  .hero-logo { justify-self: center; width: 100%; max-width: 320px; position: relative; }
+  .hero-logo img { width: 100%; height: auto; border-radius: 50%; box-shadow: 0 0 0 8px var(--bg), 0 0 0 11px var(--fire), 0 30px 60px rgba(0,0,0,.6); }
+  .hero-logo .open { position: absolute; right: -24px; top: 2%; background: var(--red); color: #fff; font-family: 'Bangers', Impact, sans-serif; font-size: 24px; letter-spacing: 1.5px; padding: 8px 18px; border-radius: 40px; transform: rotate(8deg); }
 
   /* MARQUEE */
-  .strip { background: var(--mustard); color: #140A05; overflow: hidden; white-space: nowrap; padding: 14px 0; }
-  .strip .track { display: inline-block; animation: slide 28s linear infinite; font-family: 'Anton', Impact, sans-serif; font-size: 26px; text-transform: uppercase; }
+  .strip { background: var(--fire); color: #111; overflow: hidden; white-space: nowrap; padding: 14px 0; }
+  .strip .track { display: inline-block; animation: slide 28s linear infinite; font-family: 'Bangers', Impact, sans-serif; font-size: 26px; text-transform: uppercase; }
   .strip .track span { margin: 0 22px; }
+  .strip .track span:nth-child(even) { color: var(--red); }
   @keyframes slide { to { transform: translateX(-50%); } }
   @media (prefers-reduced-motion: reduce) { .strip .track { animation: none; } .btn:hover { transform: none; } }
 
@@ -76,7 +80,7 @@
   .alt { background: var(--bg2); }
   .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 40px; }
   .head h2 { font-size: clamp(44px, 6vw, 72px); margin: 0; }
-  .head h2 span { color: var(--fire); }
+  .head h2 span { color: var(--ink); }
   .head p { color: var(--muted); max-width: 420px; margin: 0; }
 
   /* ABOUT */
@@ -84,7 +88,7 @@
   .about p { color: var(--muted); font-size: 18px; }
   .about p strong { color: var(--ink); }
   .ph { border: 2px dashed var(--line); border-radius: var(--radius); background: var(--card); display: grid; place-items: center; text-align: center; color: var(--muted); font-size: 14px; padding: 20px; min-height: 300px; }
-  .ph svg { width: 40px; height: 40px; margin: 0 auto 10px; color: var(--fire); }
+  .ph svg { width: 40px; height: 40px; margin: 0 auto 10px; color: var(--red); }
   .todo { color: var(--mustard); font-weight: 600; }
 
   /* MENU */
@@ -96,12 +100,12 @@
   .dish { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; display: flex; justify-content: space-between; gap: 16px; }
   .dish h3 { margin: 0 0 4px; font-size: 18px; }
   .dish p { margin: 0; color: var(--muted); font-size: 15px; }
-  .price { font-family: 'Anton', Impact, sans-serif; font-size: 22px; color: var(--mustard); white-space: nowrap; }
+  .price { font-family: 'Bangers', Impact, sans-serif; font-size: 22px; color: var(--mustard); white-space: nowrap; }
   .menu-note { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; color: var(--muted); }
 
   /* REVIEWS */
   .rating { display: grid; grid-template-columns: auto 1fr; gap: 40px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 40px; }
-  .rating .big { font-family: 'Anton', Impact, sans-serif; font-size: 120px; line-height: .9; color: var(--mustard); }
+  .rating .big { font-family: 'Bangers', Impact, sans-serif; font-size: 120px; line-height: .9; color: var(--mustard); }
   .rating .stars { font-size: 28px; }
   .rating p { color: var(--muted); margin: 8px 0 20px; font-size: 18px; }
 
@@ -109,7 +113,7 @@
   .visit { display: grid; grid-template-columns: 1fr 1.2fr; gap: 24px; }
   .info { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 30px; display: flex; flex-direction: column; gap: 22px; }
   .row { display: flex; gap: 16px; }
-  .row svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--fire); margin-top: 2px; }
+  .row svg { flex-shrink: 0; width: 24px; height: 24px; color: var(--red); margin-top: 2px; }
   .row h3 { margin: 0 0 2px; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
   .row p { margin: 0; font-size: 17px; }
   .row a { text-decoration-color: var(--fire); text-underline-offset: 3px; }
@@ -125,7 +129,7 @@
     .links a:not(.btn) { display: none; }
     .hero { padding: 56px 0 60px; }
     .hero .wrap, .about, .visit { grid-template-columns: 1fr; }
-    .badge { max-width: 260px; }
+    .hero-logo { max-width: 280px; }
     .panel { grid-template-columns: 1fr; }
     .rating { grid-template-columns: 1fr; gap: 10px; padding: 28px; text-align: center; }
     .rating .big { font-size: 96px; }
@@ -138,7 +142,7 @@
 
 <nav aria-label="Principal">
   <div class="wrap">
-    <a class="logo display" href="#inicio">Street <span>Tapas</span></a>
+    <a class="logo display" href="#inicio"><img src="logo.png" alt="" width="48" height="48">Street Beef</a>
     <div class="links">
       <a href="#nosotros">Nosotros</a>
       <a href="#carta">Carta</a>
@@ -153,7 +157,7 @@
   <div class="wrap">
     <div>
       <div class="kicker">Bar restaurante · Málaga</div>
-      <h1 class="display">Street Tapas<span class="o">Street Beef</span><small>by Nacho García</small></h1>
+      <h1 class="display">Street Tapas<span class="o">Street Beef</span><small class="marker">by Nacho García</small></h1>
       <p class="lead">Tapas y carne con actitud de calle, en Palma-Palmilla. Ven a cenar o a tomar algo en nuestra terraza.</p>
       <div class="cta">
         <a class="btn fire" href="tel:+34744704232">
@@ -168,11 +172,9 @@
         <div class="chip">Terraza</div>
       </div>
     </div>
-    <div class="badge" aria-hidden="true">
-      <div>
-        <div class="display">Abrimos<br>a las 20:00</div>
-        <div class="small">Palma-Palmilla</div>
-      </div>
+    <div class="hero-logo">
+      <img src="logo.png" alt="Logo de Street Beef by Nacho García" width="532" height="532">
+      <div class="open">Abrimos a las 20:00</div>
     </div>
   </div>
 </header>
@@ -188,7 +190,7 @@
   <div class="wrap about">
     <div>
       <div class="kicker">Nosotros</div>
-      <h2 class="display" style="font-size:clamp(44px,6vw,72px);margin:0 0 20px">Sabor de <span style="color:var(--fire)">calle</span></h2>
+      <h2 class="display" style="font-size:clamp(44px,6vw,72px);margin:0 0 20px">Sabor de <span style="color:var(--ink)">calle</span></h2>
       <p><strong>Street Tapas, Street Beef</strong> es el bar restaurante de <strong>Nacho García</strong> en la Avenida Jane Bowles, junto al Parque Periurbano La Virreina.</p>
       <p class="todo">[Aquí va la historia del restaurante: cómo empezó, qué tipo de cocina hacéis y qué os hace diferentes.]</p>
     </div>
@@ -292,7 +294,7 @@
 
 <footer>
   <div class="wrap">
-    <span class="display" style="font-size:20px;color:var(--ink)">Street Tapas · <span style="color:var(--fire)">Street Beef</span></span>
+    <span class="logo display" style="font-size:22px"><img src="logo.png" alt="" width="40" height="40" style="width:40px;height:40px">Street Beef <span class="marker" style="font-size:16px">by Nacho García</span></span>
     <span>Av. Jane Bowles, 17 · 29011 Málaga · 744 70 42 32</span>
   </div>
 </footer>
