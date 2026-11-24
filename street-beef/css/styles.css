@@ -399,25 +399,101 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 .note__foot { margin: 20px 0 0; font: 400 19px/1 var(--font-hand); color: var(--ink-soft); transform: rotate(-1.5deg); }
 .sugg.is-empty .note__list { display: none; }
 
-/* ---------- Elige tu corte: etiquetas + ticket de báscula ---------- */
+/* ---------- Elige tu corte: cámara de maduración en 3D + ticket ---------- */
 .cortes { background: var(--fibers), var(--kraft); position: relative; }
 .cortes .section__sub { color: #3b3026; }
-.grill { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .9fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
-.grill__list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.cut {
-  position: relative; display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; text-align: left; cursor: pointer;
-  padding: 14px 16px 14px 34px; font: inherit; color: var(--bone); background: var(--ink); border: 0;
-  clip-path: polygon(14px 0, 100% 0, 100% 100%, 14px 100%, 0 50%);   /* etiqueta de precio */
-  transition: transform .15s ease, background-color .2s ease;
+.grill { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: clamp(28px, 5vw, 64px); align-items: start; }
+
+/* La cámara */
+.aging { display: flex; justify-content: center; }
+.cab { position: relative; width: min(100%, 480px); perspective: 1800px; padding-right: 40px; }
+.cab__body {
+  position: relative; aspect-ratio: 480 / 740; transform-style: preserve-3d; transform: rotateY(-13deg) rotateX(2deg);
+  background: linear-gradient(100deg, #2b2a29, #3d3b39 18%, #1f1e1d 45%, #34322f 80%, #222120); border-radius: 12px;
+  box-shadow: inset 0 0 0 2px #4a4744, inset 0 2px 0 #6b6662, 0 40px 60px -30px rgba(0,0,0,.7);
 }
-.cut::before { content: ""; position: absolute; left: 14px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--kraft); }
-.cut:hover { transform: translateX(3px); }
-.cut__name { font: 800 19px/1.05 var(--font-display); letter-spacing: .03em; text-transform: uppercase; }
-.cut__origin { grid-column: 1; font: 400 11px/1.2 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: #b8ad9f; }
-.cut__price { grid-column: 2; grid-row: 1 / 3; font: 700 15px/1 var(--font-mono); color: var(--kraft); white-space: nowrap; }
-.cut__price small { font-size: 10px; opacity: .8; margin-left: 2px; }
-.cut[aria-checked="true"] { background: var(--red); }
-.cut[aria-checked="true"] .cut__origin, .cut[aria-checked="true"] .cut__price { color: #fff; }
+.cab__side {   /* lateral derecho: da el volumen */
+  position: absolute; top: 0; left: 100%; width: 60px; height: 100%; transform-origin: 0 50%; transform: rotateY(90deg);
+  background: linear-gradient(90deg, #262524, #121111); border-radius: 0 10px 10px 0;
+}
+.cab__top { position: absolute; left: 0; right: 0; top: 0; height: 64px; display: flex; align-items: center; justify-content: center; }
+.cab__badge { font: 700 12px/1 var(--font-mono); letter-spacing: .32em; text-transform: uppercase; color: #ff5a44;
+  text-shadow: 0 0 8px rgba(255,60,40,.8); padding: 7px 14px; border: 1px solid rgba(255,80,60,.5); border-radius: 3px; background: #0d0c0c; }
+.cab__inside, .cab__door { position: absolute; top: 64px; left: 16px; right: 16px; bottom: 16px; border-radius: 6px; }
+.cab__inside { overflow: hidden; background: #2a120b; box-shadow: inset 0 0 0 3px #111, inset 0 18px 30px rgba(0,0,0,.6), inset 22px 0 30px rgba(0,0,0,.55), inset -22px 0 30px rgba(0,0,0,.55); }
+.cab__salt { position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='48'%3E%3Crect width='120' height='48' fill='%237a3420'/%3E%3Crect x='1' y='1' width='38' height='14' rx='2' fill='%23efa07a'/%3E%3Crect x='41' y='1' width='38' height='14' rx='2' fill='%23f3aa84'/%3E%3Crect x='81' y='1' width='38' height='14' rx='2' fill='%23f3aa84'/%3E%3Crect x='-19' y='17' width='38' height='14' rx='2' fill='%23efa07a'/%3E%3Crect x='101' y='17' width='38' height='14' rx='2' fill='%23efa07a'/%3E%3Crect x='21' y='17' width='38' height='14' rx='2' fill='%23f8c39e'/%3E%3Crect x='61' y='17' width='38' height='14' rx='2' fill='%23f3aa84'/%3E%3Crect x='101' y='17' width='38' height='14' rx='2' fill='%23e98d68'/%3E%3Crect x='1' y='33' width='38' height='14' rx='2' fill='%23fbd0ae'/%3E%3Crect x='41' y='33' width='38' height='14' rx='2' fill='%23f3aa84'/%3E%3Crect x='81' y='33' width='38' height='14' rx='2' fill='%23f6b48c'/%3E%3C/svg%3E") 0 0 / 90px 36px;
+  filter: brightness(.95) saturate(1.1); }
+.cab__salt::after { content: ""; position: absolute; inset: 0;   /* luz que sale de detrás de la sal */
+  background: radial-gradient(ellipse 60% 50% at 50% 38%, rgba(255,190,130,.3), transparent 70%), radial-gradient(ellipse 90% 85% at 50% 45%, transparent 50%, rgba(30,6,2,.7)), linear-gradient(180deg, rgba(0,0,0,.05), rgba(40,10,5,.4));
+}
+.cab__led { position: absolute; left: 6%; right: 6%; top: 8px; height: 5px; border-radius: 3px; background: #fff8ea;
+  box-shadow: 0 0 10px 3px rgba(255,240,210,.9), 0 0 40px 10px rgba(255,220,170,.35); }
+.cab__led::after { content: ""; position: absolute; left: -10%; right: -10%; top: 4px; height: 220px;
+  background: linear-gradient(180deg, rgba(255,240,215,.28), transparent); clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%); }
+.cab__hang { position: absolute; top: 18px; width: 40%; height: auto; filter: drop-shadow(0 10px 12px rgba(0,0,0,.6)) brightness(.95); }
+.cab__hang--l { left: 6%; transform: rotate(-4deg); }
+.cab__hang--r { right: 5%; transform: rotate(5deg) scaleX(-1); }
+.cab__hang::before { content: ""; }
+
+/* Baldas con los cortes */
+.cab__shelves { position: absolute; left: 6%; right: 6%; top: 30%; bottom: 3%; display: flex; flex-direction: column; justify-content: space-between; }
+.shelf { position: relative; display: flex; align-items: flex-end; justify-content: center; gap: 4%; padding: 0 2% 12px; }
+.shelf__rack { position: absolute; left: -4%; right: -4%; bottom: 0; height: 12px; border-radius: 2px;
+  background: linear-gradient(180deg, #f2f0ec 0 2px, #9c9893 2px 4px, transparent 4px), repeating-linear-gradient(90deg, #c9c5bf 0 2px, transparent 2px 9px);
+  box-shadow: 0 6px 10px rgba(0,0,0,.45); }
+.cut { position: relative; flex: 0 1 22%; padding: 0; border: 0; background: none; cursor: pointer; font: inherit; color: inherit;
+  transition: transform .25s ease, filter .25s ease; }
+.cut__img { display: block; aspect-ratio: 4 / 3; border-radius: 5px; overflow: hidden; background: #3a1a10;
+  box-shadow: 0 6px 10px rgba(0,0,0,.55), 0 0 0 1px rgba(0,0,0,.4); }
+.cut__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.cut__tag {   /* etiqueta de carnicero colgando de la pieza */
+  position: absolute; left: 6%; bottom: -6px; display: flex; flex-direction: column; gap: 1px; padding: 3px 6px 3px 12px;
+  background: #f3e9d2; color: #1b1512; transform: rotate(-5deg); box-shadow: 0 2px 4px rgba(0,0,0,.45);
+  clip-path: polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%); font-family: var(--font-mono); white-space: nowrap; }
+.cut__tag b { font-size: 9px; line-height: 1.1; text-transform: uppercase; letter-spacing: .02em; }
+.cut__tag small { font-size: 8px; color: var(--red-dark); font-weight: 700; }
+.cut:hover { transform: translateY(-3px); }
+.cut[aria-checked="true"] { transform: translateY(-6px) scale(1.08); z-index: 2; }
+.cut[aria-checked="true"] .cut__img { box-shadow: 0 0 0 2px #fff4dc, 0 0 18px 4px rgba(255,200,120,.65), 0 10px 14px rgba(0,0,0,.6); }
+.cut[aria-checked="true"] .cut__tag { background: var(--red); color: #fff; }
+.cut[aria-checked="true"] .cut__tag small { color: #ffe3dc; }
+
+/* La puerta de cristal, con bisagra a la izquierda */
+.cab__door { padding: 0; border: 12px solid #171615; cursor: pointer; transform-origin: 0 50%; transform-style: preserve-3d;
+  transform: translateZ(3px); transition: transform 1.3s cubic-bezier(.3, .7, .2, 1); background: rgba(20,8,6,.28); color: inherit; font: inherit;
+  box-shadow: inset 0 0 0 1px #3c3936, 0 0 0 1px #050505, 8px 10px 24px rgba(0,0,0,.45); }
+.cab__glass { position: absolute; inset: 0; border-radius: 2px; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255,255,255,.2), rgba(255,255,255,.04) 32%, transparent 45%, rgba(255,255,255,.07) 58%, transparent 70%);
+  -webkit-backdrop-filter: blur(1.5px) saturate(.85); backdrop-filter: blur(1.5px) saturate(.85); }
+.cab__logo { position: absolute; left: 50%; top: 14%; width: 62%; height: auto; transform: translateX(-50%); filter: drop-shadow(0 0 14px rgba(255,40,25,.55)); pointer-events: none; }
+.cab__display { position: absolute; left: 50%; bottom: 20%; transform: translateX(-50%); padding: 6px 12px; border-radius: 3px; background: #050505;
+  font: 400 12px/1 var(--font-mono); color: #9d958b; white-space: nowrap; box-shadow: inset 0 0 0 1px #2e2b28; }
+.cab__display b { color: #ff4a35; text-shadow: 0 0 6px rgba(255,60,40,.8); font-weight: 700; }
+.cab__handle { position: absolute; right: 10px; top: 30%; width: 10px; height: 30%; border-radius: 5px;
+  background: linear-gradient(90deg, #8d8983, #f4f1ec 40%, #a9a49e 60%, #6e6a65); box-shadow: 3px 3px 6px rgba(0,0,0,.6); }
+.cab__cta { position: absolute; left: 50%; bottom: 7%; transform: translateX(-50%); padding: 10px 18px; white-space: nowrap;
+  background: var(--red); color: #fff; font: 800 16px/1 var(--font-display); letter-spacing: .08em; text-transform: uppercase;
+  box-shadow: 3px 3px 0 #0d0c0c; animation: ctaPulse 2.2s ease-in-out infinite; }
+@keyframes ctaPulse { 50% { box-shadow: 3px 3px 0 #0d0c0c, 0 0 0 6px rgba(225,38,28,.25); } }
+.cab.is-open .cab__door { transform: translateZ(3px) rotateY(-98deg); }
+.cab.is-open .cab__cta { animation: none; opacity: 0; }
+.cab.is-open .cab__door:hover .cab__cta, .cab.is-open .cab__door:focus-visible .cab__cta { opacity: 1; }
+.cab:not(.is-open) .cab__shelves { pointer-events: none; }
+.cab__floor { position: absolute; left: 6%; right: 2%; bottom: -26px; height: 40px; border-radius: 50%; background: radial-gradient(ellipse, rgba(0,0,0,.45), transparent 70%); filter: blur(4px); }
+
+/* La pieza elegida, en grande */
+.pick { display: grid; gap: 22px; }
+.piece { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 6px;
+  background: radial-gradient(ellipse at 50% 45%, #3d2a1e, #1b130e 75%); box-shadow: 0 26px 40px -22px rgba(0,0,0,.7), inset 0 0 0 2px rgba(0,0,0,.4); }
+.piece img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(calc(.72 + (var(--s, .8) - .72) * 1)); transform: scale(var(--s, .8));
+  border-radius: 6px; transition: transform .35s cubic-bezier(.3, .7, .2, 1); box-shadow: 0 14px 26px rgba(0,0,0,.55); }
+.piece.is-in img { animation: pieceIn .6s cubic-bezier(.3, .7, .2, 1); }
+@keyframes pieceIn { from { opacity: 0; transform: translateY(-30px) scale(calc(var(--s, .8) * .9)); } }
+.piece figcaption { position: absolute; left: 14px; top: 14px; padding: 6px 12px 6px 18px; background: #f3e9d2; color: #1b1512;
+  font: 700 13px/1 var(--font-mono); text-transform: uppercase; transform: rotate(-3deg); clip-path: polygon(10px 0, 100% 0, 100% 100%, 10px 100%, 0 50%);
+  box-shadow: 0 3px 6px rgba(0,0,0,.4); }
+.photo-credits { margin: 34px 0 0; font: 400 10px/1.6 var(--font-mono); color: #5d4d3c; }
+.photo-credits a { color: inherit; }
 
 .ticket {
   position: sticky; top: calc(var(--header-h) + 24px);
@@ -592,9 +668,9 @@ html:not(.js) .header, .header.is-solid { background: rgba(14,13,13,.97); box-sh
 
   .dishes { grid-template-columns: minmax(0, 1fr); }
   .grill { grid-template-columns: 1fr; }
-  .grill__list { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin-inline: calc(var(--gutter) * -1); padding: 4px var(--gutter) 10px; }
-  .grill__list::-webkit-scrollbar { display: none; }
-  .cut { flex: 0 0 min(270px, 74vw); scroll-snap-align: start; }
+  .cab { width: min(100%, 420px); padding-right: 30px; }
+  .cut__tag b { font-size: 7.5px; }
+  .cut__tag small { display: none; }
   .ticket { position: relative; top: 0; transform: none; }
   .visit__grid, .reviews__inner { grid-template-columns: 1fr; }
   .reviews__inner { justify-items: center; text-align: center; }

@@ -188,18 +188,31 @@ const MENU = [
   },
 ];
 
-/* ---------- Elige tu corte (calculadora de la brasa) ----------
-   Se construye con los platos de «A la brasa» que tienen unit: '100 g'.
-   Aquí solo se añade una etiqueta corta para cada corte. */
+/* ---------- Elige tu corte: la cámara de maduración ----------
+   Los cortes y precios salen de los platos de «A la brasa» con unit: '100 g'.
+   Aquí: etiqueta corta, nota y la FOTO de cada corte.
+   Las fotos son de referencia (Flickr, licencias Creative Commons: hay que
+   mantener el crédito, se muestra bajo la cámara). Cuando haya fotos de las
+   piezas reales del local, basta con cambiar «foto» y borrar «credito». */
 const CORTES_INFO = {
-  'Entrecot de lomo alto':          { origen: 'Maduración mín. 21 días', nota: '' },
-  'Chuletón de vaca rubia gallega': { origen: 'Galicia', nota: '' },
-  'Chuletón de frisona':            { origen: 'Frisona', nota: '' },
-  'Chuletón de añojo sin hueso':    { origen: 'Añojo', nota: '' },
-  'Tomahawk':                       { origen: 'Según mercado', nota: '' },
-  'T-Bone':                         { origen: 'Según mercado', nota: '' },
-  'Entrecot de lomo bajo':          { origen: '', nota: '' },
-  'Lomo bajo premium':              { origen: 'Premium', nota: '' },
-  'Cube roll argentino':            { origen: 'Argentina', nota: '' },
-  'Flap meat uruguayo':             { origen: 'Uruguay', nota: '' },
+  "Entrecot de lomo alto": { corto: "Lomo alto", origen: "Maduración mín. 21 días", nota: '', foto: "img/cortes/entrecot-lomo-alto.webp",
+    credito: {"autor": "The Meat Case", "url": "https://www.flickr.com/photos/24152400@N08/17270109106", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Chuletón de vaca rubia gallega": { corto: "Rubia gallega", origen: "Galicia", nota: '', foto: "img/cortes/chuleton-vaca-rubia-gallega.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53504078246", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Chuletón de frisona": { corto: "Frisona", origen: "Frisona", nota: '', foto: "img/cortes/chuleton-frisona.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53504386559", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Chuletón de añojo sin hueso": { corto: "Añojo s/h", origen: "Añojo", nota: '', foto: "img/cortes/chuleton-anojo-sin-hueso.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53504077211", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Tomahawk": { corto: "Tomahawk", origen: "Según mercado", nota: '', foto: "img/cortes/tomahawk.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53704701018", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "T-Bone": { corto: "T-Bone", origen: "Según mercado", nota: '', foto: "img/cortes/t-bone.webp",
+    credito: {"autor": "goodiesfirst", "url": "https://www.flickr.com/photos/49215102@N00/7231450624", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Entrecot de lomo bajo": { corto: "Lomo bajo", origen: "", nota: '', foto: "img/cortes/entrecot-lomo-bajo.webp",
+    credito: {"autor": "bnilsen", "url": "https://www.flickr.com/photos/27127323@N00/4411810895", "licencia": "CC BY-SA 2.0", "lic": "https://creativecommons.org/licenses/by-sa/2.0/"} },
+  "Lomo bajo premium": { corto: "Lomo premium", origen: "Premium", nota: '', foto: "img/cortes/lomo-bajo-premium.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53504503200", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Cube roll argentino": { corto: "Cube roll", origen: "Argentina", nota: '', foto: "img/cortes/cube-roll-argentino.webp",
+    credito: {"autor": "ccnull.de Bilddatenbank", "url": "https://www.flickr.com/photos/115225894@N07/53655649994", "licencia": "CC BY 2.0", "lic": "https://creativecommons.org/licenses/by/2.0/"} },
+  "Flap meat uruguayo": { corto: "Flap meat", origen: "Uruguay", nota: '', foto: "img/cortes/flap-meat-uruguayo.webp",
+    credito: {"autor": "avlxyz", "url": "https://www.flickr.com/photos/10559879@N00/4105534030", "licencia": "CC BY-SA 2.0", "lic": "https://creativecommons.org/licenses/by-sa/2.0/"} },
 };

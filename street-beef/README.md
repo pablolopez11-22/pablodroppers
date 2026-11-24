@@ -18,6 +18,12 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
 - `img/letras-claro.webp` / `img/letras-oscuro.webp`: las letras del logo (cabecera, pie y ticket)
 - `img/logo-dibujo.svg`: el logo anterior (dibujo a línea) en vector
 
+## Cámara de maduración («Elige tu corte»)
+- Las fotos de los cortes (`img/cortes/`) son de referencia, de Flickr con licencias Creative Commons
+  (autores y licencias en `CORTES_INFO`, `js/menu.js`). Mientras se usen, hay que mantener los créditos
+  que salen bajo la cámara.
+- [ ] Sustituirlas por fotos de las piezas reales del local (misma proporción 4:3). Al cambiar una, borrar su `credito`.
+
 ## Pendiente
 - [ ] Fotos del local (sala, rincón motero, brasa, terraza) para «El local»
 - [x] Moto de la portada: Harley antigua dibujada (dentro de `index.html`), con el logo en el depósito y las letras en la alforja; cruza la portada sobre las llamas.

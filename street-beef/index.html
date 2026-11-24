@@ -1142,39 +1142,72 @@
         <header class="section__head reveal">
           <p class="kicker">La brasa · Al peso</p>
           <h2 class="section__title">Elige tu <em>corte</em></h2>
-          <p class="section__sub">Elige la carne y los gramos y calcula el precio antes de pedir.</p>
+          <p class="section__sub">Abre la cámara de maduración, elige tu pieza y los gramos: te decimos cuánto sale antes de pedir.</p>
         </header>
 
         <div class="grill reveal">
-          <div class="grill__list" id="cutList" role="radiogroup" aria-label="Cortes a la brasa"></div>
+          <!-- Cámara de maduración en 3D: se abre y dentro están los cortes -->
+          <div class="aging">
+            <div class="cab" id="cab">
+              <div class="cab__body">
+                <div class="cab__side" aria-hidden="true"></div>
+                <div class="cab__top" aria-hidden="true"><span class="cab__badge">Dry aged</span></div>
 
-          <div class="ticket">
-            <div class="ticket__head">
-              <img src="img/logo-sm.png" alt="" width="52" height="52">
-              <div><img class="ticket__wordmark" src="img/letras-oscuro.webp" alt="Street Beef" width="81" height="48"><span>Báscula · brasa</span></div>
-            </div>
-            <h3 class="grill__name" id="cutName"></h3>
-            <p class="grill__note" id="cutNote"></p>
-            <dl class="ticket__rows">
-              <div><dt>Nota</dt><dd id="cutOrigin"></dd></div>
-              <div><dt>Precio</dt><dd id="cutPer"></dd></div>
-            </dl>
-            <div class="grill__weight">
-              <label class="grill__label" for="cutWeight">Peso <strong id="cutGrams"></strong></label>
-              <input class="grill__range" type="range" id="cutWeight" min="300" max="1500" step="50" value="500">
-              <div class="grill__presets" id="cutPresets">
-                <button type="button" data-g="400" aria-pressed="false">400 g</button>
-                <button type="button" data-g="500" aria-pressed="false">500 g</button>
-                <button type="button" data-g="700" aria-pressed="false">700 g</button>
-                <button type="button" data-g="1000" aria-pressed="false">1 kg</button>
+                <div class="cab__inside">
+                  <div class="cab__salt" aria-hidden="true"></div>
+                  <div class="cab__led" aria-hidden="true"></div>
+                  <img class="cab__hang cab__hang--l" src="img/cortes/pieza-madurada.webp" alt="" width="520" height="366" loading="lazy">
+                  <img class="cab__hang cab__hang--r" src="img/cortes/pieza-madurada.webp" alt="" width="520" height="366" loading="lazy">
+                  <div class="cab__shelves" id="cutList" role="radiogroup" aria-label="Cortes de la cámara"></div>
+                </div>
+
+                <button class="cab__door" id="cabDoor" type="button" aria-controls="cutList" aria-expanded="false">
+                  <span class="cab__glass" aria-hidden="true"></span>
+                  <img class="cab__logo" src="img/rotulo-3d.webp" alt="" width="1280" height="1280" loading="lazy">
+                  <span class="cab__display" aria-hidden="true"><b>1,5 °C</b> · 82 % HR</span>
+                  <span class="cab__handle" aria-hidden="true"></span>
+                  <span class="cab__cta" id="cabCta">Abrir la cámara</span>
+                </button>
               </div>
+              <div class="cab__floor" aria-hidden="true"></div>
             </div>
-            <div class="grill__total" aria-live="polite"><span>Total aprox.</span><strong id="cutPrice"></strong></div>
-            <p class="grill__fine">Orientativo: cada pieza se pesa en cocina y algunos cortes van según el precio de mercado.</p>
-            <div class="barcode" aria-hidden="true"></div>
-            <a class="btn btn--gold" href="tel:+34744704232" data-reserve>Reservar mesa</a>
+          </div>
+
+          <div class="pick">
+            <figure class="piece" id="piece">
+              <img id="cutPhoto" src="img/cortes/entrecot-lomo-alto.webp" alt="" width="800" height="600">
+              <figcaption><span id="pieceTag">Tu pieza</span></figcaption>
+            </figure>
+
+            <div class="ticket">
+              <div class="ticket__head">
+                <img src="img/logo-sm.png" alt="" width="52" height="52">
+                <div><img class="ticket__wordmark" src="img/letras-oscuro.webp" alt="Street Beef" width="81" height="48"><span>Báscula · brasa</span></div>
+              </div>
+              <h3 class="grill__name" id="cutName"></h3>
+              <p class="grill__note" id="cutNote"></p>
+              <dl class="ticket__rows">
+                <div><dt>Nota</dt><dd id="cutOrigin"></dd></div>
+                <div><dt>Precio</dt><dd id="cutPer"></dd></div>
+              </dl>
+              <div class="grill__weight">
+                <label class="grill__label" for="cutWeight">Peso <strong id="cutGrams"></strong></label>
+                <input class="grill__range" type="range" id="cutWeight" min="300" max="1500" step="50" value="500">
+                <div class="grill__presets" id="cutPresets">
+                  <button type="button" data-g="400" aria-pressed="false">400 g</button>
+                  <button type="button" data-g="500" aria-pressed="false">500 g</button>
+                  <button type="button" data-g="700" aria-pressed="false">700 g</button>
+                  <button type="button" data-g="1000" aria-pressed="false">1 kg</button>
+                </div>
+              </div>
+              <div class="grill__total" aria-live="polite"><span>Total aprox.</span><strong id="cutPrice"></strong></div>
+              <p class="grill__fine">Orientativo: cada pieza se pesa en cocina y algunos cortes van según el precio de mercado.</p>
+              <div class="barcode" aria-hidden="true"></div>
+              <a class="btn btn--gold" href="tel:+34744704232" data-reserve>Reservar mesa</a>
+            </div>
           </div>
         </div>
+        <p class="photo-credits" id="cutCredits"></p>
       </div>
     </section>
 
