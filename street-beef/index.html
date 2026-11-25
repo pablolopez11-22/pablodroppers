@@ -20,7 +20,7 @@
   <link rel="apple-touch-icon" href="img/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Barlow:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
   <script>
     /* Pantallas grandes (4K, monitores anchos): la web se escala para verse
        igual que en un portátil, en lugar de quedarse pequeña en el centro. */
@@ -961,6 +961,15 @@
               <span class="sr-only">Buscar en la carta</span>
               <input type="search" id="menuSearch" placeholder="Busca: chuletón, croquetas, bao…" autocomplete="off">
             </label>
+
+            <details class="allergen-filter" id="allergenFilter">
+              <summary>Alérgenos <span class="count" id="allergenCount" hidden></span></summary>
+              <div class="allergen-filter__panel">
+                <p>Ocultar platos que contengan:</p>
+                <div class="allergen-filter__list" id="allergenList"></div>
+                <p class="allergen-filter__warn">Orientativo. Ante cualquier alergia o intolerancia, consulta siempre al personal: algunos productos pueden contener trazas.</p>
+              </div>
+            </details>
           </div>
         </div>
 

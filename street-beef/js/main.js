@@ -45,7 +45,7 @@ document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && nav.clas
 /* =========================================================
    CARTA
    ========================================================= */
-const menuState = { tab: MENU[0].id, query: '' };
+const menuState = { tab: MENU[0].id, query: '', exclude: new Set() };
 const tabsEl = $('#tabs');
 const panelsEl = $('#menuPanels');
 const statusEl = $('#menuStatus');
@@ -71,6 +71,26 @@ MENU.forEach((cat, i) => {
   tabsEl.append(b);
 });
 
+// Filtro de alérgenos: «ocultar platos que contengan…»
+const allergenList = $('#allergenList');
+Object.entries(ALLERGENS).forEach(([key, label]) => {
+  const wrap = document.createElement('label');
+  wrap.className = 'check';
+  wrap.innerHTML = `<input type="checkbox" value="${key}"><span>${esc(label)}</span>`;
+  wrap.querySelector('input').addEventListener('change', (e) => {
+    e.target.checked ? menuState.exclude.add(key) : menuState.exclude.delete(key);
+    const n = menuState.exclude.size, count = $('#allergenCount');
+    count.hidden = !n; count.textContent = n;
+    renderMenu();
+  });
+  allergenList.append(wrap);
+});
+// Cerrar el panel de alérgenos al pulsar fuera
+document.addEventListener('click', (e) => {
+  const det = $('#allergenFilter');
+  if (det.open && !det.contains(e.target)) det.open = false;
+});
+
 let searchTimer;
 searchEl.addEventListener('input', () => {
   clearTimeout(searchTimer);
@@ -90,6 +110,7 @@ function selectTab(id, scroll) {
 }
 
 function passes(item) {
+  if (item.al && item.al.some((a) => menuState.exclude.has(a))) return false;
   if (menuState.query) {
     const q = fold(menuState.query);
     if (!fold(item.name).includes(q) && !fold(item.desc).includes(q)) return false;
@@ -110,6 +131,9 @@ function hl(text) {
   return out + esc(text.slice(i));
 }
 
+const alHTML = (item, light) => (item.al && item.al.length
+  ? `<p class="dish__al${light ? ' dish__al--light' : ''}"><span class="sr-only">Alérgenos: </span>${item.al.map((a) => esc(ALLERGENS[a])).join(' · ')}</p>`
+  : '');
 const tags = (item) => (item.hot ? '<span class="hot" title="Picante" aria-label="picante">🌶</span>' : '');
 
 // Precio: fijo, por unidad / por 100 g, varios (tapa / media) o «según mercado»
@@ -127,6 +151,7 @@ function dishHTML(item) {
       ${priceHTML(item)}
     </div>
     ${item.desc ? `<p class="dish__desc">${hl(item.desc)}</p>` : ''}
+    ${alHTML(item)}
   </li>`;
 }
 
@@ -138,6 +163,7 @@ function featuredHTML(f) {
       ${priceHTML(f, 'featured__price')}
     </div>
     <p class="featured__desc">${hl(f.desc)}</p>
+    ${alHTML(f, true)}
   </article>`;
 }
 
@@ -195,10 +221,16 @@ function renderMenu() {
   panelsEl.innerHTML = html;
 
   let msg = '';
+  const filtered = menuState.exclude.size > 0;
   if (searching) {
     msg = shown
       ? `${shown} ${shown === 1 ? 'plato' : 'platos'} con «${esc(menuState.query)}»`
       : `No encontramos «${esc(menuState.query)}» en la carta. Prueba con otro plato o ingrediente.`;
+  } else if (filtered) {
+    const hidden = total - shown;
+    msg = shown
+      ? `Mostrando ${shown} de ${total} platos${hidden ? ` · ${hidden} ocultos por tus alérgenos` : ''}`
+      : 'Ningún plato de esta sección es apto con tus filtros. Prueba en otra sección.';
   }
   if (msg) msg += ` <button type="button" class="link-btn" id="clearFilters">Ver toda la carta</button>`;
   statusEl.innerHTML = msg;
@@ -209,6 +241,9 @@ function renderMenu() {
 
 function clearFilters() {
   menuState.query = ''; searchEl.value = '';
+  menuState.exclude.clear();
+  allergenList.querySelectorAll('input').forEach((i) => (i.checked = false));
+  $('#allergenCount').hidden = true;
   renderMenu();
 }
 

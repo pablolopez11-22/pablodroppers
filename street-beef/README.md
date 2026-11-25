@@ -34,6 +34,13 @@ HTML + CSS + JS sin dependencias: abre `index.html` en el navegador.
   que salen bajo la cámara.
 - [ ] Sustituirlas por fotos de las piezas reales del local (misma proporción 4:3). Al cambiar una, borrar su `credito`.
 
+## Alérgenos y reseñas
+- [ ] Confirmar con cocina los alérgenos de cada plato (`al` en `js/menu.js`): están deducidos de los ingredientes.
+- Reseñas (`js/resenas.js`): opiniones reales de Google del local, copiadas tal cual (vía gastroranking.es). Firmadas con nombre e inicial.
+
+## Pendiente de la portada
+- [ ] Cambiar el vídeo por otro tipo de carne (chuletón/brasa) y revisar que se vea bien encuadrado en el móvil.
+
 ## Pendiente
 - [ ] Fotos del local (sala, rincón motero, brasa, terraza) para «El local»
 - [x] Moto de la portada: Harley antigua dibujada (dentro de `index.html`), con el logo en el depósito y las letras en la alforja; cruza la portada sobre las llamas.
