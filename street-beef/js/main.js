@@ -132,7 +132,7 @@ function hl(text) {
 }
 
 const alHTML = (item, light) => (item.al && item.al.length
-  ? `<p class="dish__al${light ? ' dish__al--light' : ''}"><span class="sr-only">Alérgenos: </span>${item.al.map((a) => esc(ALLERGENS[a])).join(' · ')}</p>`
+  ? `<p class="dish__al${light ? ' dish__al--light' : ''}"><span class="sr-only">Alérgenos: </span>${item.al.map((a) => `<span class="alp">${esc(ALLERGENS[a])}</span>`).join('')}</p>`
   : '');
 const tags = (item) => (item.hot ? '<span class="hot" title="Picante" aria-label="picante">🌶</span>' : '');
 
